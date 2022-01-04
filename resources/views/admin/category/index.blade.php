@@ -30,7 +30,7 @@
                             </td>
                             <td>
                                 <a href="{{ url('edit-category/'.$item->id) }}" class="btn btn-primary">Edit</a>
-                                <button class="btn btn-danger">Hapus</button>
+                                <a href="{{ url('delete-category/'.$item->id) }}" class="btn btn-danger" onclick="return confirm('Yakin Menghapus Kategori ini?');">Hapus</a>
                             </td>
                         </tr>
                     @endforeach
