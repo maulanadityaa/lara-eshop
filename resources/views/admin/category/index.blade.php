@@ -29,7 +29,7 @@
                                 <img src="{{ asset('assets/uploads/category/'.$item->image) }}" class="cate-img" alt="Gambar Kategori">
                             </td>
                             <td>
-                                <button class="btn btn-primary">Edit</button>
+                                <a href="{{ url('edit-category/'.$item->id) }}" class="btn btn-primary">Edit</a>
                                 <button class="btn btn-danger">Hapus</button>
                             </td>
                         </tr>
