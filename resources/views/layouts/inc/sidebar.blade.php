@@ -16,9 +16,15 @@
                 </a>
             </li>
             <li class="nav-item ">
-                <a class="nav-link" href="./user.html">
-                    <i class="material-icons">person</i>
-                    <p>User Profile</p>
+                <a class="nav-link" href="{{ url('categories') }}">
+                    <i class="material-icons">category</i>
+                    <p>Category</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ url('add-categories') }}">
+                    <i class="material-icons">add</i>
+                    <p>Tambah Kategori</p>
                 </a>
             </li>
             <li class="nav-item ">
