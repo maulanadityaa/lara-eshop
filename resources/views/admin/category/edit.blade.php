@@ -31,7 +31,7 @@
                         <input type="checkbox" {{ $category->popular == "1" ? 'checked':'' }} name="popular">
                     </div>
                     @if ($category->image)
-                        <img src="{{ asset('assets/uploads/category/'.$category->image) }}" alt="Gambar Kategori">
+                        <img src="{{ asset('assets/uploads/category/'.$category->image) }}" class="img-thumbnail" width="300" height="300" alt="Gambar Kategori">
                     @endif
                     <div class="col-md-12">
                         <input type="file" name="image" class="form-control">

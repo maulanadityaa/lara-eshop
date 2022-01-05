@@ -7,58 +7,59 @@
             <hr>
         </div>
         <div class="card-body">
-            <form action="{{ url('insert-products') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ url('update-product/'.$products->id) }}" method="POST" enctype="multipart/form-data">
+                @method('PUT')
                 @csrf
                 <div class="row">
                     <div class="col-md-12 mb-3">
-                        <select class="form-select" name="cate_id">
-                            <option selected>---Pilih Kategori---</option>
-                            @foreach ($category as $item)
-                                <option value="{{ $item->id }}">{{ $item->name }}</option>
-                            @endforeach
+                        <select class="form-select">
+                            <option selected>{{ $products->category->name }}</option>
                         </select>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="">Nama</label>
-                        <input type="text" class="form-control" name="name">
+                        <input type="text" class="form-control" value="{{ $products->name }}" name="name">
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="">Slug</label>
-                        <input type="text" class="form-control" name="slug">
+                        <input type="text" class="form-control" value="{{ $products->slug }}" name="slug">
                     </div>
                     <div class="col-md-12 mb-3">
                         <label for="">Deskripsi</label>
-                        <textarea name="description" rows="3" class="form-control"></textarea>
+                        <textarea name="description" rows="3" class="form-control">{{ $products->description }}</textarea>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="">Harga Asli</label>
-                        <input type="number" class="form-control" name="original_price">
+                        <input type="number" class="form-control" value="{{ $products->original_price }}" name="original_price">
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="">Harga Jual</label>
-                        <input type="number" class="form-control" name="sell_price">
+                        <input type="number" class="form-control" value="{{ $products->sell_price }}" name="sell_price">
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="">Stock</label>
-                        <input type="number" class="form-control" name="stock">
+                        <input type="number" class="form-control" value="{{ $products->stock }}" name="stock">
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="">Ukuran</label>
-                        <input type="text" class="form-control" name="size">
+                        <input type="text" class="form-control" value="{{ $products->size }}" name="size">
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="">Status</label>
-                        <input type="checkbox" name="status">
+                        <input type="checkbox" {{ $products->status ? 'checked' : '' }} name="status">
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="">Populer</label>
-                        <input type="checkbox" name="trending">
+                        <input type="checkbox" {{ $products->trending ? 'checked' : '' }} name="trending">
                     </div>
+                    @if ($products->image)
+                        <img src="{{ asset('assets/uploads/product/'.$products->image) }}" class="img-thumbnail" width="300" height="300" alt="Gambar Produk">
+                    @endif
                     <div class="col-md-12">
                         <input type="file" name="image" class="form-control">
                     </div>
                     <div class="col-md-12">
-                        <button type="submit" class="btn btn-primary">Tambah Produk</button>
+                        <button type="submit" class="btn btn-primary">Edit Produk</button>
                     </div>
                 </div>
             </form>
