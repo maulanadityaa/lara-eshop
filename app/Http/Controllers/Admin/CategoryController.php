@@ -26,7 +26,7 @@ class CategoryController extends Controller
             $file = $request->file('image');
             $ext = $file->getClientOriginalExtension();
             $filename = time().'.'.$ext;
-            $file->move('assets/uploads/category', $filename);
+            $file->move('assets/uploads/category/', $filename);
             $category->image = $filename;
         }
 

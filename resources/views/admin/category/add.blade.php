@@ -2,8 +2,9 @@
 
 @section('content')
     <div class="card">
-        <div class="card-header">
-            Tambah Kategori
+        <div class="card-header text-center">
+            <h3><strong>Tambah Kategori</strong></h3>
+            <hr>
         </div>
         <div class="card-body">
             <form action="{{ url('insert-category') }}" method="POST" enctype="multipart/form-data">
