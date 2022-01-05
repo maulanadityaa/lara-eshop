@@ -12,8 +12,9 @@
                     <tr class="text-center">
                         <th><strong>ID</strong></th>
                         <th><strong>Nama</strong></th>
-                        <th><strong>Deskripsi</strong></th>
-                        <th><strong>Slug</strong></th>
+                        <th><strong>Kategori</strong></th>
+                        <th><strong>Harga Asli</strong></th>
+                        <th><strong>Harga Jual</strong></th>
                         <th><strong>Ukuran</strong></th>
                         <th><strong>Gambar</strong></th>
                         <th><strong>Aksi</strong></th>
@@ -24,15 +25,16 @@
                         <tr class="text-center">
                             <td>{{ $item->id }}</td>
                             <td>{{ $item->name }}</td>
-                            <td>{{ $item->description }}</td>
-                            <td>{{ $item->slug }}</td>
+                            <td>{{ $item->category->name }}</td>
+                            <td>Rp. {{ number_format($item->original_price) }}</td>
+                            <td>Rp. {{ number_format($item->sell_price) }}</td>
                             <td>{{ $item->size }}</td>
                             <td>
                                 <img src="{{ asset('assets/uploads/product/'.$item->image) }}" class="cate-img" alt="Gambar Kategori">
                             </td>
                             <td>
-                                <a href="{{ url('edit-category/'.$item->id) }}" class="btn btn-primary">Edit</a>
-                                <a href="{{ url('delete-category/'.$item->id) }}" class="btn btn-danger" onclick="return confirm('Yakin Menghapus Kategori ini?');">Hapus</a>
+                                <a href="{{ url('edit-product/'.$item->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                <a href="{{ url('delete-product/'.$item->id) }}" class="btn btn-danger btn-sm" onclick="return confirm('Yakin Menghapus Produk ini?');">Hapus</a>
                             </td>
                         </tr>
                     @endforeach

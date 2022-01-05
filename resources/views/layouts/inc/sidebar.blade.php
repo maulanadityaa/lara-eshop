@@ -29,7 +29,7 @@
             </li>
             <li class="nav-item {{ Request::is('products') ? 'active':'' }}">
                 <a class="nav-link" href="{{ url('products') }}">
-                    <i class="material-icons">product</i>
+                    <i class="material-icons">inventory_2</i>
                     <p>Produk</p>
                 </a>
             </li>
