@@ -1,4 +1,9 @@
-.product-img{
+.product-img {
     width: 100px;
     height: 300px;
+}
+
+* {
+    font-family: "Poppins", sans-serif;
+    font-family: "Public Sans", sans-serif;
 }

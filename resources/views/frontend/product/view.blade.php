@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="py-3 mb-4 shadow-sm bg-secondary text-white border-top">
+    <div class="py-3 mb-4 shadow-sm bg-secondary text-white">
         <div class="container">
             <h5 class="mb-0"><a href="{{ url('/') }}">Home</a> > <a
                     href="{{ url('/view-category/' . $product->category->slug) }}">{{ $product->category->name }}</a> >
@@ -47,17 +47,17 @@
                         <div class="row mt-2">
                             <div class="col-md-2">
                                 <label for="Jumlah">Jumlah</label>
-                                <div class="input-group text-center mb-3">
+                                <div class="input-group text-center mb-3" style="width: 130px;">
                                     <span class="input-group-text">-</span>
-                                    <input type="text" name="jumlah" value="1" class="form-control" />
+                                    <input type="text" name="jumlah" value="1" class="form-control text-center" />
                                     <span class="input-group-text">+</span>
                                 </div>
                             </div>
                             <div class="col-md-10">
                                 <br />
                                 <button type="button" class="btn btn-success me-3 float-start">Tambahkan ke
-                                    Wishlist</button>
-                                <button type="button" class="btn btn-primary me-3 float-start">Masukkan Keranjang</button>
+                                    Wishlist <i class="fa fa-heart"></i></button>
+                                <button type="button" class="btn btn-primary me-3 float-start">Masukkan Keranjang  <i class="fa fa-shopping-cart"></i></button>
                             </div>
                         </div>
                     </div>

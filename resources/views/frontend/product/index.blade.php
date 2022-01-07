@@ -5,9 +5,13 @@
 @endsection
 
 @section('content')
-    @include('layouts.inc.slider')
+    <div class="py-3 shadow-sm bg-secondary text-white">
+        <div class="container">
+            <h5 class="mb-0"><a href="{{ url('/') }}">Home</a> > {{ $category->name }}</h5>
+        </div>
+    </div>
 
-    <div class="py-5">
+    <div class="mt-4">
         <div class="container">
             <div class="row">
                 <h2><strong>{{ $category->name }}</strong></h2>
@@ -15,8 +19,9 @@
                 @foreach ($products as $product)
                     <div class="col-md-3 mb-3">
                         <div class="card">
-                            <a href="{{ url('view-category/'.$category->slug.'/'.$product->slug) }}">
-                                <img src="{{ asset('assets/uploads/product/' . $product->image) }}" class="w-100" alt="Trending Image">
+                            <a href="{{ url('view-category/' . $category->slug . '/' . $product->slug) }}">
+                                <img src="{{ asset('assets/uploads/product/' . $product->image) }}" class="w-100"
+                                    alt="Trending Image">
                                 <div class="card-body">
                                     <h5>{{ $product->name }}</h5>
                                     <span class="float-end"><s>Rp.
