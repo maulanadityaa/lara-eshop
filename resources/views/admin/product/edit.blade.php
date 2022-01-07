@@ -22,7 +22,7 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="">Slug</label>
-                        <input type="text" class="form-control" value="{{ $products->slug }}" name="slug">
+                        <input type="text" class="form-control" value="{{ $products->slug }}" name="slug" placeholder="Slug akan Terisi Otomatis" disabled>
                     </div>
                     <div class="col-md-12 mb-3">
                         <label for="">Deskripsi</label>

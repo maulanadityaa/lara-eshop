@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'Frontend\FrontendController@index');
 Route::get('/category', 'Frontend\FrontendController@category');
 Route::get('/view-category/{slug}', 'Frontend\FrontendController@viewcategory');
+Route::get('/view-category/{cate_slug}/{prod_slug}', 'Frontend\FrontendController@viewproduct');
 
 Auth::routes();
 

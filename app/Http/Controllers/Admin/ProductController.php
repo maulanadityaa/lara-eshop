@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -35,7 +36,7 @@ class ProductController extends Controller
 
         $products->cate_id = $request->input('cate_id');
         $products->name = $request->input('name');
-        $products->slug = $request->input('slug');
+        $products->slug = Str::slug($products->name);
         $products->description = $request->input('description');
         $products->original_price = $request->input('original_price');
         $products->sell_price = $request->input('sell_price');
@@ -71,7 +72,7 @@ class ProductController extends Controller
         }
 
         $products->name = $request->input('name');
-        $products->slug = $request->input('slug');
+        $products->slug = Str::slug($products->name);
         $products->description = $request->input('description');
         $products->original_price = $request->input('original_price');
         $products->sell_price = $request->input('sell_price');
