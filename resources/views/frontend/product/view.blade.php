@@ -48,9 +48,9 @@
                             <div class="col-md-2">
                                 <label for="Jumlah">Jumlah</label>
                                 <div class="input-group text-center mb-3" style="width: 130px;">
-                                    <span class="input-group-text">-</span>
-                                    <input type="text" name="jumlah" value="1" class="form-control text-center" />
-                                    <span class="input-group-text">+</span>
+                                    <button class="input-group-text decrement-btn">-</button>
+                                    <input type="text" name="jumlah" value="1" class="form-control qty-input text-center" />
+                                    <button class="input-group-text increment-btn">+</button>
                                 </div>
                             </div>
                             <div class="col-md-10">
@@ -65,4 +65,36 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $('document').ready(function () {
+            $('.decrement-btn').click(function (e) { 
+                e.preventDefault();
+                
+                var dec_value = $('.qty-input').val();
+                var value = parseInt(dec_value, 15);
+                value = isNaN(value) ? 0 : value;
+
+                if (value > 1) {
+                    value--;
+                    $('.qty-input').val(value);
+                }
+            });
+
+            $('.increment-btn').click(function (e) { 
+                e.preventDefault();
+                
+                var inc_value = $('.qty-input').val();
+                var value = parseInt(inc_value, 15);
+                value = isNaN(value) ? 0 : value;
+
+                if (value < 15) {
+                    value++;
+                    $('.qty-input').val(value);
+                }
+            });
+        });
+    </script>
 @endsection
