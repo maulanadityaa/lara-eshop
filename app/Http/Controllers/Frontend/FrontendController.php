@@ -22,4 +22,15 @@ class FrontendController extends Controller
         $category = Category::all();
         return view('frontend.category', compact('category'));
     }
+
+    public function viewcategory($slug)
+    {
+        if(Category::where('slug', $slug)->exists()){
+            $category = Category::where('slug', $slug)->first();
+            $products = Product::where('cate_id', $category->id)->where('status', '0')->get();
+            return view('frontend.product.index', compact('category', 'products'));
+        }else{
+            return redirect('/')->with('status', "Kategori Tidak Tersedia");
+        }
+    }
 }

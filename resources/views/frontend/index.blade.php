@@ -15,11 +15,14 @@
                     @foreach ($featured_products as $product)
                         <div class="item">
                             <div class="card">
-                                <img src="{{ asset('assets/uploads/product/'.$product->image) }}" class="product-img" alt="Trending Image">
+                                <img src="{{ asset('assets/uploads/product/' . $product->image) }}" class="product-img"
+                                    alt="Trending Image">
                                 <div class="card-body">
                                     <h5>{{ $product->name }}</h5>
-                                    <span class="float-end"><s>Rp. {{ number_format($product->original_price) }}</s></span>
-                                    <span class="float-start"><strong>Rp. {{ number_format($product->sell_price) }}</strong></span>
+                                    <span class="float-end"><s>Rp.
+                                            {{ number_format($product->original_price) }}</s></span>
+                                    <span class="float-start"><strong>Rp.
+                                            {{ number_format($product->sell_price) }}</strong></span>
                                 </div>
                             </div>
                         </div>
@@ -36,13 +39,16 @@
                 <div class="owl-carousel owl-theme">
                     @foreach ($featured_categories as $cate)
                         <div class="item">
-                            <div class="card">
-                                <img src="{{ asset('assets/uploads/category/'.$cate->image) }}" class="product-img" alt="Trending Image">
-                                <div class="card-body">
-                                    <h5>{{ $cate->name }}</h5>
-                                    <p>{{ $cate->description }}</p>
+                            <a href="{{ url('/view-category/' . $cate->slug) }}">
+                                <div class="card">
+                                    <img src="{{ asset('assets/uploads/category/' . $cate->image) }}" class="product-img"
+                                        alt="Trending Image">
+                                    <div class="card-body">
+                                        <h5>{{ $cate->name }}</h5>
+                                        <p>{{ $cate->description }}</p>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                     @endforeach
                 </div>

@@ -15,13 +15,16 @@
                     <div class="row">
                         @foreach ($category as $item)
                             <div class="col-md-3 mb-3">
-                                <div class="card">
-                                    <img src="{{ asset('assets/uploads/category/'.$item->image) }}" alt="Category Image">
-                                    <div class="card-body">
-                                        <h5>{{ $item->name }}</h5>
-                                        <p>{{ $item->description }}</p>
+                                <a href="{{ url('view-category/' . $item->slug) }}">
+                                    <div class="card">
+                                        <img src="{{ asset('assets/uploads/category/' . $item->image) }}"
+                                            alt="Category Image">
+                                        <div class="card-body">
+                                            <h5>{{ $item->name }}</h5>
+                                            <p>{{ $item->description }}</p>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                         @endforeach
                     </div>
