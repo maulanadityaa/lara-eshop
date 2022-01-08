@@ -56,10 +56,11 @@
     </script>
     <script src="{{ asset('js/jquery-3.6..0.min.js') }}"></script>
     <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('js/custom.js') }}"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     @if (session('status'))
         <script>
-            swal("Pemberitahuan", "{{ session('status') }}", "success");
+            swal({{ session('status') }});
         </script>
     @endif
 

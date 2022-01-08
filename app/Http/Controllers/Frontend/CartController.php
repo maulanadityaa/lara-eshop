@@ -14,26 +14,47 @@ class CartController extends Controller
     {
         $product_id = $request->input('product_id');
         $product_qty = $request->input('product_qty');
+        $login_check = Auth::check();
 
-        if (Auth::check()) {
+        if (Auth::user()) {
             $prod_check = Product::where('id', $product_id)->first();
 
-            if($prod_check){
-                if(Cart::where('prod_id', $product_id)->where('user_id', Auth::id())->exists()){
-                    return response()->json(['status' => $prod_check->name.' sudah ada di Keranjang']);
-                }
-                else{
+            if ($prod_check) {
+                if (Cart::where('prod_id', $product_id)->where('user_id', Auth::id())->exists()) {
+                    return response()->json(['status' => $prod_check->name . ' sudah ada di Keranjang']);
+                } else {
                     $cartItem = new Cart();
                     $cartItem->prod_id = $product_id;
                     $cartItem->user_id = Auth::id();
                     $cartItem->prod_qty = $product_qty;
                     $cartItem->save();
 
-                    return response()->json(['status' => $prod_check->name.' berhasil masuk keranjang']);
+                    return response()->json(['status' => $prod_check->name . ' berhasil masuk keranjang']);
                 }
             }
+        } else {
+            return response()->json(['status' => 'Silahkan Login terlebih dahulu']);
         }
-        else{
+    }
+
+    public function viewCart()
+    {
+        $cartitems = Cart::where('user_id', Auth::id())->get();
+
+        return view('frontend.cart', compact('cartitems'));
+    }
+
+    public function deleteProduct(Request $request)
+    {
+        if(Auth::check()){
+            $prod_id = $request->input('prod_id');
+            if(Cart::where('prod_id', $prod_id)->where('user_id', Auth::id())->exists()){
+                $cartItem = Cart::where('prod_id', $prod_id)->where('user_id', Auth::id())->first();
+                $cartItem->delete();
+
+                return response()->json(['status' => 'Produk telah dihapus']);
+            }
+        } else {
             return response()->json(['status' => 'Silahkan Login terlebih dahulu']);
         }
     }

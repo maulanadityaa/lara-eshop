@@ -22,8 +22,11 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::post('add-to-cart', 'Frontend\CartController@addProduct');
+Route::post('delete-cart-item', 'Frontend\CartController@deleteProduct');
+
 Route::middleware(['auth'])->group(function () {
-    Route::post('add-to-cart', 'Frontend\CartController@addProduct');
+    Route::get('cart', 'Frontend\CartController@viewCart');
 });
 
 Route::middleware(['auth', 'isAdmin'])->group(function () {

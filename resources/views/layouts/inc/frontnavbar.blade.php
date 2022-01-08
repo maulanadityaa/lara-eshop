@@ -13,6 +13,9 @@
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('category') ? 'active':'' }}" href="{{ url('category') }}">Kategori</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('cart') ? 'active':'' }}" href="{{ url('cart') }}">Keranjang</a>
+                </li>
                 <!-- Authentication Links -->
                 @guest
                     @if (Route::has('login'))
