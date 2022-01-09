@@ -49,8 +49,8 @@
                 @endforeach
             </div>
             <div class="card-footer">
-                <h4>Total Harga : Rp. {{ number_format($total) }}
-                    <button class="btn btn-success float-end">Checkout</button>
+                <h4 class="my-auto">Total Harga : Rp. {{ number_format($total) }}
+                    <a href="{{ url('checkout') }}" class="btn btn-success float-end">Checkout</a>
                 </h4>
             </div>
         </div>
