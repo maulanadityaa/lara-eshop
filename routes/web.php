@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,17 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'Frontend\FrontendController@index');
+Route::get('/', 'Frontend\FrontendController@index')->name('home');
 Route::get('/category', 'Frontend\FrontendController@category');
 Route::get('/view-category/{slug}', 'Frontend\FrontendController@viewcategory');
 Route::get('/view-category/{cate_slug}/{prod_slug}', 'Frontend\FrontendController@viewproduct');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::post('add-to-cart', 'Frontend\CartController@addProduct');
 Route::post('delete-cart-item', 'Frontend\CartController@deleteProduct');
+Route::post('update-cart', 'Frontend\CartController@updateCart');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('cart', 'Frontend\CartController@viewCart');
