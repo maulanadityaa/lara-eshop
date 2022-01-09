@@ -14,7 +14,7 @@ class CartController extends Controller
     {
         $product_id = $request->input('product_id');
         $product_qty = $request->input('product_qty');
-        $login_check = Auth::check();
+        $product_size = $request->input('product_size');
 
         if (Auth::user()) {
             $prod_check = Product::where('id', $product_id)->first();
@@ -27,6 +27,7 @@ class CartController extends Controller
                     $cartItem->prod_id = $product_id;
                     $cartItem->user_id = Auth::id();
                     $cartItem->prod_qty = $product_qty;
+                    $cartItem->prod_size = $product_size;
                     $cartItem->save();
 
                     return response()->json(['status' => $prod_check->name . ' berhasil masuk keranjang']);

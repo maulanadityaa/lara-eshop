@@ -23,29 +23,36 @@
                             <img src="{{ asset('assets/uploads/product/' . $item->products->image) }}" height="70px"
                                 width="70px" alt="Gambar produk">
                         </div>
-                        <div class="col-md-3 my-auto">
+                        <div class="col-md-2 my-auto">
                             <h5>{{ $item->products->name }}</h5>
+                        </div>
+                        <div class="col-md-2 my-auto">
+                            <h5>{{ $item->prod_size }}</h5>
                         </div>
                         <div class="col-md-2 my-auto">
                             <h5>Rp. {{ number_format($item->products->sell_price) }}</h5>
                         </div>
-                        <div class="col-md-3 my-auto">
+                        <div class="col-md-2 my-auto">
                             <input type="hidden" value="{{ $item->prod_id }}" class="prod_id">
-                            <label for="Jumlah">Jumlah</label>
-                            <div class="input-group text-center mb-3" style="width: 130px;">
-                                <button class="input-group-text changeQty decrement-btn">-</button>
-                                <input type="text" name="jumlah" value="1" class="form-control qty-input text-center"
-                                    value="{{ $item->prod_qty }}">
-                                <button class="input-group-text changeQty increment-btn">+</button>
-                            </div>
+                            @if ($item->products->stock > $item->prod_qty)
+                                <label for="Jumlah">Jumlah</label>
+                                <div class="input-group text-center mb-3" style="width: 130px;">
+                                    <button class="input-group-text changeQty decrement-btn">-</button>
+                                    <input type="text" name="jumlah" value="1" class="form-control qty-input text-center"
+                                        value="{{ $item->prod_qty }}">
+                                    <button class="input-group-text changeQty increment-btn">+</button>
+                                </div>
+                                @php
+                                    $total += $item->products->sell_price * $item->prod_qty;
+                                @endphp
+                            @else
+                                <h6 class="badge bg-danger">Stok Habis</h6>
+                            @endif
                         </div>
                         <div class="col-md-2 my-auto">
                             <button class="btn btn-danger deleteCartItem"><i class="fa fa-trash"></i> Delete</button>
                         </div>
                     </div>
-                    @php
-                        $total += $item->products->sell_price * $item->prod_qty;
-                    @endphp
                 @endforeach
             </div>
             <div class="card-footer">

@@ -10,6 +10,10 @@ $("document").ready(function () {
             .closest(".product_data")
             .find(".qty-input")
             .val();
+        var product_size = $(this)
+            .closest(".product_data")
+            .find(".prod_size")
+            .val();
 
         $.ajaxSetup({
             headers: {
@@ -23,6 +27,7 @@ $("document").ready(function () {
             data: {
                 product_id: product_id,
                 product_qty: product_qty,
+                product_size: product_size,
             },
             success: function (response) {
                 swal("", response.status, "success");

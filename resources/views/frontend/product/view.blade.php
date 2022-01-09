@@ -36,13 +36,16 @@
                         <label class="fw-bold">
                             <h4><strong>Rp. {{ number_format($product->sell_price) }}</strong></h4>
                         </label>
-                        <p class="mt-3">{!! $product->description !!}</p>
+                        <p class="mt-3">{!! $product->description !!}
+                        <br><br>
+                        <strong>Ukuran Tersedia : {{ $product->size }}</strong>
+                        </p>
                         <hr>
 
                         @if ($product->stock > 0)
                             <label class="badge bg-success">Tersedia</label>
                         @else
-                            <label class="badge bg-success">Stok Habis</label>
+                            <label class="badge bg-danger">Stok Habis</label>
                         @endif
 
                         <div class="row mt-2">
@@ -55,12 +58,22 @@
                                     <button class="input-group-text increment-btn">+</button>
                                 </div>
                             </div>
+                            <div class="col-md-2">
+                                <input type="hidden" value="{{ $product->id }}" class="prod_id">
+                                <label for="Jumlah">Ukuran</label>
+                                <input type="text" name="size" value="" class="form-control prod_size text-center" />
+                            </div>
                             <div class="col-md-10">
                                 <br />
+                                @if ($product->stock > 0)
+                                    <button type="button" class="btn btn-primary me-3 addtoCartBtn float-start">Masukkan
+                                        Keranjang <i class="fa fa-shopping-cart"></i></button>
+                                @elseif($product->stock <= 0)
+                                    <button type="button" class="btn btn-primary me-3 addtoCartBtn float-start" disabled>Masukkan
+                                        Keranjang <i class="fa fa-shopping-cart"></i></button>
+                                @endif
                                 <button type="button" class="btn btn-success me-3 float-start">Tambahkan ke
                                     Wishlist <i class="fa fa-heart"></i></button>
-                                <button type="button" class="btn btn-primary me-3 addtoCartBtn float-start">Masukkan
-                                    Keranjang <i class="fa fa-shopping-cart"></i></button>
                             </div>
                         </div>
                     </div>

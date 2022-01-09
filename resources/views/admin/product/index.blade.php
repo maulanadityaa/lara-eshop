@@ -16,6 +16,7 @@
                         <th><strong>Harga Asli</strong></th>
                         <th><strong>Harga Jual</strong></th>
                         <th><strong>Ukuran</strong></th>
+                        <th><strong>Stock</strong></th>
                         <th><strong>Gambar</strong></th>
                         <th><strong>Aksi</strong></th>
                     </tr>
@@ -29,6 +30,7 @@
                             <td>Rp. {{ number_format($item->original_price) }}</td>
                             <td>Rp. {{ number_format($item->sell_price) }}</td>
                             <td>{{ $item->size }}</td>
+                            <td>{{ $item->stock }}</td>
                             <td>
                                 <img src="{{ asset('assets/uploads/product/'.$item->image) }}" class="cate-img" alt="Gambar Kategori">
                             </td>
