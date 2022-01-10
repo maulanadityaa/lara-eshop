@@ -34,11 +34,11 @@
                         </div>
                         <div class="col-md-2 my-auto">
                             <input type="hidden" value="{{ $item->prod_id }}" class="prod_id">
-                            @if ($item->products->stock > $item->prod_qty)
+                            @if ($item->products->stock >= $item->prod_qty)
                                 <label for="Jumlah">Jumlah</label>
                                 <div class="input-group text-center mb-3" style="width: 130px;">
                                     <button class="input-group-text changeQty decrement-btn">-</button>
-                                    <input type="text" name="jumlah" value="1" class="form-control qty-input text-center"
+                                    <input type="text" name="jumlah" value="{{ $item->prod_qty }}" class="form-control qty-input text-center"
                                         value="{{ $item->prod_qty }}">
                                     <button class="input-group-text changeQty increment-btn">+</button>
                                 </div>

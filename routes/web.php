@@ -19,6 +19,7 @@ Route::get('/category', 'Frontend\FrontendController@category');
 Route::get('/view-category/{slug}', 'Frontend\FrontendController@viewcategory');
 Route::get('/view-category/{cate_slug}/{prod_slug}', 'Frontend\FrontendController@viewproduct');
 
+
 Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -30,6 +31,8 @@ Route::post('update-cart', 'Frontend\CartController@updateCart');
 Route::middleware(['auth'])->group(function () {
     Route::get('cart', 'Frontend\CartController@viewCart');
     Route::get('checkout', 'Frontend\CheckoutController@index');
+    Route::get('cek-ongkir/cities/{province_id}', 'Frontend\CheckoutController@getCities');
+    Route::post('cek-ongkir/', 'Frontend\CheckoutController@cekOngkir');
 });
 
 Route::middleware(['auth', 'isAdmin'])->group(function () {
