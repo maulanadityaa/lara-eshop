@@ -83,6 +83,7 @@
                             <input type="hidden" name="total_harga" value="{{ $total_harga }}">
                             <div class="col-md-6 mt-3 mx-auto">
                                 <label class="font-weight-bold">Kurir/Ekspedisi</label>
+
                                 <select class="form-control" name="courier_name">
                                     <option value="0">-- pilih kurir --</option>
                                     <option value="jne">JNE</option>
@@ -133,14 +134,20 @@
                                     <td>Total :</td>
                                     <td>{{ $jumlah_brg }}</td>
                                     <td>{{ $total_berat }} gr</td>
-                                    <td id="total_harga">Rp. {{ number_format($total_harga) }}</td>
+                                    <td name="total_harga">Rp. {{ number_format($total_harga) }}</td>
                                 </tr>
                             </tfoot>
                         </table>
                         <hr>
                         <h6>Ongkos Kirim</h6>
                         {{-- <input type="number" class="form-control total_ongkir" name="total_ongkir" readonly> --}}
-                        <input type="text" name="total_ongkir" value="Belum ditanbahkan" class="form-control total_ongkir" readonly/>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">Rp.</span>
+                            <input type="text" name="total_ongkir" value="0" class="form-control total_ongkir" readonly />
+                            <input type="text" name="jasa_pengiriman" value="belum ada" class="form-control jasa_pengiriman"
+                                readonly />
+                        </div>
+                        {{-- <input type="text" name="total_ongkir" value="Belum ditanbahkan" class="form-control total_ongkir" readonly/> --}}
                         <div class="d-grid gap-2 col-6 mx-auto mt-3">
                             <button class="btn btn-primary" type="button">Buat Pesanan</button>
                         </div>
@@ -203,25 +210,19 @@
                     success: function(response) {
                         isProcessing = false;
                         if (response) {
-                            $('#ongkir').empty();
-                            $('.ongkir').addClass('d-block');
-                            $.each(response[0]['costs'], function(key, value) {
-                                $('#ongkir').append('<li class="list-group-item">' + response[0]
-                                    .code.toUpperCase() + ' : <strong>' + value.service +
-                                    '</strong> - Rp. ' + value.cost[0].value + ' (' + value
-                                    .cost[0].etd + ' hari)</li>')
-                            });
-
                             $('select[name="harga_ongkir"]').empty();
                             $('select[name="harga_ongkir"]').append(
                                 '<option value="">-- pilih ongkir --</option>');
                             $.each(response[0]['costs'], function(key, value) {
                                 $('select[name="harga_ongkir"]').append('<option value="' +
-                                    value.cost[0].value + '">' + response[0].code
+                                    value.cost[0].value + response[0].code
+                                    .toUpperCase() + ' : ' + value.service + '">' +
+                                    response[0].code
                                     .toUpperCase() + ' : ' + value.service + ' - Rp. ' +
                                     value.cost[0].value + ' (' + value.cost[0].etd +
                                     ' hari)' + '</option>');
                             });
+
 
                             // $('#total_berat').val();
                         }
@@ -239,8 +240,15 @@
                 var value = parseInt(hargaOngkir);
                 value = isNaN(value) ? 0 : value;
                 $('.total_ongkir').val(value);
+
+                let withoutNumbers = hargaOngkir.replace(/[0-9]/g, '');
+                if (withoutNumbers) {
+                    $('.jasa_pengiriman').val(withoutNumbers);
+                } else {
+                    $('.jasa_pengiriman').val();
+                }
             } else {
-                $(this).closest('.order_data').find('.total_ongkir').val(0);
+                $('.total_ongkir').val(0);
             }
         });
     </script>

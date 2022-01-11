@@ -43,7 +43,7 @@ class CheckoutController extends Controller
         $postal_code = $request->input('kode-pos');
 
         $cost = RajaOngkir::ongkosKirim([
-            'origin'    => 134,
+            'origin'    => 164,
             'originType' => "city",
             'destination'    => $destination,
             'destinationType' => "subdistrict",
