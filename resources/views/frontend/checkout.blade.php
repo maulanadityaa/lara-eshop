@@ -90,15 +90,21 @@
                                     <option value="tiki">TIKI</option>
                                 </select>
                             </div>
-                        </div>
-                        <div class="d-grid gap-2 col-6 mx-auto mt-3">
-                            <button type="submit" class="btn btn-success btnCekOngkir">Cek Ongkir</button>
+                            <div class="form-group mt-3">
+                                <label class="font-weight-bold">Ongkos Kirim</label>
+                                <select class="form-control ongkos-kirim" name="harga_ongkir">
+                                    <option value="0">-- pilih ongkir --</option>
+                                    {{-- @foreach ($provinces as $province => $value)
+                                            <option value="{{ $province  }}">{{ $value }}</option>
+                                        @endforeach --}}
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-5">
-                <div class="card">
+                <div class="card order-data">
                     <div class="card-body">
                         <h5 class="fw-bold">Detail Order</h5>
                         <hr>
@@ -131,22 +137,13 @@
                                 </tr>
                             </tfoot>
                         </table>
-                        {{-- <input type="hidden" name="total_berat" value="{{ $total_berat }}">
-                        <input type="hidden" name="total_harga" value="{{ $total_harga }}"> --}}
                         <hr>
-                        <button class="btn btn-primary float-end">Buat Pesanan</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col-md-12">
-                <div class="card ongkir">
-                    <div class="card-body">
-                        <h5 class="fw-bold">Ongkos Pengiriman</h5>
-                        <hr>
-                        <ul class="list-group" id="ongkir">
-                        </ul>
+                        <h6>Ongkos Kirim</h6>
+                        {{-- <input type="number" class="form-control total_ongkir" name="total_ongkir" readonly> --}}
+                        <input type="text" name="total_ongkir" value="Belum ditanbahkan" class="form-control total_ongkir" readonly/>
+                        <div class="d-grid gap-2 col-6 mx-auto mt-3">
+                            <button class="btn btn-primary" type="button">Buat Pesanan</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -179,12 +176,11 @@
         });
 
         let isProcessing = false;
-        $('.btnCekOngkir').click(function(e) {
-            e.preventDefault();
-
+        $('select[name="courier_name"]').on('change', function() {
+            let courier = $(this).val();
             let token = $("meta[name='csrf-token']").attr("content");
             let city_destination = $('select[name=city_destination]').val();
-            let courier = $('select[name=courier_name]').val();
+            //   let courier = $('select[name=courier_name]').val();
             let weight = $('#total_berat').val();
 
             if (isProcessing) {
@@ -193,32 +189,59 @@
 
             isProcessing = true;
 
-            jQuery.ajax({
-                method: "POST",
-                url: "cek-ongkir",
-                data: {
-                    _token: token,
-                    city_destination: city_destination,
-                    courier: courier,
-                    weight: weight
-                },
-                dataType: "JSON",
-                success: function(response) {
-                    isProcessing = false;
-                    if (response) {
-                        $('#ongkir').empty();
-                        $('.ongkir').addClass('d-block');
-                        $.each(response[0]['costs'], function(key, value) {
-                            $('#ongkir').append('<li class="list-group-item">' + response[0]
-                                .code.toUpperCase() + ' : <strong>' + value.service +
-                                '</strong> - Rp. ' + value.cost[0].value + ' (' + value
-                                .cost[0].etd + ' hari)</li>')
-                        });
+            if (courier) {
+                jQuery.ajax({
+                    url: '/cek-ongkir',
+                    method: "POST",
+                    data: {
+                        _token: token,
+                        city_destination: city_destination,
+                        courier: courier,
+                        weight: weight
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        isProcessing = false;
+                        if (response) {
+                            $('#ongkir').empty();
+                            $('.ongkir').addClass('d-block');
+                            $.each(response[0]['costs'], function(key, value) {
+                                $('#ongkir').append('<li class="list-group-item">' + response[0]
+                                    .code.toUpperCase() + ' : <strong>' + value.service +
+                                    '</strong> - Rp. ' + value.cost[0].value + ' (' + value
+                                    .cost[0].etd + ' hari)</li>')
+                            });
 
-                        // $('#total_berat').val();
+                            $('select[name="harga_ongkir"]').empty();
+                            $('select[name="harga_ongkir"]').append(
+                                '<option value="">-- pilih ongkir --</option>');
+                            $.each(response[0]['costs'], function(key, value) {
+                                $('select[name="harga_ongkir"]').append('<option value="' +
+                                    value.cost[0].value + '">' + response[0].code
+                                    .toUpperCase() + ' : ' + value.service + ' - Rp. ' +
+                                    value.cost[0].value + ' (' + value.cost[0].etd +
+                                    ' hari)' + '</option>');
+                            });
+
+                            // $('#total_berat').val();
+                        }
                     }
-                }
-            });
+                });
+            } else {
+                $('select[name="courier_name"]').append('<option value="">-- pilih ongkir --</option>');
+            }
+        });
+
+        $('select[name="harga_ongkir"]').on('change', function() {
+            let hargaOngkir = $(this).val();
+
+            if (hargaOngkir) {
+                var value = parseInt(hargaOngkir);
+                value = isNaN(value) ? 0 : value;
+                $('.total_ongkir').val(value);
+            } else {
+                $(this).closest('.order_data').find('.total_ongkir').val(0);
+            }
         });
     </script>
 @endsection
