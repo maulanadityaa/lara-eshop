@@ -14,39 +14,81 @@
                         <select class="form-select" name="cate_id">
                             <option selected>---Pilih Kategori---</option>
                             @foreach ($category as $item)
-                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @if (old('cate_id') == $item->id)
+                                    <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
+                                @else
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endif
                             @endforeach
                         </select>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="">Nama</label>
-                        <input type="text" class="form-control" name="name" id="name">
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name"
+                            value="{{ old('name') }}" required>
+                        @error('name')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="">Slug</label>
-                        <input type="text" class="form-control" name="slug" id="slug"
-                            placeholder="Slug akan Terisi Otomatis" readonly>
+                        <input type="text" class="form-control @error('slug') is-invalid @enderror" name="slug" id="slug"
+                            placeholder="Slug akan Terisi Otomatis" value="{{ old('slug') }}" readonly>
+                        @error('slug')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="col-md-12 mb-3">
                         <label for="">Deskripsi</label>
-                        <input id="description" type="hidden" name="description">
+                        @error('description')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                        <input id="description" type="hidden" name="description" value="{{ old('description') }}" required>
                         <trix-editor input="description"></trix-editor>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="">Harga Asli</label>
-                        <input type="number" class="form-control" name="original_price">
+                        <input type="number" class="form-control @error('original_price') is-invalid @enderror"
+                            name="original_price" value="{{ old('original_price') }}" required>
+                        @error('original_price')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="">Harga Jual</label>
-                        <input type="number" class="form-control" name="sell_price">
+                        <input type="number" class="form-control @error('sell_price') is-invalid @enderror"
+                            name="sell_price" value="{{ old('sell_price') }}" required>
+                        @error('sell_price')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="">Stock</label>
-                        <input type="number" class="form-control" name="stock">
+                        <input type="number" class="form-control @error('stock') is-invalid @enderror" name="stock"
+                            value="{{ old('stock') }}" required>
+                        @error('stock')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="">Ukuran</label>
-                        <input type="text" class="form-control" name="size">
+                        <input type="text" class="form-control @error('size') is-invalid @enderror" name="size"
+                            value="{{ old('size') }}" required>
+                        @error('size')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="">Status</label>
@@ -57,7 +99,13 @@
                         <input type="checkbox" name="trending">
                     </div>
                     <div class="col-md-12">
-                        <input type="file" name="image" class="form-control">
+                        <input type="file" name="image" class="form-control @error('image') is-invalid @enderror"
+                            value="{{ old('image') }}" required>
+                        @error('image')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="col-md-12">
                         <button type="submit" class="btn btn-primary">Tambah Produk</button>
@@ -79,7 +127,7 @@
                 .then(data => slug.value = data.slug)
         });
 
-        document.addEventListener('trix-file-accept', function(e){
+        document.addEventListener('trix-file-accept', function(e) {
             e.prevenDefault();
         });
     </script>

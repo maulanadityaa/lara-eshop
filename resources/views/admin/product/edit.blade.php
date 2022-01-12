@@ -18,7 +18,7 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="">Nama</label>
-                        <input type="text" class="form-control" value="{{ $products->name }}" name="name" id="name">
+                        <input type="text" class="form-control" value="{{ $products->name }}" name="name" id="name" required>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="">Slug</label>
@@ -26,24 +26,24 @@
                     </div>
                     <div class="col-md-12 mb-3">
                         <label for="">Deskripsi</label>
-                        <input id="description" type="hidden" name="description">
+                        <input id="description" type="hidden" name="description" value="{{ $products->description }}" required>
                         <trix-editor input="description"></trix-editor>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="">Harga Asli</label>
-                        <input type="number" class="form-control" value="{{ $products->original_price }}" name="original_price">
+                        <input type="number" class="form-control" value="{{ $products->original_price }}" name="original_price" required>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="">Harga Jual</label>
-                        <input type="number" class="form-control" value="{{ $products->sell_price }}" name="sell_price">
+                        <input type="number" class="form-control" value="{{ $products->sell_price }}" name="sell_price" required>
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="">Stock</label>
-                        <input type="number" class="form-control" value="{{ $products->stock }}" name="stock">
+                        <input type="number" class="form-control" value="{{ $products->stock }}" name="stock" required>
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="">Ukuran</label>
-                        <input type="text" class="form-control" value="{{ $products->size }}" name="size">
+                        <input type="text" class="form-control" value="{{ $products->size }}" name="size" required>
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="">Status</label>
@@ -57,7 +57,7 @@
                         <img src="{{ asset('assets/uploads/product/'.$products->image) }}" class="img-thumbnail" width="300" height="300" alt="Gambar Produk">
                     @endif
                     <div class="col-md-12">
-                        <input type="file" name="image" class="form-control">
+                        <input type="file" name="image" class="form-control" required>
                     </div>
                     <div class="col-md-12">
                         <button type="submit" class="btn btn-primary">Edit Produk</button>

@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="">Nama</label>
-                        <input type="text" value="{{ $category->name }}" class="form-control" name="name" id="name">
+                        <input type="text" value="{{ $category->name }}" class="form-control" name="name" id="name" required>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="">Slug</label>
@@ -20,7 +20,7 @@
                     </div>
                     <div class="col-md-12 mb-3">
                         <label for="">Deskripsi</label>
-                        <input id="description" type="hidden" name="description">
+                        <input id="description" type="hidden" name="description" required>
                         <trix-editor input="description"></trix-editor>
                     </div>
                     <div class="col-md-6 mb-3">
@@ -35,7 +35,7 @@
                         <img src="{{ asset('assets/uploads/category/'.$category->image) }}" class="img-thumbnail" width="300" height="300" alt="Gambar Kategori">
                     @endif
                     <div class="col-md-12">
-                        <input type="file" name="image" class="form-control">
+                        <input type="file" name="image" class="form-control" required>
                     </div>
                     <div class="col-md-12">
                         <button type="submit" class="btn btn-primary">Ubah Kategori</button>

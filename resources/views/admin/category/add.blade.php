@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="">Nama</label>
-                        <input type="text" class="form-control" name="name" id="name">
+                        <input type="text" class="form-control" name="name" id="name" required>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="">Slug</label>
@@ -20,7 +20,7 @@
                     </div>
                     <div class="col-md-12 mb-3">
                         <label for="">Deskripsi</label>
-                        <input id="description" type="hidden" name="description">
+                        <input id="description" type="hidden" name="description" required>
                         <trix-editor input="description"></trix-editor>
                     </div>
                     <div class="col-md-6 mb-3">
@@ -32,7 +32,7 @@
                         <input type="checkbox" name="popular">
                     </div>
                     <div class="col-md-12">
-                        <input type="file" name="image" class="form-control">
+                        <input type="file" name="image" class="form-control" required>
                     </div>
                     <div class="col-md-12">
                         <button type="submit" class="btn btn-primary">Tambah Kategori</button>

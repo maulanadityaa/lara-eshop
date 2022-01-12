@@ -31,6 +31,7 @@ Route::post('update-cart', 'Frontend\CartController@updateCart');
 Route::middleware(['auth'])->group(function () {
     Route::get('cart', 'Frontend\CartController@viewCart');
     Route::get('checkout', 'Frontend\CheckoutController@index');
+    Route::post('checkout/place-order', 'Frontend\CheckoutController@placeOrder');
     
     Route::get('cek-ongkir/cities/{province_id}', 'Frontend\CheckoutController@getCities');
     Route::post('cek-ongkir/', 'Frontend\CheckoutController@cekOngkir');
