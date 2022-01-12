@@ -27,4 +27,9 @@ class Order extends Model
         'status',
         'message',
     ];
+
+    public function orderitems()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
 }

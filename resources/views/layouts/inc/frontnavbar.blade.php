@@ -8,13 +8,15 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::is('/') ? 'active':'' }}" href="{{ url('/') }}">Home</a>
+                    <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="{{ url('/') }}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::is('category') ? 'active':'' }}" href="{{ url('category') }}">Kategori</a>
+                    <a class="nav-link {{ Request::is('category') ? 'active' : '' }}"
+                        href="{{ url('category') }}">Kategori</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::is('cart') ? 'active':'' }}" href="{{ url('cart') }}">Keranjang</a>
+                    <a class="nav-link {{ Request::is('cart') ? 'active' : '' }}"
+                        href="{{ url('cart') }}">Keranjang</a>
                 </li>
                 <!-- Authentication Links -->
                 @guest
@@ -42,9 +44,14 @@
                                     Dashboard
                                 </a>
                                 <hr class="dropdown-divider">
+                            @else
+                                <a class="dropdown-item" href="{{ url('/my-orders') }}">
+                                    Pesanan Saya
+                                </a>
+                                <hr class="dropdown-divider">
                             @endif
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                           document.getElementById('logout-form').submit();">
+                                               document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
                             </a>
 

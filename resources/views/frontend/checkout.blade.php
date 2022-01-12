@@ -36,23 +36,28 @@
                             <div class="row checkout-form">
                                 <div class="col-md-6">
                                     <label for="">Nama Depan</label>
-                                    <input type="text" class="form-control" value="{{ Auth::user()->name }}" name="fname" placeholder="Masukkan Nama Depan">
+                                    <input type="text" class="form-control" value="{{ Auth::user()->name }}"
+                                        name="fname" placeholder="Masukkan Nama Depan">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="">Nama Belakang</label>
-                                    <input type="text" class="form-control" value="{{ Auth::user()->lname }}" name="lname" placeholder="Masukkan Nama Belakang">
+                                    <input type="text" class="form-control" value="{{ Auth::user()->lname }}"
+                                        name="lname" placeholder="Masukkan Nama Belakang">
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <label for="">Email</label>
-                                    <input type="text" class="form-control" value="{{ Auth::user()->email }}" name="email" placeholder="Masukkan Email">
+                                    <input type="text" class="form-control" value="{{ Auth::user()->email }}"
+                                        name="email" placeholder="Masukkan Email">
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <label for="">Nomor HP</label>
-                                    <input type="text" class="form-control" value="{{ Auth::user()->nohp }}" name="nohp" placeholder="Masukkan Nama Belakang">
+                                    <input type="text" class="form-control" value="{{ Auth::user()->nohp }}" name="nohp"
+                                        placeholder="Masukkan Nama Belakang">
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <label for="">Alamat Lengkap</label>
-                                    <input type="text" class="form-control" value="{{ Auth::user()->alamat }}" name="address" placeholder="Masukkan Alamat Lengkap">
+                                    <input type="text" class="form-control" value="{{ Auth::user()->alamat }}"
+                                        name="address" placeholder="Masukkan Alamat Lengkap">
                                 </div>
                                 <div class="form-group col-md-6 mt-3">
                                     <label class="font-weight-bold">Provinsi</label>
@@ -71,8 +76,8 @@
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <label for="">Kode Pos</label>
-                                    <input type="number" class="form-control" value="{{ Auth::user()->kodepos }}" name="postal_code"
-                                        placeholder="Masukkan Kode Pos">
+                                    <input type="number" class="form-control" value="{{ Auth::user()->kodepos }}"
+                                        name="postal_code" placeholder="Masukkan Kode Pos">
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <label for="">Total Berat (gram)</label>
@@ -143,9 +148,16 @@
                                 <input type="text" name="jasa_pengiriman" value="belum ada"
                                     class="form-control jasa_pengiriman" readonly />
                             </div>
-                            <div class="d-grid gap-2 col-6 mx-auto mt-3">
-                                <button class="btn btn-primary" type="submit">Buat Pesanan</button>
-                            </div>
+                            @if ($cartitems->count() > 0)
+                                <div class="d-grid gap-2 col-6 mx-auto mt-3">
+                                    <button class="btn btn-primary" type="submit">Buat Pesanan</button>
+                                </div>
+                            @else
+                                <div class="d-grid gap-2 col-6 mx-auto mt-3">
+                                    <a href="{{ url('category') }}" class="btn btn-outline-success float-end">Belanja
+                                        Sekarang</a>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>

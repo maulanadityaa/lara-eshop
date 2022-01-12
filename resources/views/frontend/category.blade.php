@@ -5,9 +5,12 @@
 @endsection
 
 @section('content')
-    @include('layouts.inc.slider')
-
-    <div class="py-5">
+    <div class="py-3 mb-4 shadow-sm bg-secondary text-white">
+        <div class="container">
+            <h5 class="mb-0"><a href="{{ url('/') }}">Home</a> > Semua Kategori</h5>
+        </div>
+    </div>
+    <div class="mt-3">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">

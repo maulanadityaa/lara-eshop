@@ -35,6 +35,9 @@ Route::middleware(['auth'])->group(function () {
     
     Route::get('cek-ongkir/cities/{province_id}', 'Frontend\CheckoutController@getCities');
     Route::post('cek-ongkir/', 'Frontend\CheckoutController@cekOngkir');
+
+    Route::get('my-orders', 'Frontend\UserController@index');
+    Route::get('view-order/{id}', 'Frontend\UserController@view');
 });
 
 Route::middleware(['auth', 'isAdmin'])->group(function () {
