@@ -54,10 +54,6 @@
                                     <label for="">Alamat Lengkap</label>
                                     <input type="text" class="form-control" value="{{ Auth::user()->alamat }}" name="address" placeholder="Masukkan Alamat Lengkap">
                                 </div>
-                                {{-- <div class="col-md-6 mt-3">
-                                    <label for="">Provinsi</label>
-                                    <input type="text" class="form-control" name="" placeholder="Masukkan Nama Provinsi">
-                                </div> --}}
                                 <div class="form-group col-md-6 mt-3">
                                     <label class="font-weight-bold">Provinsi</label>
                                     <select class="form-control form-select provinsi-tujuan" name="province_destination">
@@ -67,17 +63,10 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                {{-- <div class="col-md-6 mt-3">
-                                    <label for="">Kota/Kabupaten</label>
-                                    <input type="text" class="form-control" name="" placeholder="Masukkan Nama Kota/Kabupaten">
-                                </div> --}}
                                 <div class="form-group col-md-6 mt-3">
                                     <label class="font-weight-bold">Kota/Kabupaten</label>
                                     <select class="form-control form-select kota-tujuan" name="city_destination">
                                         <option value="0">-- pilih kota --</option>
-                                        {{-- @foreach ($provinces as $province => $value)
-                                            <option value="{{ $province  }}">{{ $value }}</option>
-                                        @endforeach --}}
                                     </select>
                                 </div>
                                 <div class="col-md-6 mt-3">
@@ -89,8 +78,6 @@
                                     <label for="">Total Berat (gram)</label>
                                     <input type="number" class="form-control" name="total_berat" id="total_berat"
                                         value="{{ $total_berat }}" readonly>
-                                    <input type="hidden" class="form-control" name="total_harga" id="total_harga"
-                                        value="{{ $total_harga }}" readonly>
                                 </div>
                                 <input type="hidden" name="total_harga" value="{{ $total_harga }}">
                                 <div class="col-md-6 mt-3 mx-auto">
@@ -107,9 +94,6 @@
                                     <label class="font-weight-bold">Ongkos Kirim</label>
                                     <select class="form-control ongkos-kirim" name="harga_ongkir">
                                         <option value="0">-- pilih ongkir --</option>
-                                        {{-- @foreach ($provinces as $province => $value)
-                                            <option value="{{ $province  }}">{{ $value }}</option>
-                                        @endforeach --}}
                                     </select>
                                 </div>
                             </div>
@@ -146,13 +130,12 @@
                                         <td>Total :</td>
                                         <td>{{ $jumlah_brg }}</td>
                                         <td>{{ $total_berat }} gr</td>
-                                        <td name="total_harga">Rp. {{ number_format($total_harga) }}</td>
+                                        <td>Rp. {{ number_format($total_harga) }}</td>
                                     </tr>
                                 </tfoot>
                             </table>
                             <hr>
                             <h6>Ongkos Kirim</h6>
-                            {{-- <input type="number" class="form-control total_ongkir" name="total_ongkir" readonly> --}}
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1">Rp.</span>
                                 <input type="text" name="total_ongkir" value="0" class="form-control total_ongkir"
@@ -160,7 +143,6 @@
                                 <input type="text" name="jasa_pengiriman" value="belum ada"
                                     class="form-control jasa_pengiriman" readonly />
                             </div>
-                            {{-- <input type="text" name="total_ongkir" value="Belum ditanbahkan" class="form-control total_ongkir" readonly/> --}}
                             <div class="d-grid gap-2 col-6 mx-auto mt-3">
                                 <button class="btn btn-primary" type="submit">Buat Pesanan</button>
                             </div>
