@@ -40,6 +40,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/dashboard', 'Admin\FrontendController@index');
 
     Route::get('categories', 'Admin\CategoryController@index');
+    Route::get('categories/check-slug', 'Admin\CategoryController@checkSlug');
     Route::get('add-categories', 'Admin\CategoryController@add');
     Route::post('insert-category', 'Admin\CategoryController@insert');
     Route::get('edit-category/{id}', 'Admin\CategoryController@edit');
@@ -47,6 +48,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('delete-category/{id}', 'Admin\CategoryController@destroy');
 
     Route::get('products', 'Admin\ProductController@index');
+    Route::get('products/check-slug', 'Admin\ProductController@checkSlug');
     Route::get('add-products', 'Admin\ProductController@add');
     Route::post('insert-products', 'Admin\ProductController@insert');
     Route::get('edit-product/{id}', 'Admin\ProductController@edit');

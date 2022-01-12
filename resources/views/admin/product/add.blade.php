@@ -20,11 +20,11 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="">Nama</label>
-                        <input type="text" class="form-control" name="name">
+                        <input type="text" class="form-control" name="name" id="name">
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="">Slug</label>
-                        <input type="text" class="form-control" name="slug" placeholder="Slug akan Terisi Otomatis" disabled>
+                        <input type="text" class="form-control" name="slug" id="slug" placeholder="Slug akan Terisi Otomatis" readonly>
                     </div>
                     <div class="col-md-12 mb-3">
                         <label for="">Deskripsi</label>
@@ -64,4 +64,17 @@
             </form>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        const name = document.querySelector('#name');
+        const slug = document.querySelector('#slug');
+
+        name.addEventListener('change', function(){
+            fetch('/products/check-slug?name=' + name.value)
+            .then(response => response.json())
+            .then(data => slug.value = data.slug)
+        });
+    </script>
 @endsection
