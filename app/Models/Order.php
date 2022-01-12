@@ -21,6 +21,7 @@ class Order extends Model
         'city',
         'province',
         'postal_code',
+        'ongkir',
         'courier',
         'noresi',
         'total_price',

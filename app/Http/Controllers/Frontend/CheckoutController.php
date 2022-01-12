@@ -69,6 +69,7 @@ class CheckoutController extends Controller
         $order->province = $request->province_destination;
         $order->postal_code = $request->postal_code;
         $order->courier = $request->jasa_pengiriman;
+        $order->courier = $request->total_ongkir;
         $order->total_price = $request->total_harga + $request->total_ongkir;
         $order->save();
 

@@ -15,7 +15,9 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header bg-warning">
-                        <h3 class="text-center text-dark"><strong>Detail Pesanan</strong></h3>
+                        <h3 class="text-center text-dark"><strong>Detail Pesanan</strong>
+                            <a href="{{ url('my-orders') }}" class="btn btn-dark float-end">Kembali</a>
+                        </h3>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -33,6 +35,8 @@
                                 <label for="">Alamat Pengiriman</label>
                                 <div class="border">{{ $orders->address }}, {{ $orders->city }},
                                     {{ $orders->province }}, {{ $orders->postal_code }}</div>
+                                <label for="">Jasa Ekspedisi</label>
+                                <div class="border">{{ $orders->courier }}</div>
                             </div>
                             <div class="col-md-6">
                                 <h3><strong>Detail Barang</strong></h3>
@@ -63,7 +67,11 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                                <h4 class="px-2">Total Harga : <span class="float-end"><strong>Rp. {{ number_format($orders->total_price) }}</strong></span></h4>
+                                <h5 class="px-2">Ongkir<span class="float-end">Rp.
+                                        {{ number_format($orders->ongkir) }}</span></h5>
+                                        <hr>
+                                <h4 class="px-2">Total Harga<span class="float-end"><strong>Rp.
+                                            {{ number_format($orders->total_price) }}</strong></span></h4>
                             </div>
                         </div>
                     </div>
