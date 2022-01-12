@@ -24,11 +24,13 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="">Slug</label>
-                        <input type="text" class="form-control" name="slug" id="slug" placeholder="Slug akan Terisi Otomatis" readonly>
+                        <input type="text" class="form-control" name="slug" id="slug"
+                            placeholder="Slug akan Terisi Otomatis" readonly>
                     </div>
                     <div class="col-md-12 mb-3">
                         <label for="">Deskripsi</label>
-                        <textarea name="description" rows="3" class="form-control"></textarea>
+                        <input id="description" type="hidden" name="description">
+                        <trix-editor input="description"></trix-editor>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="">Harga Asli</label>
@@ -71,10 +73,14 @@
         const name = document.querySelector('#name');
         const slug = document.querySelector('#slug');
 
-        name.addEventListener('change', function(){
+        name.addEventListener('change', function() {
             fetch('/products/check-slug?name=' + name.value)
-            .then(response => response.json())
-            .then(data => slug.value = data.slug)
+                .then(response => response.json())
+                .then(data => slug.value = data.slug)
+        });
+
+        document.addEventListener('trix-file-accept', function(e){
+            e.prevenDefault();
         });
     </script>
 @endsection

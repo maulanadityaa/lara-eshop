@@ -20,7 +20,8 @@
                     </div>
                     <div class="col-md-12 mb-3">
                         <label for="">Deskripsi</label>
-                        <textarea name="description" rows="3" class="form-control"></textarea>
+                        <input id="description" type="hidden" name="description">
+                        <trix-editor input="description"></trix-editor>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="">Status</label>
@@ -51,6 +52,10 @@
             fetch('/categories/check-slug?name=' + name.value)
             .then(response => response.json())
             .then(data => slug.value = data.slug)
+        });
+
+        document.addEventListener('trix-file-accept', function(e){
+            e.prevenDefault();
         });
     </script>
 @endsection
