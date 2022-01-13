@@ -69,7 +69,7 @@ class CheckoutController extends Controller
         $order->province = $request->province_destination;
         $order->postal_code = $request->postal_code;
         $order->courier = $request->jasa_pengiriman;
-        $order->courier = $request->total_ongkir;
+        $order->ongkir = $request->total_ongkir;
         $order->total_price = $request->total_harga + $request->total_ongkir;
         $order->save();
 
@@ -90,7 +90,7 @@ class CheckoutController extends Controller
         $cartitems = Cart::where('user_id', Auth::id())->get();
         foreach ($cartitems as $item) {
             OrderItem::create([
-                'order_id' => 1,
+                'order_id' => $order->id,
                 'prod_id' => $item->prod_id,
                 'qty' => $item->prod_qty,
                 'price' => $item->products->sell_price

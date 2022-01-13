@@ -39,10 +39,16 @@
                     <p>Tambah Produk</p>
                 </a>
             </li>
-            <li class="nav-item ">
-                <a class="nav-link" href="./tables.html">
+            <li class="nav-item {{ Request::is('admin/orders') ? 'active':'' }}">
+                <a class="nav-link" href="{{ url('admin/orders') }}">
                     <i class="material-icons">content_paste</i>
-                    <p>Table List</p>
+                    <p>Pesanan</p>
+                </a>
+            </li>
+            <li class="nav-item {{ Request::is('users') ? 'active':'' }}">
+                <a class="nav-link" href="{{ url('users') }}">
+                    <i class="material-icons">person</i>
+                    <p>Data Pelanggan</p>
                 </a>
             </li>
         </ul>
