@@ -13,6 +13,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Kavist\RajaOngkir\Facades\RajaOngkir;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 
 class CheckoutController extends Controller
 {
@@ -58,20 +59,38 @@ class CheckoutController extends Controller
 
     public function placeOrder(Request $request)
     {
-        $order = new Order();
-        $order->user_id = Auth::id();
-        $order->fname = $request->fname;
-        $order->lname = $request->lname;
-        $order->email = $request->email;
-        $order->nohp = $request->nohp;
-        $order->address = $request->address;
-        $order->city = $request->city_destination;
-        $order->province = $request->province_destination;
-        $order->postal_code = $request->postal_code;
-        $order->courier = $request->jasa_pengiriman;
-        $order->ongkir = $request->total_ongkir;
-        $order->total_price = $request->total_harga + $request->total_ongkir;
-        $order->save();
+        $validated = $request->validate([
+            'fname' => 'required',
+            'lname' => 'required',
+            'email' => 'required',
+            'address' => 'required',
+            'nohp' => 'required',
+            'city_destination' => 'required|gt:1',
+            'province_destination' => 'required|gt:1',
+            'postal_code' => 'required',
+            'jasa_pengiriman' => 'required',
+            'total_ongkir' => 'required|gt:1000'
+        ]);
+
+        dd($validated);
+
+        // $id = IdGenerator::generate(['table' => 'orders','field' => 'invoice_id', 'length' => 10, 'prefix' =>'INV-']);
+
+        // $order = new Order();
+        // $order->invoice_id = $id;
+        // $order->user_id = Auth::id();
+        // $order->fname = $request->fname;
+        // $order->lname = $request->lname;
+        // $order->email = $request->email;
+        // $order->nohp = $request->nohp;
+        // $order->address = $request->address;
+        // $order->city = $request->city_destination;
+        // $order->province = $request->province_destination;
+        // $order->postal_code = $request->postal_code;
+        // $order->courier = $request->jasa_pengiriman;
+        // $order->ongkir = $request->total_ongkir;
+        // $order->total_price = $request->total_harga + $request->total_ongkir;
+        // $order->save();
 
         // Order::create([
         //     'user_id' => Auth::id(),
@@ -87,35 +106,35 @@ class CheckoutController extends Controller
         //     'total_price' => $request->input('total_harga')
         // ]);
 
-        $cartitems = Cart::where('user_id', Auth::id())->get();
-        foreach ($cartitems as $item) {
-            OrderItem::create([
-                'order_id' => $order->id,
-                'prod_id' => $item->prod_id,
-                'qty' => $item->prod_qty,
-                'price' => $item->products->sell_price
-            ]);
+        // $cartitems = Cart::where('user_id', Auth::id())->get();
+        // foreach ($cartitems as $item) {
+        //     OrderItem::create([
+        //         'order_id' => $order->id,
+        //         'prod_id' => $item->prod_id,
+        //         'qty' => $item->prod_qty,
+        //         'price' => $item->products->sell_price
+        //     ]);
+            
+        //     $product = Product::where('id', $item->prod_id)->first();
+        //     $product->stock = $product->stock - $item->prod_qty;
+        //     $product->update();
+        // }
 
-            $product = Product::where('id', $item->prod_id)->first();
-            $product->stock = $product->stock - $item->prod_qty;
-            $product->update();
-        }
+        // if(Auth::user()->alamat == NULL){
+        //     $user = User::where('id', Auth::id())->first();
+        //     $user->name = $request->fname;
+        //     $user->lname = $request->lname;
+        //     $user->nohp = $request->nohp;
+        //     $user->alamat = $request->address;
+        //     $user->kota = $request->city_destination;
+        //     $user->provinsi = $request->province_destination;
+        //     $user->kodepos = $request->postal_code;
+        //     $user->update();
+        // }
 
-        if(Auth::user()->alamat == NULL){
-            $user = User::where('id', Auth::id())->first();
-            $user->name = $request->fname;
-            $user->lname = $request->lname;
-            $user->nohp = $request->nohp;
-            $user->alamat = $request->address;
-            $user->kota = $request->city_destination;
-            $user->provinsi = $request->province_destination;
-            $user->kodepos = $request->postal_code;
-            $user->update();
-        }
+        // $cartitems = Cart::where('user_id', Auth::id())->get();
+        // Cart::destroy($cartitems);
 
-        $cartitems = Cart::where('user_id', Auth::id())->get();
-        Cart::destroy($cartitems);
-
-        return redirect('/')->with('status', 'Pesanan telah dibuat!!');
+        // return redirect('/')->with('status', 'Pesanan telah dibuat!!');
     }
 }

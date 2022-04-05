@@ -11,7 +11,9 @@ class Order extends Model
 
     // protected $guarded = [];
     protected $table = 'orders';
+    public $incrementing = false;
     protected $fillable = [
+        'id',
         'user_id',
         'fname',
         'lname',

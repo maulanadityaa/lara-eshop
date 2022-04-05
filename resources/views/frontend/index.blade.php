@@ -57,6 +57,7 @@
             </div>
         </div>
     </div>
+    {{ \TawkTo::widgetCode() }}
 @endsection
 
 @section('scripts')

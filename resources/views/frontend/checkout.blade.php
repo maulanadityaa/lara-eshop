@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="py-3 mb-4 shadow-sm bg-secondary text-white">
+    <div class="py-3 mb-4 shadow-sm bg-light text-dark">
         <div class="container">
             <h5 class="mb-0"><a href="{{ url('/') }}">Home</a> > <a href="{{ url('/cart') }}">Keranjang</a>
                 > Checkout</h5>
