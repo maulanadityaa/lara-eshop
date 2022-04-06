@@ -5,6 +5,21 @@
 @endsection
 
 @section('content')
+    <style>
+        .zoom {
+            transition: transform .4s;
+            /* Animation */
+            /* width: 200px;
+                height: 200px; */
+            margin: 0 auto;
+        }
+
+        .zoom:hover {
+            transform: scale(1.2);
+            /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+        }
+
+    </style>
     <div class="py-3 mb-4 shadow-sm bg-light text-dark">
         <div class="container">
             <h5 class="mb-0"><a href="{{ url('/') }}">Home</a> > <a
@@ -17,8 +32,8 @@
         <div class="card shadow product_data">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-4 border-right">
-                        <img src="{{ asset('assets/uploads/product/' . $product->image) }}" class="w-100"
+                    <div class="col-md-4 border-right" id="img-product">
+                        <img src="{{ asset('assets/uploads/product/' . $product->image) }}" class="w-100 rounded"
                             alt="Product Image">
                     </div>
                     <div class="col-md-8">
@@ -37,8 +52,8 @@
                             <h4><strong>Rp. {{ number_format($product->sell_price) }}</strong></h4>
                         </label>
                         <p class="mt-3">{!! $product->description !!}
-                        <br><br>
-                        <strong>Ukuran Tersedia : {{ $product->size }}</strong>
+                            <br><br>
+                            <strong>Ukuran Tersedia : {{ $product->size }}</strong>
                         </p>
                         <hr>
 
@@ -69,7 +84,8 @@
                                     <button type="button" class="btn btn-primary me-3 addtoCartBtn float-start">Masukkan
                                         Keranjang <i class="fa fa-shopping-cart"></i></button>
                                 @elseif($product->stock <= 0)
-                                    <button type="button" class="btn btn-primary me-3 addtoCartBtn float-start" disabled>Masukkan
+                                    <button type="button" class="btn btn-primary me-3 addtoCartBtn float-start"
+                                        disabled>Masukkan
                                         Keranjang <i class="fa fa-shopping-cart"></i></button>
                                 @endif
                                 <button type="button" class="btn btn-success me-3 float-start">Tambahkan ke
@@ -81,4 +97,16 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        var options = {
+            offset: {
+                vertical: 0,
+                horizontal: 15
+            }
+        };
+        new ImageZoom(document.getElementById("img-product"), options);
+    </script>
 @endsection
