@@ -5,21 +5,6 @@
 @endsection
 
 @section('content')
-    <style>
-        .zoom {
-            transition: transform .4s;
-            /* Animation */
-            /* width: 200px;
-                height: 200px; */
-            margin: 0 auto;
-        }
-
-        .zoom:hover {
-            transform: scale(1.2);
-            /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
-        }
-
-    </style>
     <div class="py-3 mb-4 shadow-sm bg-light text-dark">
         <div class="container">
             <h5 class="mb-0"><a href="{{ url('/') }}">Home</a> > <a
@@ -32,6 +17,19 @@
         <div class="card shadow product_data">
             <div class="card-body">
                 <div class="row">
+                    {{-- menampilkan error validasi --}}
+                    {{-- @php
+                        dd($errors)
+                    @endphp --}}
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <div class="col-md-4 border-right" id="img-product">
                         <img src="{{ asset('assets/uploads/product/' . $product->image) }}" class="w-100 rounded"
                             alt="Product Image">
@@ -74,9 +72,9 @@
                                 </div>
                             </div>
                             <div class="col-md-2">
-                                <input type="hidden" value="{{ $product->id }}" class="prod_id">
+                                {{-- <input type="hidden" value="{{ $product->id }}" class="prod_id"> --}}
                                 <label for="Jumlah">Ukuran</label>
-                                <input type="text" name="size" value="" class="form-control prod_size text-center" />
+                                <input type="number" name="size" value="" class="form-control prod_size text-center" required>
                             </div>
                             <div class="col-md-10">
                                 <br />
@@ -102,9 +100,13 @@
 @section('scripts')
     <script>
         var options = {
+            width: 425,
+            zoomWidth: 500,
+            fillContainer: true,
+            scale: 1.2,
             offset: {
                 vertical: 0,
-                horizontal: 15
+                horizontal: 10
             }
         };
         new ImageZoom(document.getElementById("img-product"), options);

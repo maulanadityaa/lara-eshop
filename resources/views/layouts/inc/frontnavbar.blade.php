@@ -33,7 +33,16 @@
                 <li class="nav-item me-3 me-lg-0 text-dark">
                   <a class="nav-link {{ Request::is('cart') ? 'active' : '' }}" href="{{ url('cart') }}">
                     <span><i class="fas fa-shopping-cart" style="color:#313131;"></i></span>
-                    <span class="badge rounded-pill badge-notification bg-danger">1</span>
+                    @php
+                        if (Auth::user()) {
+                          $cart = \App\Models\Cart::where('user_id', Auth::user()->id)->count();
+                        } else{
+                          $cart = 0;
+                        }
+                    @endphp
+                    @if ($cart != 0)
+                      <span class="badge rounded-pill badge-notification bg-danger">{{ $cart }}</span>
+                    @endif
                   </a>
                 </li>
                 @guest

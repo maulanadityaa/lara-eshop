@@ -39,7 +39,7 @@
                     <p>Tambah Produk</p>
                 </a>
             </li>
-            <li class="nav-item {{ Request::is('admin/orders') ? 'active':'' }}">
+            <li class="nav-item {{ Request::is('admin/orders') || Request::is('admin/order-history') || Request::is('admin/view-order-details/{id}') ? 'active':'' }}">
                 <a class="nav-link" href="{{ url('admin/orders') }}">
                     <i class="material-icons">content_paste</i>
                     <p>Pesanan</p>

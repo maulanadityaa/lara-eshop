@@ -58,7 +58,7 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="{{ asset('js/jquery-3.6..0.min.js') }}"></script>
+    {{-- <script src="{{ asset('js/jquery-3.6..0.min.js') }}"></script> --}}
     <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
     <script src="https://unpkg.com/js-image-zoom@0.7.0/js-image-zoom.js" type="application/javascript"></script>

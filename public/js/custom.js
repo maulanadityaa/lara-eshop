@@ -32,6 +32,9 @@ $("document").ready(function () {
             success: function (response) {
                 swal("", response.status, "success");
             },
+            error: function(response) {
+                swal("", 'Ukuran Harus Diisi', "error");
+              }
         });
     });
 

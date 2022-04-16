@@ -25,6 +25,15 @@
         @endphp
     @endforeach
     <div class="container mt-3">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <form action="{{ url('checkout/place-order') }}" method="POST">
             @csrf
             <div class="row">
@@ -114,6 +123,7 @@
                                 <thead>
                                     <tr>
                                         <th>Nama Produk</th>
+                                        <th>Ukuran</th>
                                         <th>Jumlah</th>
                                         <th>Berat</th>
                                         <th>Harga</th>
@@ -124,6 +134,7 @@
                                     @foreach ($cartitems as $item)
                                         <tr>
                                             <td>{{ $item->products->name }}</td>
+                                            <td>{{ $item->prod_size }}</td>
                                             <td>{{ $item->prod_qty }}</td>
                                             <td>{{ $item->prod_qty * 1000 }} gr</td>
                                             <td>Rp. {{ number_format($item->products->sell_price) }}</td>
@@ -132,7 +143,7 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <td>Total :</td>
+                                        <td colspan="2">Total :</td>
                                         <td>{{ $jumlah_brg }}</td>
                                         <td>{{ $total_berat }} gr</td>
                                         <td>Rp. {{ number_format($total_harga) }}</td>
@@ -234,6 +245,9 @@
 
                             // $('#total_berat').val();
                         }
+                    },
+                    error: function(response) {
+                        console.log('error ongkir');
                     }
                 });
             } else {

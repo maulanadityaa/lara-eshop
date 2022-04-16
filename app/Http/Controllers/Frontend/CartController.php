@@ -6,12 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Http\Requests\ValidationRequest;
 use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
     public function addProduct(Request $request)
     {
+        $request->validate([
+            'product_size' => 'required'
+        ]);
         $product_id = $request->input('product_id');
         $product_qty = $request->input('product_qty');
         $product_size = $request->input('product_size');
