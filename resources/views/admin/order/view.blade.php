@@ -101,16 +101,18 @@
                                         </div>
                                         <select class="form-select" name="order_status">
                                             <option {{ $orders->status == '0' ? 'selected' : '' }} value="0">Menunggu
+                                                Konfirmasi</option>
+                                            <option {{ $orders->status == '1' ? 'selected' : '' }} value="1">Menunggu
                                                 Pembayaran</option>
-                                            <option {{ $orders->status == '1' ? 'selected' : '' }} value="1">Telah
+                                            <option {{ $orders->status == '2' ? 'selected' : '' }} value="2">Telah
                                                 Dibayar
                                             </option>
-                                            <option {{ $orders->status == '2' ? 'selected' : '' }} value="2">Sedang
+                                            <option {{ $orders->status == '3' ? 'selected' : '' }} value="3">Sedang
                                                 Dikirim
                                             </option>
-                                            <option {{ $orders->status == '3' ? 'selected' : '' }} value="3">Selesai
+                                            <option {{ $orders->status == '4' ? 'selected' : '' }} value="4">Selesai
                                             </option>
-                                            <option {{ $orders->status > '4' ? 'selected' : '' }} value="4">Dibatalkan
+                                            <option {{ $orders->status > '5' ? 'selected' : '' }} value="5">Dibatalkan
                                             </option>
                                         </select>
                                         <button type="submit" class="btn btn-primary mt-3 float-right">Update</button>

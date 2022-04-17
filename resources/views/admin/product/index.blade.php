@@ -1,10 +1,9 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="card">
-        <div class="card-header">
-            <h3 class="text-center"><strong>Daftar Produk</strong></h3>
-            <hr>
+    <div class="card card-nav-tabs">
+        <div class="card-header card-header-info">
+            <h3 class="text-center">Daftar Produk</h3>
         </div>
         <div class="card-body">
             <table class="table table-bordered table-striped">

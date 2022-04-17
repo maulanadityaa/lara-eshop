@@ -16,8 +16,7 @@
                     </div>
                     <div class="card-footer">
                         <div class="stats">
-                            <i class="material-icons text-danger">warning</i>
-                            <a href="#">Ada {{ $orders_unconfirmed }} Pesanan Baru yang belum dikonfirmasi</a>
+                            <i class="material-icons text-danger">report_problem </i>Ada {{ $orders_unconfirmed }} Pesanan Baru yang belum dikonfirmasi
                         </div>
                     </div>
                 </div>
@@ -33,7 +32,7 @@
                     </div>
                     <div class="card-footer">
                         <div class="stats">
-                            <i class="material-icons">date_range</i> {{ $orders_confirmed }} pesanan sudah <diproses></diproses>
+                            <i class="material-icons">check</i> {{ $orders_confirmed }} pesanan sudah diproses
                         </div>
                     </div>
                 </div>

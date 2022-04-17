@@ -26,20 +26,28 @@ class ProductController extends Controller
 
     public function insert(Request $request)
     {
-        // $validatedData = new Product();
-        // $request->validate([
-        //     'cate_id' => 'required',
-        //     'name' => 'required|max:191',
-        //     'slug' => 'required|unique:products',
-        //     'desciption' => 'required',
-        //     'original_price' => 'required',
-        //     'sell_price' => 'required',
-        //     'stock' => 'required',
-        //     'size' => 'required',
-        //     'image' => 'required',
-        //     'trending' => 'required',
-        //     'status' => 'required',
-        // ]);
+        $request->validate(
+            [
+                'name' => 'required',
+                'slug' => 'required',
+                'image' => 'required',
+                'description' => 'required',
+                'stock' => 'required',
+                'original_price' => 'required',
+                'sell_price' => 'required',
+                'size' => 'required',
+            ],
+            [
+                'name.required' => 'Nama harus diisi!',
+                'slug.required' => 'Slug harus ada!',
+                'image.required' => 'Gambar harus ada!',
+                'description.required' => 'Deskripsi harus diisi!',
+                'stock.required' => 'Stok harus ada!',
+                'original_price.required' => 'Harga Asli harus diisi!',
+                'sell_price.required' => 'Harga Jual harus diisi!',
+                'size.required' => 'Ukuran harus ada!',
+            ]
+        );
 
         $products = new Product();
         if($request->hasFile('image')){
@@ -49,20 +57,6 @@ class ProductController extends Controller
             $file->move('assets/uploads/product/', $filename);
             $products->image = $filename;
         }
-
-        // $product = Product::create([
-        //     'cate_id' => $request->input('cate_id'),
-        //     'name' => $request->input('name'),
-        //     'slug' => $request->input('slug'),
-        //     'description' => $request->input('description'),
-        //     'original_price' => $request->input('original_price'),
-        //     'sell_price' => $request->input('sell_price'),
-        //     'stock' => $request->input('stock'),
-        //     'size' => $request->input('size'),
-        //     'status' => $request->input('status') == TRUE ? '1':'0',
-        //     'trending' => $request->input('trending') == TRUE ? '1':'0',
-        //     'image' => $namaImg,
-        // ]);
 
         $products->cate_id = $request->cate_id;
         $products->name = $request->name;
@@ -77,13 +71,6 @@ class ProductController extends Controller
         $products->save();
 
         return redirect('products')->with('status', 'Produk Sukses ditambahkan');
-        // if($products){
-        //     return redirect('products')->with('status', 'Produk Sukses ditambahkan');
-        // } else{
-        //     return redirect('products')->with('status', 'Produk Gagal ditambahkan');
-        // }
-
-        // return dd($validatedData);
     }
 
     public function edit($id)
@@ -94,6 +81,29 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate(
+            [
+                'name' => 'required',
+                'slug' => 'required',
+                'image' => 'required',
+                'description' => 'required',
+                'stock' => 'required',
+                'original_price' => 'required',
+                'sell_price' => 'required',
+                'size' => 'required',
+            ],
+            [
+                'name.required' => 'Nama harus diisi!',
+                'slug.required' => 'Slug harus ada!',
+                'image.required' => 'Gambar harus ada!',
+                'description.required' => 'Deskripsi harus diisi!',
+                'stock.required' => 'Stok harus ada!',
+                'original_price.required' => 'Harga Asli harus diisi!',
+                'sell_price.required' => 'Harga Jual harus diisi!',
+                'size.required' => 'Ukuran harus ada!',
+            ]
+        );
+
         $products = Product::find($id);
         if($request->hasFile('image')){
             $path = 'assets/uploads/product/'.$products->image;

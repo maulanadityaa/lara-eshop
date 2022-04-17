@@ -22,6 +22,18 @@ class CategoryController extends Controller
 
     public function insert(Request $request)
     {
+        $request->validate(
+            [
+                'name' => 'required',
+                'slug' => 'required',
+                'image' => 'required',
+            ],
+            [
+                'name.required' => 'Nama harus diisi!',
+                'slug.required' => 'Slug harus ada!',
+                'image.required' => 'Gambar harus ada!',
+            ]
+        );
         $category = new Category();
         if($request->hasFile('image')){
             $file = $request->file('image');
@@ -49,6 +61,21 @@ class CategoryController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate(
+            [
+                'name' => 'required',
+                'slug' => 'required',
+                'description' => 'required',
+                'image' => 'required',
+            ],
+            [
+                'name.required' => 'Nama harus diisi!',
+                'slug.required' => 'Slug harus ada!',
+                'description.required' => 'Deskripsi harus diisi!',
+                'image.required' => 'Gambar harus ada!',
+            ]
+        );
+
         $category = Category::find($id);
         if($request->hasFile('image')){
             $path = 'assets/uploads/category/'.$category->image;
