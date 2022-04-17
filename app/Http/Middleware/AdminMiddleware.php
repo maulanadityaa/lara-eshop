@@ -22,11 +22,11 @@ class AdminMiddleware
                 return $next($request);
             }
             else{
-                return redirect('/home')->with('status', 'Access Denied!! Anda bukan Admin');
+                return redirect('/')->with('status', 'Access Denied!! Anda bukan Admin');
             }
         }
         else{
-            return redirect('/home')->with('status', 'Silahkan Login Dahulu');
+            return redirect('/')->with('status', 'Silahkan Login Dahulu');
         }
     }
 }
