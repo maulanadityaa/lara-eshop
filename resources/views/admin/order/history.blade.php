@@ -8,15 +8,19 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header bg-warning">
+                <div class="card card-nav-tabs">
+                    {{-- <div class="card-header card-nav-tabs">
                         <h3 class="text-center text-dark  my-auto"><strong>Semua Pesanan</strong>
                         <a href="{{ url('admin/orders') }}" class="btn btn-primary float-right">Kembali</a></h3>
-                    </div>
-                    <div class="card-body">
-                        <table class="table table-bordered">
+                    </div> --}}
+                    <h3 class="card-header card-header-warning">
+                        Semua Pesanan
+                        <a href="{{ url('admin/orders') }}" class="btn btn-primary float-right">Kembali</a></h3>
+                    <div class="card-body table-responsive">
+                        <table class="table table-hover">
                             <thead>
                                 <tr class="text-center fw-bold">
+                                    <th><strong>Invoice ID</strong></th>
                                     <th><strong>Tanggal Pemesanan</strong></th>
                                     <th><strong>No. Resi</strong></th>
                                     <th><strong>Total Harga</strong></th>
@@ -27,6 +31,7 @@
                             <tbody>
                                 @foreach ($orders as $item)
                                     <tr class="text-center">
+                                        <td>{{ $item->invoice_id }}</td>
                                         <td>{{ date('d-m-Y', strtotime($item->created_at)) }}</td>
                                         @if ($item->noresi == '0')
                                             <td>Belum Ada</td>

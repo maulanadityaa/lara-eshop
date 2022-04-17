@@ -8,11 +8,11 @@
     <div class="container mt-3">
         <div class="row">
             <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header bg-warning">
-                        <h3 class="text-center text-dark"><strong>Detail Pesanan</strong>
-                            <a href="{{ url('admin/orders') }}" class="btn btn-dark float-right">Kembali</a>
-                        </h3>
+                <div class="card card-nav-tabs">
+                    <div class="card-header card-header-warning">
+                        <h3 class="card-title">Detail Pesanan</h3>
+                        {{-- <a href="{{ url('admin/orders') }}" class="btn btn-dark float-right">Kembali</a> --}}
+                        <h4 class="card-category">INVOICE ID : {{ $orders->invoice_id }}</h4>
                     </div>
                     <div class="card-body">
                         <div class="row">
