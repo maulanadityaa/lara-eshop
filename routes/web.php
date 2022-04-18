@@ -62,6 +62,8 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('users', 'Admin\FrontendController@users');
 
     Route::get('admin/orders', 'Admin\OrderController@index');
+    Route::get('admin/confirm-order/{id}', 'Admin\OrderController@confirmOrder');
+    Route::get('admin/decline-order/{id}', 'Admin\OrderController@declineOrder');
     Route::get('admin/order-history', 'Admin\OrderController@orderHistory');
     Route::get('admin/view-order-details/{id}', 'Admin\OrderController@view');
     Route::put('admin/update-order/{id}', 'Admin\OrderController@updateOrder');

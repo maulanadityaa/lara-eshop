@@ -13,7 +13,8 @@ class FrontendController extends Controller
         $orders = Order::where('status', '0')->get();
         $orders_unconfirmed = Order::where('status', '0')->count();
         $orders_confirmed = Order::where('status', '!=', '0')->count();
+        $orders_canceled = Order::where('status', '=', '5')->count();
 
-        return view('admin.index', compact('orders_unconfirmed', 'orders_confirmed', 'orders'));
+        return view('admin.index', compact('orders_unconfirmed', 'orders_confirmed', 'orders', 'orders_canceled'));
     }
 }

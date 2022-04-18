@@ -69,6 +69,11 @@
             swal("Pemberitahuan", "{{ session('status') }}", "success");
         </script>
     @endif
+    @if (session('cancel'))
+        <script>
+            swal("Pemberitahuan", "{{ session('cancel') }}", "error");
+        </script>
+    @endif
 
     @yield('scripts')
 </body>

@@ -67,7 +67,7 @@ class CheckoutController extends Controller
                 'lname' => 'required',
                 'email' => 'required',
                 'address' => 'required',
-                'nohp' => 'required',
+                'nohp' => 'required|digits:10',
                 'city_destination' => 'required|gt:1',
                 'province_destination' => 'required|gt:1',
                 'postal_code' => 'required',
@@ -75,12 +75,24 @@ class CheckoutController extends Controller
                 'total_ongkir' => 'required|gt:1000'
             ],
             [
+                'nohp.digits' => 'No HP minimal 10 digit!',
                 'required' => 'Data Harus Diisi dengan Lengkap!',
                 'city_destination.gt' => 'Pilih Kota Tujuan Dahulu!',
                 'province_destination.gt' => 'Pilih Provinsi Tujuan Dahulu!',
                 'total_ongkir.gt' => 'Total Ongkos Kirim Harus Ada!',
             ]
         );
+
+        if(!preg_match('/[^+0-9]/',trim($request->nohp))){
+            // cek apakah no hp karakter 1-3 adalah +62
+            if(substr(trim($request->nohp), 0, 3)=='+62'){
+                $hp = trim($request->nohp);
+            }
+            // cek apakah no hp karakter 1 adalah 0
+            elseif(substr(trim($request->nohp), 0, 1)=='0'){
+                $hp = '+62'.substr(trim($request->nohp), 1);
+            }
+        }
 
         $id = IdGenerator::generate(['table' => 'orders','field' => 'invoice_id', 'length' => 10, 'prefix' =>'INV'.date('Ymd')]);
         // dd($id);
@@ -90,7 +102,7 @@ class CheckoutController extends Controller
         $order->fname = $request->fname;
         $order->lname = $request->lname;
         $order->email = $request->email;
-        $order->nohp = $request->nohp;
+        $order->nohp = $hp;
         $order->address = $request->address;
         $order->city = $request->city_destination;
         $order->province = $request->province_destination;

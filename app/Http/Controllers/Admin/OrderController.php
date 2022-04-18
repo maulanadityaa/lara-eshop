@@ -31,6 +31,24 @@ class OrderController extends Controller
         return view('admin.order.view', compact('orders', 'province', 'city'));
     }
 
+    public function confirmOrder($id)
+    {
+        $orders = Order::find($id);
+        $orders->status = 1;
+        $orders->update();
+
+        return redirect('dashboard')->with('status', 'Pesanan Dikonfirmasi!');
+    }
+
+    public function declineOrder($id)
+    {
+        $orders = Order::find($id);
+        $orders->status = 5;
+        $orders->update();
+
+        return redirect('dashboard')->with('cancel', 'Pesanan Ditolak!');
+    }
+
     public function updateOrder(Request $request, $id)
     {
         $orders = Order::find($id);
