@@ -31,7 +31,7 @@
                             <tbody>
                                 @foreach ($orders as $item)
                                     <tr class="text-center">
-                                        <td>{{ $item->invoice_id }}</td>
+                                        <td>{{ $item->id }}</td>
                                         <td>{{ date('d-m-Y', strtotime($item->created_at)) }}</td>
                                         @if ($item->noresi == '0')
                                             <td>Belum Ada</td>
@@ -40,15 +40,17 @@
                                         @endif
                                         <td>Rp. {{ number_format($item->total_price) }}</td>
                                         @if ($item->status == '0')
-                                            <td><span class="badge bg-warning text-dark">Menunggu Pembayaran</span></td>
+                                            <td><span class="badge bg-danger text-dark">Menunggu Konfirmasi</span></td>
                                         @elseif($item->status == '1')
+                                            <td><span class="badge bg-warning text-dark">Menunggu Pembayaran</span></td>
+                                        @elseif($item->status == '2')
                                             <td><span class="badge bg-primary text-white">Telah Dibayar</span></td>
-                                        @elseif ($item->status == '2')
-                                            <td><span class="badge bg-info text-white">Sedang dikirm</span></td>
                                         @elseif ($item->status == '3')
-                                            <td><span class="badge bg-success">Selesai</span></td>
+                                            <td><span class="badge bg-info text-white">Sedang dikirm</span></td>
+                                        @elseif ($item->status == '4')
+                                            <td><span class="badge bg-success text-white">Selesai</span></td>
                                         @else
-                                            <td><span class="badge bg-danger">Dibatalkan</span></td>
+                                            <td><span class="badge bg-danger text-white">Dibatalkan</span></td>
                                         @endif
                                         <td>
                                             <a href="{{ url('admin/view-order-details/' . $item->id) }}"

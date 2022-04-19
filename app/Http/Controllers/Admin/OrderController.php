@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use App\Models\City;
 use App\Models\Order;
 use App\Models\Province;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -26,9 +28,20 @@ class OrderController extends Controller
             $provinceId = $orders->province;
             $province = Province::where('province_id', '=', $provinceId)->first();
         }
+        // dd($orders->orderitems);
         // dd($orders);
 
-        return view('admin.order.view', compact('orders', 'province', 'city'));
+        // $old_cartitems = Cart::where('user_id', Auth::id())->get();
+        // foreach ($old_cartitems as $item) {
+        //     if (!Product::where('id', $item->prod_id)->where('stock', '>=', $item->prod_qty)->exists()) {
+        //         $removeItem = Cart::where('user_id', Auth::id())->where('prod_id', $item->prod_id)->first();
+        //         $removeItem->delete();
+        //     }
+        // }
+        $cartitems = Cart::where('user_id', Auth::id())->get();
+        // dd($cartitems);
+
+        return view('admin.order.view', compact('orders', 'province', 'city', 'cartitems'));
     }
 
     public function confirmOrder($id)

@@ -76,7 +76,7 @@
                                     <tr>
                                         <td class="text-center">
                                             <p class="h4">
-                                                {{ $item->invoice_id }}
+                                                {{ $item->id }}
                                             </p>
                                             <small>
                                                 {{ date('d F Y H:i:s', strtotime($item->created_at)) }} WIB
@@ -98,6 +98,11 @@
                                 @endforeach
                             </tbody>
                         </table>
+                    </div>
+                    <div class="pagination justify-content-center">
+                        <div class="d-flex">
+                            {!! $orders->links() !!}
+                        </div>
                     </div>
                 </div>
             </div>

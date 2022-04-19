@@ -10,7 +10,7 @@ class FrontendController extends Controller
 {
     public function index()
     {
-        $orders = Order::where('status', '0')->get();
+        $orders = Order::where('status', '0')->latest()->paginate(5);
         $orders_unconfirmed = Order::where('status', '0')->count();
         $orders_confirmed = Order::where('status', '!=', '0')->count();
         $orders_canceled = Order::where('status', '=', '5')->count();

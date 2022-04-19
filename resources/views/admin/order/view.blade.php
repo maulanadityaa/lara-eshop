@@ -42,7 +42,8 @@
                                 {{-- <div class="border">{{ $orders->address }}, {{ $orders->city }},
                                     {{ $orders->province }}, {{ $orders->postal_code }}</div> --}}
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" value="{{ $orders->address }}, {{ $city->name }}, {{ $province->name }}">
+                                    <input type="text" class="form-control"
+                                        value="{{ $orders->address }}, {{ $city->name }}, {{ $province->name }}">
                                 </div>
                                 <label for="">Kode POS</label>
                                 {{-- <div class="border">{{ $orders->address }}, {{ $orders->city }},
@@ -59,32 +60,28 @@
                             <div class="col-md-6">
                                 <h3><strong>Detail Barang</strong></h3>
                                 <hr>
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr class="text-center">
-                                            <th><strong>Nama Produk</strong></th>
-                                            <th><strong>Jumlah</strong></th>
-                                            <th><strong>Harga</strong></th>
-                                            <th><strong>Gambar</strong></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($orders->orderitems as $item)
-                                            <tr>
-                                                {{-- @php
-                                                    dd($item);
-                                                @endphp --}}
-                                                <td>{{ $item->products->name }}</td>
-                                                <td>{{ $item->qty }}</td>
-                                                <td>Rp. {{ number_format($item->price) }}</td>
-                                                <td>
-                                                    <img src="{{ asset('assets/uploads/product/' . $item->products->image) }}"
-                                                        width="50px" alt="Gambar Produk">
-                                                </td>
+                                <div class="table table-responsive">
+                                    <table class="table table-hover table-bordered">
+                                        <thead>
+                                            <tr class="text-center">
+                                                <th><strong>Nama Produk</strong></th>
+                                                <th><strong>Jumlah</strong></th>
+                                                <th><strong>Ukuran</strong></th>
+                                                <th><strong>Harga</strong></th>
                                             </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($orders->orderitems as $item)
+                                                <tr>
+                                                    <td>{{ $item->products->name }}</td>
+                                                    <td>{{ $item->qty }}</td>
+                                                    <td>{{ $item->prod_size }}</td>
+                                                    <td>Rp. {{ number_format($item->price) }}</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                                 <h5 class="px-2">Ongkir<span class="float-right">Rp.
                                         {{ number_format($orders->ongkir) }}</span></h5>
                                 <hr>
@@ -99,23 +96,27 @@
                                             <input type="text" class="form-control" value="{{ $orders->noresi }}"
                                                 name="no_resi">
                                         </div>
-                                        <select class="form-select" name="order_status">
-                                            <option {{ $orders->status == '0' ? 'selected' : '' }} value="0">Menunggu
-                                                Konfirmasi</option>
-                                            <option {{ $orders->status == '1' ? 'selected' : '' }} value="1">Menunggu
-                                                Pembayaran</option>
-                                            <option {{ $orders->status == '2' ? 'selected' : '' }} value="2">Telah
-                                                Dibayar
-                                            </option>
-                                            <option {{ $orders->status == '3' ? 'selected' : '' }} value="3">Sedang
-                                                Dikirim
-                                            </option>
-                                            <option {{ $orders->status == '4' ? 'selected' : '' }} value="4">Selesai
-                                            </option>
-                                            <option {{ $orders->status > '5' ? 'selected' : '' }} value="5">Dibatalkan
-                                            </option>
-                                        </select>
-                                        <button type="submit" class="btn btn-primary mt-3 float-right">Update</button>
+                                        <div class="input-group">
+                                            <label for="status">Status : </label>
+                                            <select class="form-select" name="order_status">
+                                                <option {{ $orders->status == '0' ? 'selected' : '' }} value="0">Menunggu
+                                                    Konfirmasi</option>
+                                                <option {{ $orders->status == '1' ? 'selected' : '' }} value="1">Menunggu
+                                                    Pembayaran</option>
+                                                <option {{ $orders->status == '2' ? 'selected' : '' }} value="2">Telah
+                                                    Dibayar
+                                                </option>
+                                                <option {{ $orders->status == '3' ? 'selected' : '' }} value="3">Sedang
+                                                    Dikirim
+                                                </option>
+                                                <option {{ $orders->status == '4' ? 'selected' : '' }} value="4">Selesai
+                                                </option>
+                                                <option {{ $orders->status > '5' ? 'selected' : '' }} value="5">
+                                                    Dibatalkan
+                                                </option>
+                                            </select>
+                                            <button type="submit" class="btn btn-primary mt-3 float-right">Update</button>
+                                        </div>
                                     </form>
                                 </div>
                             </div>

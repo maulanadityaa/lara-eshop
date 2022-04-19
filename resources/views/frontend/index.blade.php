@@ -1,7 +1,7 @@
 @extends('layouts.front')
 
 @section('title')
-    Selamat Datang di Toko Sandal
+    Selamat Datang di Byboot.id
 @endsection
 
 @section('content')

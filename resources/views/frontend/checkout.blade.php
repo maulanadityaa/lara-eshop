@@ -13,9 +13,9 @@
     </div>
 
     @php
-    $total_berat = 0;
-    $jumlah_brg = 0;
-    $total_harga = 0;
+        $total_berat = 0;
+        $jumlah_brg = 0;
+        $total_harga = 0;
     @endphp
     @foreach ($cartitems as $item)
         @php

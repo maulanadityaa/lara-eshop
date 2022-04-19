@@ -27,7 +27,7 @@
                             <tbody>
                                 @foreach ($orders as $item)
                                     <tr class="text-center">
-                                        <td>{{ $item->invoice_id }}</td>
+                                        <td>{{ $item->id }}</td>
                                         <td>{{ date('d F Y H:i:s', strtotime($item->created_at)) }} WIB</td>
                                         @if ($item->noresi == '0')
                                             <td>Belum Ada</td>

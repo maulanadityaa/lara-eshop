@@ -67,7 +67,7 @@ class CheckoutController extends Controller
                 'lname' => 'required',
                 'email' => 'required',
                 'address' => 'required',
-                'nohp' => 'required|digits:10',
+                'nohp' => 'required|min:10',
                 'city_destination' => 'required|gt:1',
                 'province_destination' => 'required|gt:1',
                 'postal_code' => 'required',
@@ -75,7 +75,7 @@ class CheckoutController extends Controller
                 'total_ongkir' => 'required|gt:1000'
             ],
             [
-                'nohp.digits' => 'No HP minimal 10 digit!',
+                'nohp.min' => 'No HP minimal 10 digit!',
                 'required' => 'Data Harus Diisi dengan Lengkap!',
                 'city_destination.gt' => 'Pilih Kota Tujuan Dahulu!',
                 'province_destination.gt' => 'Pilih Provinsi Tujuan Dahulu!',
@@ -94,10 +94,11 @@ class CheckoutController extends Controller
             }
         }
 
-        $id = IdGenerator::generate(['table' => 'orders','field' => 'invoice_id', 'length' => 10, 'prefix' =>'INV'.date('Ymd')]);
+        $invid = IdGenerator::generate(['table' => 'orders','field' => 'id', 'length' => 10, 'prefix' =>'INV'.date('ymd')]);
+        $id = $invid.Auth::user()->id.rand(10,100);
         // dd($id);
         $order = new Order();
-        $order->invoice_id = $id;
+        $order->id = $id;
         $order->user_id = Auth::id();
         $order->fname = $request->fname;
         $order->lname = $request->lname;
@@ -112,11 +113,27 @@ class CheckoutController extends Controller
         $order->total_price = $request->total_harga + $request->total_ongkir;
         $order->save();
 
+        // Order::create([
+        //     'user_id' => Auth::id(),
+        //     'invoice_id' => $id,
+        //     'fname' => $request->fname,
+        //     'lname' => $request->lname,
+        //     'email' => $request->email,
+        //     'nohp' => $hp,
+        //     'address' => $request->address,
+        //     'city' => $request->city_destination,
+        //     'province' => $request->province_destination,
+        //     'postal_code' => $request->postal_code,
+        //     'courier' => $request->jasa_pengiriman,
+        //     'ongkir' => $request->total_ongkir,
+        //     'total_price' => $request->total_harga + $request->total_ongkir
+        // ]);
+
         $cartitems = Cart::where('user_id', Auth::id())->get();
         // dd($cartitems);
         foreach ($cartitems as $item) {
             OrderItem::create([
-                'order_id' => $order->invoice_id,
+                'order_id' => $order->id,
                 'prod_id' => $item->prod_id,
                 'prod_size' => $item->prod_size,
                 'qty' => $item->prod_qty,
