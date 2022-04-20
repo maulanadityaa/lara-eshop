@@ -13,9 +13,9 @@
     </div>
 
     @php
-        $total_berat = 0;
-        $jumlah_brg = 0;
-        $total_harga = 0;
+    $total_berat = 0;
+    $jumlah_brg = 0;
+    $total_harga = 0;
     @endphp
     @foreach ($cartitems as $item)
         @php
@@ -159,16 +159,16 @@
                                 <input type="text" name="jasa_pengiriman" value="belum ada"
                                     class="form-control jasa_pengiriman" readonly />
                             </div>
-                            @if ($cartitems->count() > 0)
-                                <div class="d-grid gap-2 col-6 mx-auto mt-3">
-                                    <button class="btn btn-primary" type="submit">Buat Pesanan</button>
-                                </div>
-                            @else
-                                <div class="d-grid gap-2 col-6 mx-auto mt-3">
-                                    <a href="{{ url('category') }}" class="btn btn-outline-success float-end">Belanja
-                                        Sekarang</a>
-                                </div>
-                            @endif
+                                @if ($cartitems->count() > 0)
+                                    <div class="d-grid gap-2 col-6 mx-auto mt-3">
+                                        <button class="btn btn-primary" type="submit">Buat Pesanan</button>
+                                    </div>
+                                @else
+                                    <div class="d-grid gap-2 col-6 mx-auto mt-3">
+                                        <a href="{{ url('category') }}" class="btn btn-outline-success float-end">Belanja
+                                            Sekarang</a>
+                                    </div>
+                                @endif
                         </div>
                     </div>
                 </div>
@@ -262,6 +262,7 @@
                 var value = parseInt(hargaOngkir);
                 value = isNaN(value) ? 0 : value;
                 $('.total_ongkir').val(value);
+                $('span[name="total_harga"]').append('<b><stong>Rp. </stong></b>');
 
                 let withoutNumbers = hargaOngkir.replace(/[0-9]/g, '');
                 if (withoutNumbers) {

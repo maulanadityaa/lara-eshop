@@ -83,19 +83,19 @@ class CheckoutController extends Controller
             ]
         );
 
-        if(!preg_match('/[^+0-9]/',trim($request->nohp))){
+        if (!preg_match('/[^+0-9]/', trim($request->nohp))) {
             // cek apakah no hp karakter 1-3 adalah +62
-            if(substr(trim($request->nohp), 0, 3)=='+62'){
+            if (substr(trim($request->nohp), 0, 3) == '+62') {
                 $hp = trim($request->nohp);
             }
             // cek apakah no hp karakter 1 adalah 0
-            elseif(substr(trim($request->nohp), 0, 1)=='0'){
-                $hp = '+62'.substr(trim($request->nohp), 1);
+            elseif (substr(trim($request->nohp), 0, 1) == '0') {
+                $hp = '+62' . substr(trim($request->nohp), 1);
             }
         }
 
-        $invid = IdGenerator::generate(['table' => 'orders','field' => 'id', 'length' => 10, 'prefix' =>'INV'.date('ymd')]);
-        $id = $invid.Auth::user()->id.rand(10,100);
+        $invid = IdGenerator::generate(['table' => 'orders', 'field' => 'id', 'length' => 10, 'prefix' => 'INV' . date('ymd')]);
+        $id = $invid . Auth::user()->id . rand(10, 100);
         // dd($id);
         $order = new Order();
         $order->id = $id;
@@ -145,7 +145,7 @@ class CheckoutController extends Controller
             $product->update();
         }
 
-        if(Auth::user()->alamat == NULL){
+        if (Auth::user()->alamat == NULL) {
             $user = User::where('id', Auth::id())->first();
             $user->name = $request->fname;
             $user->lname = $request->lname;
@@ -161,5 +161,53 @@ class CheckoutController extends Controller
         Cart::destroy($cartitems);
 
         return redirect('/')->with('status', 'Pesanan telah dibuat!!');
+    }
+
+    public function payNow($id)
+    {
+        $orders = Order::findOrFail($id);
+        // dd($orders);
+
+        $customerDetails = [
+            'first_name' => $orders->fname,
+            'last_name' => $orders->lname,
+            'email' => $orders->email,
+            'phone' => $orders->nohp,
+            'address' => $orders->address,
+            'city' => $orders->city,
+            'postal_code' => $orders->postal_code
+        ];
+
+        $transactionDetails = [
+            'order_id' => $orders->id,
+            'gross_amount' => $orders->total_price
+        ];
+
+        // dd($this->harga);
+
+        $payload = [
+            'transaction_details' => $transactionDetails,
+            'customer_details' => $customerDetails
+        ];
+
+        // Set your Merchant Server Key
+        \Midtrans\Config::$serverKey = config('services.midtrans.serverKey');
+        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+        \Midtrans\Config::$isProduction = false;
+        // Set sanitization on (default)
+        \Midtrans\Config::$isSanitized = true;
+        // Set 3DS transaction for credit card to true
+        \Midtrans\Config::$is3ds = true;
+
+        // dd(\Midtrans\Config::$serverKey = config('services.midtrans.serverKey'));
+        $snapToken = \Midtrans\Snap::getSnapToken($payload);
+        // dd($snapToken);
+
+        if ($snapToken) {
+            $orders->snaptoken = $snapToken;
+            $orders->update();
+        }
+        
+        return response()->json($snapToken);
     }
 }
