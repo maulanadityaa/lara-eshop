@@ -7,7 +7,8 @@
 @section('content')
     <div class="py-3 mb-4 shadow-sm bg-light text-dark">
         <div class="container">
-            <h5 class="mb-0"><a href="{{ url('/') }}">Home</a> > <a href="{{ url('/my-orders') }}">Pesanan Saya</a> > {{ $orders->id }}</h5>
+            <h5 class="mb-0"><a href="{{ url('/') }}">Home</a> > <a href="{{ url('/my-orders') }}">Pesanan
+                    Saya</a> > {{ $orders->id }}</h5>
         </div>
     </div>
     <div class="container mt-3">
@@ -75,9 +76,21 @@
                                     dd($orders->snaptoken);
                                 @endphp --}}
                                 <div class="float-end">
-                                    <button type="button" class="btn btn-success" type="submit" name="bayar"><i class="far fa-credit-card"></i>  Bayar Sekarang</button>
+                                    @if ($orders->status == 0)
+                                        <button type="button" class="btn btn-danger" type="submit" name="bayar" disabled><i
+                                                class="fas fa-exclamation-triangle"></i> Menunggu Konfirmasi</button>
+                                    @else
+                                        <button type="button" class="btn btn-success" type="submit" name="bayar"><i
+                                                class="far fa-credit-card"></i> Bayar Sekarang</button>
+                                    @endif
+
                                 </div>
                             </div>
+                            <form action="{{ url('checkout/place-order/paynow/submit-payment') }}" id="midtrans_submit"
+                                method="POST">
+                                @csrf
+                                <input type="hidden" name="midtrans_callback">
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -115,20 +128,17 @@
                             // Optional
                             onSuccess: function(result) {
                                 /* You may add your own js here, this is just example */
-                                document.getElementById('result-json').innerHTML += JSON
-                                    .stringify(result, null, 2);
+                                sendCallback(result);
                             },
                             // Optional
                             onPending: function(result) {
                                 /* You may add your own js here, this is just example */
-                                document.getElementById('result-json').innerHTML += JSON
-                                    .stringify(result, null, 2);
+                                sendCallback(result);
                             },
                             // Optional
                             onError: function(result) {
                                 /* You may add your own js here, this is just example */
-                                document.getElementById('result-json').innerHTML += JSON
-                                    .stringify(result, null, 2);
+                                sendCallback(result);
                             }
                         });
                     }
@@ -158,6 +168,13 @@
                     document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
                 }
             });
+        }
+
+        function sendCallback(response) {
+            // document.getElementById('midtrans_callback').value = JSON.stringify(response);
+            $('input[name=midtrans_callback]').val(JSON.stringify(response));
+            // alert(document.getElementById('midtrans_callback').value)
+            $('#midtrans_submit').submit();
         }
     </script>
 @endsection

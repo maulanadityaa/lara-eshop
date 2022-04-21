@@ -34,7 +34,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('checkout/place-order', 'Frontend\CheckoutController@placeOrder');
     Route::GET('checkout/place-order/paynow/{id}', 'Frontend\CheckoutController@payNow');
     
-    Route::get('cek-ongkir/cities/{province_id}', 'Frontend\CheckoutController@getCities');
+    Route::post('checkout/place-order/paynow/submit-payment', 'Frontend\MidtransController@submitPayment');
+    
+        Route::get('cek-ongkir/cities/{province_id}', 'Frontend\CheckoutController@getCities');
     Route::post('cek-ongkir/', 'Frontend\CheckoutController@cekOngkir');
 
     Route::get('my-orders', 'Frontend\UserController@index');

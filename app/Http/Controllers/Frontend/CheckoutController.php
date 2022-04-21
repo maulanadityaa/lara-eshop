@@ -160,7 +160,7 @@ class CheckoutController extends Controller
         $cartitems = Cart::where('user_id', Auth::id())->get();
         Cart::destroy($cartitems);
 
-        return redirect('/')->with('status', 'Pesanan telah dibuat!!');
+        return redirect('/my-orders')->with('status', 'Pesanan telah dibuat!!');
     }
 
     public function payNow($id)

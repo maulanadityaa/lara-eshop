@@ -73,6 +73,12 @@
         </script>
     @endif
 
+    @if (session('error'))
+        <script>
+            swal("", "{{ session('error') }}", "error");
+        </script>
+    @endif
+
     @yield('scripts')
 </body>
 @include('layouts.inc.frontfooter')

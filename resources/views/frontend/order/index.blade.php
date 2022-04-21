@@ -35,12 +35,14 @@
                                         <td>{{ $item->noresi }}</td>
                                         <td>Rp. {{ number_format($item->total_price) }}</td>
                                         @if ($item->status == '0')
-                                            <td><span class="badge bg-warning text-dark">Menunggu Pembayaran</span></td>
+                                            <td><span class="badge bg-danger text-white">Menunggu Konfirmasi</span></td>
                                         @elseif($item->status == '1')
+                                            <td><span class="badge bg-warning text-white">Menunggu Pembayaran</span></td>
+                                        @elseif($item->status == '2')
                                             <td><span class="badge bg-primary">Telah Dibayar</span></td>
-                                        @elseif ($item->status == '2')
-                                            <td><span class="badge bg-info text-dark">Sedang dikirm</span></td>
                                         @elseif ($item->status == '3')
+                                            <td><span class="badge bg-info text-dark">Sedang dikirm</span></td>
+                                        @elseif ($item->status == '4')
                                             <td><span class="badge bg-success">Selesai</span></td>
                                         @else
                                             <td><span class="badge bg-danger">Dibatalkan</span></td>
