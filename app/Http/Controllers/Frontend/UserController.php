@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -22,5 +23,14 @@ class UserController extends Controller
         $orders = Order::where('id', $id)->where('user_id', Auth::id())->first();
 
         return view('frontend.order.view', compact('orders'));
+    }
+    
+    public function cancelOrder($id)
+    {
+        DB::table('orders')->delete($id);
+        OrderItem::where('order_id',$id)->delete();
+
+        $orders = Order::where('user_id', Auth::id())->get();
+        return view('frontend.order.index', compact('orders'))->with('status', 'Pesanan telah dibatalkan!');
     }
 }

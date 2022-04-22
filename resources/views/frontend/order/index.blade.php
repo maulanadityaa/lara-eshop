@@ -74,11 +74,10 @@
                                             <td><span class="badge bg-danger">Dibatalkan</span></td>
                                         @endif
                                         <td>
-                                            {{-- <a href="{{ url('view-order/' . $item->id) }}"
-                                                class="btn btn-info">Lihat</a> --}}
                                             @if ($item->status == '0')
-                                                {{-- <button class="btn btn-primary" disabled>Update
-                                                    Status</button> --}}
+                                            @elseif ($item->midtrans_status == NULL)
+                                            @elseif ($item->status == '5')
+                                                <div class="text-danger">Pesanan Dibatalkan</div>
                                             @else
                                                 <a href="{{ url('view-order/update-status/' . $item->id) }}"
                                                     class="btn btn-primary" name="update_status">Update Status</a>
@@ -100,16 +99,5 @@
         $(".clickable-row").click(function() {
             window.location = $(this).data("href");
         });
-        // $('button[name="update_status"]').on('click', function() {
-        //     $.ajax({
-        //         type: "GET",
-        //         url: "view-order/update-status/" + ,
-        //         data: "data",
-        //         dataType: "dataType",
-        //         success: function (response) {
-
-        //         }
-        //     });
-        // });
     </script>
 @endsection

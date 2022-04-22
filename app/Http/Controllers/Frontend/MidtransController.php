@@ -53,11 +53,22 @@ class MidtransController extends Controller
         // dd($status);
         if($status && $orders){
             if($status->transaction_status != $orders->id){
-                if (strtolower($status->transaction_status) == 'pending') {
-                    $orders->status = 1;
-                } elseif (strtolower($status->transaction_status) == 'settlement' || 'capture') {
+                if (strtolower($status->transaction_status) == $orders->midtrans_status) {
+                    return redirect()->back()->with('error', 'Status Pesanan dengan ID ' . $id . ' belum ada perubahan');
+                } 
+                elseif (strtolower($status->transaction_status) == 'settlement') {
                     $orders->status = 2;
-                } elseif (strtolower($status->transaction_status) == 'deny' || 'cancel' || 'expire') {
+                } 
+                elseif (strtolower($status->transaction_status) == 'capture') {
+                    $orders->status = 2;
+                } 
+                elseif (strtolower($status->transaction_status) == 'deny') {
+                    $orders->status = 5;
+                }
+                elseif (strtolower($status->transaction_status) == 'cancel') {
+                    $orders->status = 5;
+                }
+                elseif (strtolower($status->transaction_status) == 'expire') {
                     $orders->status = 5;
                 }
                 $orders->midtrans_status = $status->transaction_status;

@@ -33,15 +33,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('checkout', 'Frontend\CheckoutController@index');
     Route::post('checkout/place-order', 'Frontend\CheckoutController@placeOrder');
     Route::GET('checkout/place-order/paynow/{id}', 'Frontend\CheckoutController@payNow');
-    
+
     Route::post('checkout/place-order/paynow/submit-payment', 'Frontend\MidtransController@submitPayment');
-    
-        Route::get('cek-ongkir/cities/{province_id}', 'Frontend\CheckoutController@getCities');
+    Route::get('/view-order/update-status/{id}', 'Frontend\MidtransController@updateStatus');
+
+    Route::get('cek-ongkir/cities/{province_id}', 'Frontend\CheckoutController@getCities');
     Route::post('cek-ongkir/', 'Frontend\CheckoutController@cekOngkir');
 
     Route::get('my-orders', 'Frontend\UserController@index');
     Route::get('view-order/{id}', 'Frontend\UserController@view');
-    Route::get('/view-order/update-status/{id}', 'Frontend\MidtransController@updateStatus');
+    Route::get('view-order/cancel-order/{id}', 'Frontend\UserController@cancelOrder');
 });
 
 Route::middleware(['auth', 'isAdmin'])->group(function () {

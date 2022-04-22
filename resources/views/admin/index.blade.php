@@ -82,7 +82,7 @@
                                                 {{ date('d F Y H:i:s', strtotime($item->created_at)) }} WIB
                                             </small>
                                         </td>
-                                        <td><a href="https://wa.me/{{ $item->nohp }}" target="_blank"><i class="material-icons">whatsapp</i> {{ $item->nohp }}</a></td>
+                                        <td><a href="https://wa.me/{{ $item->nohp }}" target="_blank" style="color: green"><i class="material-icons">whatsapp</i> {{ $item->nohp }}</a></td>
                                         <td>{{ $item->email }}</td>
                                         <td>Rp. {{ number_format($item->total_price) }}</td>
                                         <td><span class="badge bg-danger text-white">Menunggu Konfirmasi</span></td>
