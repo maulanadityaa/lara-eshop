@@ -79,9 +79,12 @@
                                     @if ($orders->status == 0)
                                         <button type="button" class="btn btn-danger" type="submit" name="bayar" disabled><i
                                                 class="fas fa-exclamation-triangle"></i> Menunggu Konfirmasi</button>
-                                    @else
+                                    @elseif($orders->status == 1)
                                         <button type="button" class="btn btn-success" type="submit" name="bayar"><i
                                                 class="far fa-credit-card"></i> Bayar Sekarang</button>
+                                    @else
+                                        <button type="button" class="btn btn-info" type="submit" name="bayar" disabled><i
+                                                class="fas fa-badge-check"></i> Telah Dibayar</button>
                                     @endif
 
                                 </div>

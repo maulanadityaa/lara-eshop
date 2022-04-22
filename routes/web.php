@@ -41,6 +41,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('my-orders', 'Frontend\UserController@index');
     Route::get('view-order/{id}', 'Frontend\UserController@view');
+    Route::get('/view-order/update-status/{id}', 'Frontend\MidtransController@updateStatus');
 });
 
 Route::middleware(['auth', 'isAdmin'])->group(function () {

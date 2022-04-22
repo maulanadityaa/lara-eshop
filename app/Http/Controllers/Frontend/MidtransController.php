@@ -16,13 +16,13 @@ class MidtransController extends Controller
         $orders = Order::findOrFail($callback->order_id);
 
         if ($orders) {
-            if(strtolower($callback->transaction_status) == 'pending'){
+            if (strtolower($callback->transaction_status) == 'pending') {
                 $orders->status = 1;
-            } elseif (strtolower($callback->transaction_status) == 'settlement' || 'capture'){
+            } elseif (strtolower($callback->transaction_status) == 'settlement' || 'capture') {
                 $orders->status = 2;
-            } elseif (strtolower($callback->transaction_status) == 'deny' || 'cancel' || 'expire'){
+            } elseif (strtolower($callback->transaction_status) == 'deny' || 'cancel' || 'expire') {
                 $orders->status = 5;
-            }   
+            }
             $orders->midtrans_status = $callback->transaction_status;
             $orders->payment_type = $callback->payment_type;
             $orders->payment_code = isset($callback->payment_code) ? $callback->payment_code : null;
@@ -33,5 +33,38 @@ class MidtransController extends Controller
         }
 
         return view('frontend.order.index')->with('error', 'Order tidak ditemukan!');
+    }
+
+    public function updateStatus($id)
+    {
+        // Set your Merchant Server Key
+        \Midtrans\Config::$serverKey = config('services.midtrans.serverKey');
+        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+        \Midtrans\Config::$isProduction = false;
+        // Set sanitization on (default)
+        \Midtrans\Config::$isSanitized = true;
+        // Set 3DS transaction for credit card to true
+        \Midtrans\Config::$is3ds = true;
+
+        $orders = Order::findOrFail($id);
+        /** @var object $status */
+        $status = \Midtrans\Transaction::status($id);
+        $newStatus = json_encode($status);
+        // dd($status);
+        if($status && $orders){
+            if($status->transaction_status != $orders->id){
+                if (strtolower($status->transaction_status) == 'pending') {
+                    $orders->status = 1;
+                } elseif (strtolower($status->transaction_status) == 'settlement' || 'capture') {
+                    $orders->status = 2;
+                } elseif (strtolower($status->transaction_status) == 'deny' || 'cancel' || 'expire') {
+                    $orders->status = 5;
+                }
+                $orders->midtrans_status = $status->transaction_status;
+                $orders->update();
+                return redirect()->back()->with('status', 'Status Pesanan dengan ID ' . $id . ' telah diperbarui');
+            }
+            return redirect()->back()->with('error', 'Status Pesanan dengan ID ' . $id . ' tidak ada');
+        }
     }
 }
