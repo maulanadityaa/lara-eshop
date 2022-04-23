@@ -28,11 +28,17 @@ Route::post('add-to-cart', 'Frontend\CartController@addProduct');
 Route::post('delete-cart-item', 'Frontend\CartController@deleteProduct');
 Route::post('update-cart', 'Frontend\CartController@updateCart');
 
+Route::post('add-to-wishlist', 'Frontend\WishlistController@add');
+Route::post('delete-wishlist-item', 'Frontend\WishlistController@deleteItem');
+
 Route::middleware(['auth'])->group(function () {
     Route::get('cart', 'Frontend\CartController@viewCart');
+
+    Route::get('wishlist', 'Frontend\WishlistController@index');
+
     Route::get('checkout', 'Frontend\CheckoutController@index');
     Route::post('checkout/place-order', 'Frontend\CheckoutController@placeOrder');
-    Route::GET('checkout/place-order/paynow/{id}', 'Frontend\CheckoutController@payNow');
+    Route::get('checkout/place-order/paynow/{id}', 'Frontend\CheckoutController@payNow');
 
     Route::post('checkout/place-order/paynow/submit-payment', 'Frontend\MidtransController@submitPayment');
     Route::get('/view-order/update-status/{id}', 'Frontend\MidtransController@updateStatus');

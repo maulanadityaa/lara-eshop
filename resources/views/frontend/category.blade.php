@@ -21,7 +21,7 @@
                                 <a href="{{ url('view-category/' . $item->slug) }}">
                                     <div class="card">
                                         <img src="{{ asset('assets/uploads/category/' . $item->image) }}"
-                                            alt="Category Image">
+                                            class="card-img-top" alt="Category Image">
                                         <div class="card-body">
                                             <h5>{{ $item->name }}</h5>
                                             <p>{{ $item->description }}</p>

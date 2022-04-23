@@ -86,7 +86,7 @@
                                         disabled>Masukkan
                                         Keranjang <i class="fa fa-shopping-cart"></i></button>
                                 @endif
-                                <button type="button" class="btn btn-success me-3 float-start">Tambahkan ke
+                                <button type="button" class="btn btn-success me-3 addtoWishlistBtn float-start">Tambahkan ke
                                     Wishlist <i class="fa fa-heart"></i></button>
                             </div>
                         </div>

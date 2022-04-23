@@ -13,6 +13,9 @@
 
     <div class="container">
         <div class="card shadow">
+            <h3 class="card-header text-center text-white" style="background: rgb(90, 120, 255)">
+                Keranjang Saya
+            </h3>
             @if ($cartitems->count() > 0)
                 <div class="card-body">
                     @php

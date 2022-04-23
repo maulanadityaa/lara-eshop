@@ -14,9 +14,9 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header bg-primary">
-                        <h3 class="text-center text-white"><strong>Pesanan Saya</strong></h3>
-                    </div>
+                    <h3 class="card-header text-center text-white" style="background: rgb(170, 79, 255)">
+                        Pesanan Saya
+                    </h3>
                     <div class="card-body">
                         <table class="table table-bordered table-hover" style="cursor:pointer">
                             <thead>
