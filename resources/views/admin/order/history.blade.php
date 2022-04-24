@@ -89,7 +89,15 @@
                                             @elseif ($item->status == '4')
                                                 <td><span class="badge bg-success text-white">Selesai</span></td>
                                             @else
-                                                <td><span class="badge bg-danger text-white">Dibatalkan</span></td>
+                                                <td class="col-md-2">
+                                                    <span class="badge bg-danger text-white">Dibatalkan</span>
+                                                    @if ($item->midtrans_status == 'deny' || $item->midtrans_status == 'cancel')
+                                                        <p class="text-muted fw-lighter">(Pembayaran Gagal)</p>
+                                                    @elseif ($item->midtrans_status == 'expire')
+                                                        <p class="text-muted fw-lighter">(Pembayaran melebihi batas waktu)
+                                                        </p>
+                                                    @endif
+                                                </td>
                                             @endif
                                             <td>
                                                 <a href="{{ url('admin/view-order-details/' . $item->id) }}"

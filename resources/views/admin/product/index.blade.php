@@ -26,7 +26,7 @@
                     @foreach ($products as $item)
                         <tr class="text-center">
                             <td>{{ $item->id }}</td>
-                            <td>{{ $item->name }}</td>
+                            <td class="col-md-2">{{ $item->name }}</td>
                             <td>{{ $item->category->name }}</td>
                             <td>Rp. {{ number_format($item->original_price) }}</td>
                             <td>Rp. {{ number_format($item->sell_price) }}</td>
