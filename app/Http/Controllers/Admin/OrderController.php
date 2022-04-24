@@ -22,7 +22,7 @@ class OrderController extends Controller
     public function view($id)
     {
         $orders = Order::where('id', $id)->first();
-        if($orders){
+        if ($orders) {
             $cityId = $orders->city;
             $city = City::where('city_id', '=', $cityId)->first();
             $provinceId = $orders->province;
@@ -72,11 +72,33 @@ class OrderController extends Controller
         return redirect('admin/orders')->with('status', 'Pesanan Sukses Diupdate!');
     }
 
-    public function orderHistory()
+    public function orderHistory(Request $request)
     {
-        $orders = Order::where('status','!=', '0')->get();
-        // dd($orders);
+        $month = $request->input('month');
+        $keyword = $request->input('keyword');
 
-        return view('admin.order.history', compact('orders'));
+        if ($request->has('month') && $request->has('keyword')) {
+            if ($month != '' && $keyword != '') {
+                $orders = Order::whereMonth('created_at', $month)->where('id', '=', $keyword)->get();
+
+                return view('admin.order.history', compact('orders'));
+            } elseif ($month == '' && $keyword != '') {
+                $orders = Order::where('id', '=', $keyword)->get();
+
+                return view('admin.order.history', compact('orders'));
+            } elseif ($month != '' && $keyword == '') {
+                $orders = Order::whereMonth('created_at', $month)->get();
+
+                return view('admin.order.history', compact('orders'));
+            } else {
+                $orders = Order::where('status', '!=', '0')->get();
+
+                return view('admin.order.history', compact('orders'));
+            }
+        } else {
+            $orders = Order::where('status', '!=', '0')->get();
+
+            return view('admin.order.history', compact('orders'));
+        }
     }
 }

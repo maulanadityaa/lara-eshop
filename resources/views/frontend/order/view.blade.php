@@ -47,6 +47,7 @@
                                             <th><strong>Nama Produk</strong></th>
                                             <th><strong>Jumlah</strong></th>
                                             <th><strong>Ukuran</strong></th>
+                                            <th><strong>Catatan</strong></th>
                                             <th><strong>Harga</strong></th>
                                             <th><strong>Gambar</strong></th>
                                         </tr>
@@ -60,6 +61,7 @@
                                                 <td>{{ $item->products->name }}</td>
                                                 <td>{{ $item->qty }}</td>
                                                 <td>{{ $item->prod_size }}</td>
+                                                <td>{{ $item->message }}</td>
                                                 <td>Rp. {{ number_format($item->price) }}</td>
                                                 <td>
                                                     <img src="{{ asset('assets/uploads/product/' . $item->products->image) }}"
@@ -81,7 +83,9 @@
                                     @if ($orders->status == 0)
                                         <button type="button" class="btn btn-danger" type="submit" name="bayar" disabled><i
                                                 class="fas fa-exclamation-triangle"></i> Menunggu Konfirmasi</button>
-                                        <a class="btn btn-warning" href="{{ url('view-order/cancel-order/'.$orders->id) }}" name="cancel"><i class="fas fa-exclamation"></i>
+                                        <a class="btn btn-warning"
+                                            href="{{ url('view-order/cancel-order/' . $orders->id) }}" name="cancel"><i
+                                                class="fas fa-exclamation"></i>
                                             Batalkan</a>
                                     @elseif($orders->status == 1)
                                         <button type="button" class="btn btn-success" type="submit" name="bayar"><i

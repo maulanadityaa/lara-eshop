@@ -14,6 +14,7 @@ $("document").ready(function () {
             .closest(".product_data")
             .find(".prod_size")
             .val();
+        var note = $(this).closest(".product_data").find(".note").val();
 
         $.ajaxSetup({
             headers: {
@@ -28,12 +29,14 @@ $("document").ready(function () {
                 product_id: product_id,
                 product_qty: product_qty,
                 product_size: product_size,
+                note: note,
             },
             success: function (response) {
                 swal("", response.status, "success");
             },
             error: function (response) {
                 swal("", "Ukuran Harus Diisi", "error");
+                console.log(product_size);
             },
         });
     });
@@ -60,7 +63,7 @@ $("document").ready(function () {
             },
             success: function (response) {
                 swal("", response.status, "success");
-            }
+            },
         });
     });
 
@@ -120,9 +123,9 @@ $("document").ready(function () {
         });
     });
 
-    $('.deleteWishlistItem').click(function (e) { 
+    $(".deleteWishlistItem").click(function (e) {
         e.preventDefault();
-        
+
         var prod_id = $(this).closest(".product_data").find(".prod_id").val();
 
         $.ajaxSetup({
@@ -139,6 +142,30 @@ $("document").ready(function () {
             },
             success: function (response) {
                 window.location.reload();
+                swal("", response.status, "success");
+            },
+        });
+    });
+
+    $(".changeNote").change(function (e) {
+        e.preventDefault();
+        var note = $(this).closest(".product_data").find(".changeNote").val();
+        var prod_id = $(this).closest(".product_data").find(".prod_id").val();
+
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+        });
+
+        $.ajax({
+            method: "POST",
+            url: "cart/change-note",
+            data: {
+                note: note,
+                prod_id: prod_id,
+            },
+            success: function (response) {
                 swal("", response.status, "success");
             },
         });
@@ -169,4 +196,13 @@ $("document").ready(function () {
             },
         });
     });
+
+    $(".hoverDiv").hover(
+        function () {
+            $(this).css("background", "#f5f5f5");
+        },
+        function () {
+            $(this).css("background", "#fff");
+        }
+    );
 });

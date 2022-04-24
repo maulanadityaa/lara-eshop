@@ -33,6 +33,7 @@ Route::post('delete-wishlist-item', 'Frontend\WishlistController@deleteItem');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('cart', 'Frontend\CartController@viewCart');
+    Route::post('cart/change-note', 'Frontend\CartController@changeNote');
 
     Route::get('wishlist', 'Frontend\WishlistController@index');
 

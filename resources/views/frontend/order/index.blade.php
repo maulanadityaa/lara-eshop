@@ -17,9 +17,9 @@
                     <h3 class="card-header text-center text-white" style="background: rgb(170, 79, 255)">
                         Pesanan Saya
                     </h3>
-                    <div class="card-body">
+                    <div class="card-body table-responsive">
                         <table class="table table-bordered table-hover" style="cursor:pointer">
-                            <thead>
+                            <thead class="table-dark">
                                 <tr class="text-center">
                                     <th><strong>Invoice ID</strong></th>
                                     <th><strong>Metode Pembayaran</strong></th>
@@ -27,7 +27,7 @@
                                     <th><strong>No. Resi</strong></th>
                                     <th><strong>Total Harga</strong></th>
                                     <th><strong>Status</strong></th>
-                                    <th><strong>Aksi</strong></th>
+                                    <th><strong>Aksi/Keterangan</strong></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -45,16 +45,16 @@
                                         @if (!$item->payment_type)
                                             <td>Belum Memilih Pembayaran</td>
                                         @elseif ($item->payment_type == 'cstore')
-                                            <td>Alfamart/Indomaret</td>
+                                            <td style="text-transform:uppercase">Alfamart/Indomaret</td>
                                         @else
-                                            <td>{{ $item->payment_type }}</td>
+                                            <td style="text-transform:uppercase">{{ $item->payment_type }}</td>
                                         @endif
                                         @if (!$item->payment_code)
                                             <td>Kode Bayar Tidak Tersedia</td>
                                         @else
                                             <td>{{ $item->payment_code }}</td>
                                         @endif
-                                        @if ($item->noresi == 0)
+                                        @if ($item->noresi == '0')
                                             <td>Belum Tersedia</td>
                                         @else
                                             <td>{{ $item->noresi }}</td>
@@ -75,9 +75,15 @@
                                         @endif
                                         <td>
                                             @if ($item->status == '0')
-                                            @elseif ($item->midtrans_status == NULL)
+                                            @elseif ($item->midtrans_status == null)
+
                                             @elseif ($item->status == '5')
                                                 <div class="text-danger">Pesanan Dibatalkan</div>
+                                                @if ($item->midtrans_status == 'deny' || $item->midtrans_status == 'cancel')
+                                                    <p class="text-muted fw-lighter">(Pembayaran Gagal)</p>
+                                                @elseif ($item->midtrans_status == 'expire')
+                                                    <p class="text-muted fw-lighter">(Pembayaran melebihi batas waktu)</p>
+                                                @endif
                                             @else
                                                 <a href="{{ url('view-order/update-status/' . $item->id) }}"
                                                     class="btn btn-primary" name="update_status">Update Status</a>

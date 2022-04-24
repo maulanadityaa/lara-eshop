@@ -12,7 +12,7 @@
                     <div class="card-header card-header-warning">
                         <h3 class="card-title">Detail Pesanan</h3>
                         {{-- <a href="{{ url('admin/orders') }}" class="btn btn-dark float-right">Kembali</a> --}}
-                        <h4 class="card-category">INVOICE ID : {{ $orders->invoice_id }}</h4>
+                        <h4 class="card-category">INVOICE ID : {{ $orders->id }}</h4>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -61,13 +61,14 @@
                                 <h3><strong>Detail Barang</strong></h3>
                                 <hr>
                                 <div class="table table-responsive">
-                                    <table class="table table-hover table-bordered">
-                                        <thead>
+                                    <table class="table table-bordered">
+                                        <thead class="table-dark">
                                             <tr class="text-center">
                                                 <th><strong>Nama Produk</strong></th>
                                                 <th><strong>Jumlah</strong></th>
                                                 <th><strong>Ukuran</strong></th>
                                                 <th><strong>Harga</strong></th>
+                                                <th><strong>Catatan</strong></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -77,6 +78,7 @@
                                                     <td>{{ $item->qty }}</td>
                                                     <td>{{ $item->prod_size }}</td>
                                                     <td>Rp. {{ number_format($item->price) }}</td>
+                                                    <td>{{ $item->message }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

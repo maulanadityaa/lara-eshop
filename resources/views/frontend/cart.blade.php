@@ -17,47 +17,57 @@
                 Keranjang Saya
             </h3>
             @if ($cartitems->count() > 0)
-                <div class="card-body">
+                <div class="card-body table-responsive">
                     @php
                         $total = 0;
                     @endphp
-                    @foreach ($cartitems as $item)
-                        <div class="row product_data">
-                            <div class="col-md-2 my-auto">
-                                <img src="{{ asset('assets/uploads/product/' . $item->products->image) }}" height="70px"
-                                    width="70px" alt="Gambar produk">
-                            </div>
-                            <div class="col-md-2 my-auto">
-                                <h5>{{ $item->products->name }}</h5>
-                            </div>
-                            <div class="col-md-2 my-auto">
-                                <h5>{{ $item->prod_size }}</h5>
-                            </div>
-                            <div class="col-md-2 my-auto">
-                                <h5>Rp. {{ number_format($item->products->sell_price) }}</h5>
-                            </div>
-                            <div class="col-md-2 my-auto">
-                                <input type="hidden" value="{{ $item->prod_id }}" class="prod_id">
-                                @if ($item->products->stock >= $item->prod_qty)
-                                    <label for="Jumlah">Jumlah</label>
-                                    <div class="input-group text-center mb-3" style="width: 130px;">
-                                        <button class="input-group-text changeQty decrement-btn">-</button>
-                                        <input type="text" name="jumlah" value="{{ $item->prod_qty }}"
-                                            class="form-control qty-input text-center" value="{{ $item->prod_qty }}">
-                                        <button class="input-group-text changeQty increment-btn">+</button>
-                                    </div>
-                                    @php
-                                        $total += $item->products->sell_price * $item->prod_qty;
-                                    @endphp
-                                @else
-                                    <h6 class="badge bg-danger">Stok Habis</h6>
-                                @endif
-                            </div>
-                            <div class="col-md-2 my-auto">
-                                <button class="btn btn-danger deleteCartItem"><i class="fa fa-trash"></i> Delete</button>
-                            </div>
-                        </div>
-                    @endforeach
+                    <table class="table table-hover">
+                        <tbody>
+                            @foreach ($cartitems as $item)
+                                <tr class="row product_data">
+                                    <td class="col">
+                                        <img src="{{ asset('assets/uploads/product/' . $item->products->image) }}"
+                                            height="70px" width="70px" alt="Gambar produk">
+                                    </td>
+                                    <td class="col">
+                                        <h5>{{ $item->products->name }}</h5>
+                                    </td>
+                                    <td class="col">
+                                        <h5>{{ $item->prod_size }}</h5>
+                                    </td>
+                                    <td class="col">
+                                        <h5>Rp. {{ number_format($item->products->sell_price) }}</h5>
+                                    </td>
+                                    <td class="col">
+                                        <small>Catatan : </small>
+                                        <textarea class="form-control changeNote">{{ $item->message }}</textarea>
+                                    </td>
+                                    <td class="col">
+                                        <input type="hidden" value="{{ $item->prod_id }}" class="prod_id">
+                                        @if ($item->products->stock >= $item->prod_qty)
+                                            <small>Jumlah : </small>
+                                            <div class="input-group text-center mb-3" style="width: 130px;">
+                                                <button class="input-group-text changeQty decrement-btn">-</button>
+                                                <input type="text" name="jumlah" value="{{ $item->prod_qty }}"
+                                                    class="form-control qty-input text-center"
+                                                    value="{{ $item->prod_qty }}">
+                                                <button class="input-group-text changeQty increment-btn">+</button>
+                                            </div>
+                                            @php
+                                                $total += $item->products->sell_price * $item->prod_qty;
+                                            @endphp
+                                        @else
+                                            <h6 class="badge bg-danger">Stok Habis</h6>
+                                        @endif
+                                    </td>
+                                    <td class="col">
+                                        <button class="btn btn-danger deleteCartItem"><i class="fa fa-trash"></i>
+                                            Delete</button>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
                 <div class="card-footer">
                     <h4 class="my-auto">Total Harga : Rp. {{ number_format($total) }}

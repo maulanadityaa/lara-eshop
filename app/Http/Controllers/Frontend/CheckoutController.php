@@ -137,7 +137,8 @@ class CheckoutController extends Controller
                 'prod_id' => $item->prod_id,
                 'prod_size' => $item->prod_size,
                 'qty' => $item->prod_qty,
-                'price' => $item->products->sell_price
+                'price' => $item->products->sell_price,
+                'message' => $item->message,
             ]);
 
             $product = Product::where('id', $item->prod_id)->first();
@@ -207,7 +208,7 @@ class CheckoutController extends Controller
             $orders->snaptoken = $snapToken;
             $orders->update();
         }
-        
+
         return response()->json($snapToken);
     }
 }

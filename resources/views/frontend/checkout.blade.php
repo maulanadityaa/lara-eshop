@@ -124,6 +124,7 @@
                                     <tr>
                                         <th>Nama Produk</th>
                                         <th>Ukuran</th>
+                                        <th>Catatan</th>
                                         <th>Jumlah</th>
                                         <th>Berat</th>
                                         <th>Harga</th>
@@ -135,6 +136,7 @@
                                         <tr>
                                             <td>{{ $item->products->name }}</td>
                                             <td>{{ $item->prod_size }}</td>
+                                            <td>{{ $item->message }}</td>
                                             <td>{{ $item->prod_qty }}</td>
                                             <td>{{ $item->prod_qty * 1000 }} gr</td>
                                             <td>Rp. {{ number_format($item->products->sell_price) }}</td>
@@ -142,8 +144,8 @@
                                     @endforeach
                                 </tbody>
                                 <tfoot>
-                                    <tr>
-                                        <td colspan="2">Total :</td>
+                                    <tr class="fw-bold">
+                                        <td colspan="3">Total :</td>
                                         <td>{{ $jumlah_brg }}</td>
                                         <td>{{ $total_berat }} gr</td>
                                         <td>Rp. {{ number_format($total_harga) }}</td>
@@ -159,16 +161,16 @@
                                 <input type="text" name="jasa_pengiriman" value="belum ada"
                                     class="form-control jasa_pengiriman" readonly />
                             </div>
-                                @if ($cartitems->count() > 0)
-                                    <div class="d-grid gap-2 col-6 mx-auto mt-3">
-                                        <button class="btn btn-primary" type="submit">Buat Pesanan</button>
-                                    </div>
-                                @else
-                                    <div class="d-grid gap-2 col-6 mx-auto mt-3">
-                                        <a href="{{ url('category') }}" class="btn btn-outline-success float-end">Belanja
-                                            Sekarang</a>
-                                    </div>
-                                @endif
+                            @if ($cartitems->count() > 0)
+                                <div class="d-grid gap-2 col-6 mx-auto mt-3">
+                                    <button class="btn btn-primary" type="submit">Buat Pesanan</button>
+                                </div>
+                            @else
+                                <div class="d-grid gap-2 col-6 mx-auto mt-3">
+                                    <a href="{{ url('category') }}" class="btn btn-outline-success float-end">Belanja
+                                        Sekarang</a>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>

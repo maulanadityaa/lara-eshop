@@ -46,8 +46,7 @@
                         @error('description')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
-                        <input id="description" type="hidden" name="description" value="{{ old('description') }}"
-                        >
+                        <input id="description" type="hidden" name="description" value="{{ old('description') }}">
                         <trix-editor input="description"></trix-editor>
                     </div>
                     <div class="col-md-6 mb-3">
@@ -99,6 +98,17 @@
                         <input type="checkbox" name="trending">
                     </div>
                     <div class="col-md-12">
+                        {{-- <div class="form-group form-file-upload form-file-multiple">
+                            <input type="file" multiple="" class="inputFileHidden" name="image">
+                            <div class="input-group">
+                                <input type="text" class="form-control inputFileVisible" placeholder="Pilih Gambar">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-fab btn-round btn-primary">
+                                        <i class="material-icons">attach_file</i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div> --}}
                         <input type="file" name="image" class="form-control @error('image') is-invalid @enderror"
                             value="{{ old('image') }}">
                         @error('image')

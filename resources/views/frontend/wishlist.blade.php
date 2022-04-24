@@ -18,44 +18,55 @@
             </h3>
             <div class="card-body">
                 @if ($wishlist->count() > 0)
-                    <div class="card-body">
-                        @foreach ($wishlist as $item)
-                            <div class="row product_data table-hover">
-                                <div class="col-md-2 my-auto">
-                                    <img src="{{ asset('assets/uploads/product/' . $item->products->image) }}"
-                                        height="70px" width="70px" alt="Gambar produk">
-                                </div>
-                                <div class="col-md-2 my-auto clickable-name"
-                                    data-href='{{ url('view-category/' . $item->products->category->slug . '/' . $item->products->slug) }}' style="cursor:pointer">
-                                    <h5>{{ $item->products->name }}</h5>
-                                </div>
-                                <div class="col-md-2 my-auto">
-                                    <h5>{{ $item->prod_size }}</h5>
-                                </div>
-                                <div class="col-md-2 my-auto">
-                                    <h5>Rp. {{ number_format($item->products->sell_price) }}</h5>
-                                </div>
-                                <div class="col-md-2 my-auto">
-                                    <input type="hidden" value="{{ $item->prod_id }}" class="prod_id">
-                                    @if ($item->products->stock > 0)
-                                        <h6 class="badge bg-success">Stok Tersedia</h6>
-                                    @else
-                                        <h6 class="badge bg-danger">Stok Habis</h6>
-                                    @endif
-                                </div>
-                                <div class="col-md-2 my-auto">
-                                    <button class="btn btn-danger deleteWishlistItem"><i class="fa fa-trash"></i>
-                                        Delete</button>
-                                </div>
-                            </div>
-                            <hr>
-                        @endforeach
+                    <div class="card-body table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-dark">
+                                <tr class="text-center">
+                                    <th><strong>Gambar</strong></th>
+                                    <th><strong>Nama Produk</strong></th>
+                                    <th><strong>Harga</strong></th>
+                                    <th><strong>Stok</strong></th>
+                                    <th><strong>Aksi</strong></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($wishlist as $item)
+                                    <tr class="product_data text-center">
+                                        <td class="text-center">
+                                            <img src="{{ asset('assets/uploads/product/' . $item->products->image) }}"
+                                                height="70px" width="70px" alt="Gambar produk">
+                                        </td>
+                                        <td class="col-md-2 my-auto clickable-name"
+                                            data-href='{{ url('view-category/' . $item->products->category->slug . '/' . $item->products->slug) }}'
+                                            style="cursor:pointer">
+                                            <h5>{{ $item->products->name }}</h5>
+                                        </td>
+                                        <td>
+                                            <h5>Rp. {{ number_format($item->products->sell_price) }}</h5>
+                                        </td>
+                                        <td>
+                                            <input type="hidden" value="{{ $item->prod_id }}" class="prod_id">
+                                            @if ($item->products->stock > 0)
+                                                <h6 class="badge bg-success">Stok Tersedia</h6>
+                                            @else
+                                                <h6 class="badge bg-danger">Stok Habis</h6>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger deleteWishlistItem"><i class="fa fa-trash"></i>
+                                                Delete</button>
                     </div>
-                @else
-                    <h4 class="text-center">Tidak Ada Produk di Wishlist Kamu</h4>
-                @endif
+                    </tr>
+                @endforeach
+                </tbody>
+                </table>
+
             </div>
+        @else
+            <h4 class="text-center">Tidak Ada Produk di Wishlist Kamu</h4>
+            @endif
         </div>
+    </div>
     </div>
 @endsection
 

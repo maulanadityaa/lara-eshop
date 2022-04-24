@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+@section('title', 'Kategori')
+
 @section('content')
     <div class="card card-nav-tabs">
         <div class="card-header card-header-info">
@@ -7,7 +9,7 @@
         </div>
         <div class="card-body table-responsive">
             <table class="table table-hover">
-                <thead>
+                <thead class="table-dark">
                     <tr class="text-center">
                         <th><strong>ID</strong></th>
                         <th><strong>Nama</strong></th>
@@ -25,11 +27,13 @@
                             <td>{{ $item->description }}</td>
                             <td>{{ $item->slug }}</td>
                             <td>
-                                <img src="{{ asset('assets/uploads/category/'.$item->image) }}" class="cate-img" alt="Gambar Kategori">
+                                <img src="{{ asset('assets/uploads/category/' . $item->image) }}" class="cate-img"
+                                    alt="Gambar Kategori">
                             </td>
                             <td>
-                                <a href="{{ url('edit-category/'.$item->id) }}" class="btn btn-primary">Edit</a>
-                                <a href="{{ url('delete-category/'.$item->id) }}" class="btn btn-danger" onclick="return confirm('Yakin Menghapus Kategori ini?');">Hapus</a>
+                                <a href="{{ url('edit-category/' . $item->id) }}" class="btn btn-primary">Edit</a>
+                                <a href="{{ url('delete-category/' . $item->id) }}" class="btn btn-danger"
+                                    onclick="return confirm('Yakin Menghapus Kategori ini?');">Hapus</a>
                             </td>
                         </tr>
                     @endforeach

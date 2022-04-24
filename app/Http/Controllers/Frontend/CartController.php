@@ -19,6 +19,7 @@ class CartController extends Controller
         $product_id = $request->input('product_id');
         $product_qty = $request->input('product_qty');
         $product_size = $request->input('product_size');
+        $note = $request->input('note');
 
         if (Auth::user()) {
             $prod_check = Product::where('id', $product_id)->first();
@@ -32,6 +33,7 @@ class CartController extends Controller
                     $cartItem->user_id = Auth::id();
                     $cartItem->prod_qty = $product_qty;
                     $cartItem->prod_size = $product_size;
+                    $cartItem->message = $note;
                     $cartItem->save();
 
                     return response()->json(['status' => $prod_check->name . ' berhasil masuk keranjang']);
@@ -51,9 +53,9 @@ class CartController extends Controller
 
     public function deleteProduct(Request $request)
     {
-        if(Auth::check()){
+        if (Auth::check()) {
             $prod_id = $request->input('prod_id');
-            if(Cart::where('prod_id', $prod_id)->where('user_id', Auth::id())->exists()){
+            if (Cart::where('prod_id', $prod_id)->where('user_id', Auth::id())->exists()) {
                 $cartItem = Cart::where('prod_id', $prod_id)->where('user_id', Auth::id())->first();
                 $cartItem->delete();
 
@@ -69,11 +71,27 @@ class CartController extends Controller
         $product_id = $request->input('prod_id');
         $product_qty = $request->input('prod_qty');
 
-        if(Auth::check()){
-            if(Cart::where('prod_id', $product_id)->where('user_id', Auth::id())->exists()){
+        if (Auth::check()) {
+            if (Cart::where('prod_id', $product_id)->where('user_id', Auth::id())->exists()) {
                 $cart = Cart::where('prod_id', $product_id)->where('user_id', Auth::id())->first();
                 $cart->prod_qty = $product_qty;
                 $cart->update();
+            }
+        }
+    }
+
+    public function changeNote(Request $request)
+    {
+        $note = $request->input('note');
+        $product_id = $request->input('prod_id');
+
+        if (Auth::check()) {
+            if (Cart::where('prod_id', $product_id)->where('user_id', Auth::id())->exists()) {
+                $cart = Cart::where('prod_id', $product_id)->where('user_id', Auth::id())->first();
+                $cart->message = $note;
+                $cart->update();
+
+                return response()->json(['status' => 'Catatan telah diganti']);
             }
         }
     }

@@ -1,13 +1,15 @@
 @extends('layouts.admin')
 
+@section('title', 'Produk')
+
 @section('content')
     <div class="card card-nav-tabs">
         <div class="card-header card-header-info">
             <h3 class="text-center">Daftar Produk</h3>
         </div>
-        <div class="card-body">
-            <table class="table table-bordered table-striped">
-                <thead>
+        <div class="card-body table-responsive">
+            <table class="table table-hover">
+                <thead class="table-dark">
                     <tr class="text-center">
                         <th><strong>ID</strong></th>
                         <th><strong>Nama</strong></th>
@@ -31,11 +33,13 @@
                             <td>{{ $item->size }}</td>
                             <td>{{ $item->stock }}</td>
                             <td>
-                                <img src="{{ asset('assets/uploads/product/'.$item->image) }}" class="cate-img" alt="Gambar Kategori">
+                                <img src="{{ asset('assets/uploads/product/' . $item->image) }}" class="cate-img"
+                                    alt="Gambar Kategori">
                             </td>
                             <td>
-                                <a href="{{ url('edit-product/'.$item->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                                <a href="{{ url('delete-product/'.$item->id) }}" class="btn btn-danger btn-sm" onclick="return confirm('Yakin Menghapus Produk ini?');">Hapus</a>
+                                <a href="{{ url('edit-product/' . $item->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                <a href="{{ url('delete-product/' . $item->id) }}" class="btn btn-danger btn-sm"
+                                    onclick="return confirm('Yakin Menghapus Produk ini?');">Hapus</a>
                             </td>
                         </tr>
                     @endforeach
