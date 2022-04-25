@@ -10,17 +10,23 @@
             <div class="container-fluid justify-content-center justify-content-md-between">
                 <div class="d-flex my-2 my-sm-0">
                     <a class="navbar-brand me-2 mb-1 d-flex justify-content-center" href="{{ route('home') }}">
-                        <img src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.png" height="20" alt=""
-                            loading="lazy" />
+                        <img src="{{ url('assets/favicon.ico') }}" height="25" alt="" loading="lazy" />
+                        <span class="text-dark"> Byboot.id</span>
                     </a>
 
                     <!-- Search form -->
-                    <form class="d-flex input-group w-auto my-auto">
-                        <input autocomplete="off" type="search" class="form-control rounded" placeholder="Search"
-                            style="min-width: 125px" />
-                        <span class="input-group-text border-0 d-none d-md-flex"><i
-                                class="fas fa-search text-dark"></i></span>
-                    </form>
+
+                    <div class="search-bar">
+                        <form action="{{ url('search-product') }}" method="post">
+                            @csrf
+                            <div class="d-flex input-group w-auto my-auto">
+                                <input type="search" class="form-control rounded" placeholder="Cari produk..."
+                                    id="search" name="keyword">
+                                <button type="submit" class="input-group-text border-0 d-none d-md-flex"><i
+                                        class="fas fa-search text-dark"></i></button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
 
                 <ul class="navbar-nav flex-row">
@@ -89,7 +95,7 @@
                                 @endif
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
-                                                                                           document.getElementById('logout-form').submit();">
+                                                                                                                                                                                                                                                                                   document.getElementById('logout-form').submit();">
                                     <i class="fas fa-sign-out-alt"></i> {{ __('Logout') }}
                                 </a>
 

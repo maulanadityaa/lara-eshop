@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css"
         href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <link rel="icon" href="{{ url('assets/favicon.ico') }}">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -65,7 +66,7 @@
     <script src="https://unpkg.com/js-image-zoom@0.7.0/js-image-zoom.js" type="application/javascript"></script>
     <script src="https://app.sandbox.midtrans.com/snap/snap.js"
         data-client-key="{{ config('services.midtrans.clientKey') }}"></script>
-
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     @if (session('status'))
         <script>
@@ -78,6 +79,26 @@
             swal("", "{{ session('error') }}", "error");
         </script>
     @endif
+
+    <script>
+        $(function() {
+            var availableTags = [];
+
+            $.ajax({
+                type: "GET",
+                url: "/get-product-name",
+                success: function(response) {
+                    loadAutoComplete(response);
+                }
+            });
+
+            function loadAutoComplete(availableTags) {
+                $("#search").autocomplete({
+                    source: availableTags
+                });
+            }
+        });
+    </script>
 
     @yield('scripts')
 </body>

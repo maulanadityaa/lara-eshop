@@ -27,12 +27,12 @@ class FrontendController extends Controller
     {
         // $cek_kate = Product::where('cate_id', $category->id)->where('status', '0')->get();
         // dd($cek_kate);
-        if(Category::where('slug', $slug)->exists()){
+        if (Category::where('slug', $slug)->exists()) {
             $category = Category::where('slug', $slug)->first();
             $products = Product::where('cate_id', $category->id)->where('status', '0')->get();
             // dd($products);
             return view('frontend.product.index', compact('category', 'products'));
-        }else{
+        } else {
             return redirect('/')->with('status', "Kategori Tidak Tersedia");
         }
     }
@@ -42,17 +42,43 @@ class FrontendController extends Controller
         // $kate = $cate_slug;
         // $cek_kate = Category::where('slug', $cate_slug)->exists();
         // dd($cek_kate);
-        if(Category::where('slug', $cate_slug)->exists()){
-            if(Product::where('slug', $prod_slug)->exists()){
+        if (Category::where('slug', $cate_slug)->exists()) {
+            if (Product::where('slug', $prod_slug)->exists()) {
                 $product = Product::where('slug', $prod_slug)->first();
                 return view('frontend.product.view', compact('product'));
-            }
-            else{
+            } else {
                 return redirect('/')->with('status', 'Produk Tidak Tersedia');
             }
-        }
-        else{
+        } else {
             return redirect('/')->with('status', "Kategori Tidak Tersedia");
+        }
+    }
+
+    public function getProductName()
+    {
+        $products = Product::select('name')->get();
+        $prod_name = [];
+
+        foreach ($products as $item) {
+            $prod_name[] = $item['name'];
+        }
+
+        return $prod_name;
+    }
+
+    public function searchProduct(Request $request)
+    {
+        $keyword = $request->keyword;
+
+        if ($keyword != '') {
+            $product = Product::where('name', 'LIKE', "%$keyword%")->first();
+            if ($product) {
+                return redirect('/view-category/' . $product->category->slug . '/' . $product->slug);
+            } else {
+                return redirect()->back()->with('error', 'Produk yang Anda Cari Tidak Ada');
+            }
+        } else {
+            return redirect()->back();
         }
     }
 }

@@ -8,23 +8,37 @@
     font-family: "Public Sans", sans-serif;
 }
 
-.checkout-form label{
+.checkout-form label {
     font-size: 15px;
     font-weight: 500;
 }
 
-.checkout-form input{
+.checkout-form input {
     font-size: 14px;
     padding: 5px;
     font-weight: 400;
 }
 
-.order-details label{
+.order-details label {
     font-size: 12px;
     font-weight: 700;
 }
 
-.order-details div{
+.order-details div {
     font-size: 14px;
     padding: 8px !important;
+}
+
+.ui-menu {
+    z-index: 3500 !important;
+    background: white;
+    width: 750px;
+    cursor: pointer;
+    list-style-type: none;
+    margin: 0;
+    padding: 3px;
+}
+
+.ui-menu-item:hover {
+    background: rgb(184, 184, 184);
 }
