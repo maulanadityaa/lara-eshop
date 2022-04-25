@@ -21,7 +21,7 @@
                             @csrf
                             <div class="d-flex input-group w-auto my-auto">
                                 <input type="search" class="form-control rounded" placeholder="Cari produk..."
-                                    id="search" name="keyword">
+                                    id="search" name="keyword" required>
                                 <button type="submit" class="input-group-text border-0 d-none d-md-flex"><i
                                         class="fas fa-search text-dark"></i></button>
                             </div>
@@ -95,7 +95,7 @@
                                 @endif
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
-                                                                                                                                                                                                                                                                                   document.getElementById('logout-form').submit();">
+                                                                                                                                                                                                                                                                                       document.getElementById('logout-form').submit();">
                                     <i class="fas fa-sign-out-alt"></i> {{ __('Logout') }}
                                 </a>
 
