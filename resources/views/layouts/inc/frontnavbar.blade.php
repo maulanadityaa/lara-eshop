@@ -82,6 +82,9 @@
                                     </a>
                                     <hr class="dropdown-divider">
                                 @else
+                                    <a class="dropdown-item" href="{{ url('/user-profile') }}">
+                                        <i class="fas fa-address-card mr-4"></i> Profil Saya
+                                    </a>
                                     @if ($orders != 0)
                                         <a class="dropdown-item" href="{{ url('/my-orders') }}">
                                             <i class="fas fa-receipt"></i> Pesanan Saya <span
@@ -95,7 +98,7 @@
                                 @endif
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
-                                                                                                                                                                                                                                                                                       document.getElementById('logout-form').submit();">
+                                                                                                                                                                                                                                                                                                                                               document.getElementById('logout-form').submit();">
                                     <i class="fas fa-sign-out-alt"></i> {{ __('Logout') }}
                                 </a>
 

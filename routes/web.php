@@ -34,6 +34,10 @@ Route::post('add-to-wishlist', 'Frontend\WishlistController@add');
 Route::post('delete-wishlist-item', 'Frontend\WishlistController@deleteItem');
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('user-profile', 'Frontend\UserController@viewProfile');
+    Route::get('user-profile/edit-profile', 'Frontend\UserController@editProfile');
+    Route::post('user-profile/edit-profile/update', 'Frontend\UserController@updateProfile');
+
     Route::get('cart', 'Frontend\CartController@viewCart');
     Route::post('cart/change-note', 'Frontend\CartController@changeNote');
 

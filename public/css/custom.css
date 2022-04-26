@@ -41,4 +41,5 @@
 
 .ui-menu-item:hover {
     background: rgb(184, 184, 184);
+    list-style-type: none;
 }
