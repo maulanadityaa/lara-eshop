@@ -44,6 +44,15 @@
             color: black;
         }
 
+        a :hover {
+            color: black;
+        }
+
+        td {
+            vertical-align: middle;
+            text-align: center;
+        }
+
     </style>
 
 </head>

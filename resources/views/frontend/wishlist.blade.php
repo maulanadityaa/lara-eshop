@@ -5,6 +5,12 @@
 @endsection
 
 @section('content')
+    <style>
+        .clickable-name :hover {
+            color: blue;
+        }
+
+    </style>
     <div class="py-3 mb-4 shadow-sm bg-light text-dark">
         <div class="container">
             <h5 class="mb-0"><a href="{{ url('/') }}">Home</a> > Wishlist</h5>
