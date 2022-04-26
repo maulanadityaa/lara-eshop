@@ -7,7 +7,7 @@
         </button>
 
         <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
-            <div class="container-fluid justify-content-center justify-content-md-between">
+            <div class="container-fluid justify-content-center justify-content-md-between px-5">
                 <div class="d-flex my-2 my-sm-0">
                     <a class="navbar-brand me-2 mb-1 d-flex justify-content-center" href="{{ route('home') }}">
                         <img src="{{ url('assets/favicon.ico') }}" height="25" alt="" loading="lazy" />
@@ -90,6 +90,10 @@
                                             <i class="fas fa-receipt"></i> Pesanan Saya <span
                                                 class="badge rounded-pill badge-notification bg-success">{{ $orders }}</span>
                                         </a>
+                                    @else
+                                        <a class="dropdown-item" href="{{ url('/my-orders') }}">
+                                            <i class="fas fa-receipt"></i> Pesanan Saya
+                                        </a>
                                     @endif
                                     <a class="dropdown-item" href="{{ url('/wishlist') }}">
                                         <i class="fas fa-heart"></i> Wishlist
@@ -98,7 +102,7 @@
                                 @endif
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
-                                                                                                                                                                                                                                                                                                                                               document.getElementById('logout-form').submit();">
+                                                                                                                                                                                                                                                                                                                                                                                                   document.getElementById('logout-form').submit();">
                                     <i class="fas fa-sign-out-alt"></i> {{ __('Logout') }}
                                 </a>
 

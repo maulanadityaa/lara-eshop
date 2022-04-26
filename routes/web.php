@@ -24,7 +24,7 @@ Route::post('/search-product', 'Frontend\FrontendController@searchProduct');
 
 Auth::routes();
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', 'Frontend\FrontendController@index');
 
 Route::post('add-to-cart', 'Frontend\CartController@addProduct');
 Route::post('delete-cart-item', 'Frontend\CartController@deleteProduct');

@@ -36,8 +36,11 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="">Nama Belakang</label>
-                                    <div type="text" class="form-control">
-                                        {{ $users->lname }}</div>
+                                    @if ($users->lname)
+                                        <div type="text" class="form-control">{{ $users->lname }}</div>
+                                    @else
+                                        <div type="text" class="form-control">Belum Ada</div>
+                                    @endif
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <label for="">Email</label>
@@ -45,42 +48,43 @@
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <label for="">Nomor HP</label>
-                                    <div type="text" class="form-control">{{ $users->nohp }}</div>
+                                    @if ($users->nohp)
+                                        <div type="text" class="form-control">{{ $users->nohp }}</div>
+                                    @else
+                                        <div type="text" class="form-control">Belum Ada</div>
+                                    @endif
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <label for="">Alamat Lengkap</label>
-                                    <div type="text" class="form-control">{{ $users->alamat }}</div>
+                                    @if ($users->alamat)
+                                        <div type="text" class="form-control">{{ $users->alamat }}</div>
+                                    @else
+                                        <div type="text" class="form-control">Belum Ada</div>
+                                    @endif
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <label for="">Kota</label>
-                                    <div type="text" class="form-control">{{ $city->name }}</div>
+                                    @if ($city)
+                                        <div type="text" class="form-control">{{ $city->name }}</div>
+                                    @else
+                                        <div type="text" class="form-control">Belum Ada</div>
+                                    @endif
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <label for="">Provinsi</label>
-                                    <div type="text" class="form-control">{{ $province->name }}</div>
+                                    @if ($province)
+                                        <div type="text" class="form-control">{{ $province->name }}</div>
+                                    @else
+                                        <div type="text" class="form-control">Belum Ada</div>
+                                    @endif
                                 </div>
-                                {{-- <div class="form-group col-md-6 mt-3">
-                                    <label class="font-weight-bold">Provinsi</label>
-                                    <select class="form-control form-select provinsi-tujuan" name="province_destination">
-                                        @if ($users->provinsi)
-                                            <option value="{{ $users->provinsi }}">Jombang</option>
-                                        @else
-                                            <option value="0">-- pilih provinsi --</option>
-                                            @foreach ($provinces as $province => $value)
-                                                <option value="{{ $province }}">{{ $value }}</option>
-                                            @endforeach
-                                        @endif
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-6 mt-3">
-                                    <label class="font-weight-bold">Kota/Kabupaten</label>
-                                    <select class="form-control form-select kota-tujuan" name="city_destination">
-                                        <option value="0">-- pilih kota --</option>
-                                    </select>
-                                </div> --}}
                                 <div class="col-md-6 mt-3">
                                     <label for="">Kode Pos</label>
-                                    <div type="number" class="form-control">{{ $users->kodepos }}</div>
+                                    @if ($users->kodepos)
+                                        <div type="text" class="form-control">{{ $users->kodepos }}</div>
+                                    @else
+                                        <div type="text" class="form-control">Belum Ada</div>
+                                    @endif
                                 </div>
                             </div>
                             <div class="d-grid gap-2 col-6 mx-auto mt-3">
