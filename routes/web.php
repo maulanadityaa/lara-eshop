@@ -55,6 +55,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('my-orders', 'Frontend\UserController@index');
     Route::get('view-order/{id}', 'Frontend\UserController@view');
+    Route::get('view-order/print-invoice/{id}', 'Frontend\UserController@printPDF');
     Route::get('view-order/cancel-order/{id}', 'Frontend\UserController@cancelOrder');
 });
 

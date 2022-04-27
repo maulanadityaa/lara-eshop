@@ -11,6 +11,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use PDF;
 
 class UserController extends Controller
 {
@@ -104,5 +105,25 @@ class UserController extends Controller
         $user->update();
 
         return $this->viewProfile()->with('status', 'Profil sukses diubah');
+    }
+
+    public function printPDF($id)
+    {
+        $orders = Order::where('id', $id)->where('user_id', Auth::id())->first();
+        if ($orders) {
+            $cityId = $orders->city;
+            $city = City::where('city_id', '=', $cityId)->first();
+            $provinceId = $orders->province;
+            $province = Province::where('province_id', '=', $provinceId)->first();
+        }
+
+        $path = base_path('public/assets/logo.png');
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data = file_get_contents($path);
+        $logo = 'data:image/' . ';base64,' . base64_encode($data);
+
+        $pdf = PDF::loadView('frontend.order.invoice', ['orders' => $orders, 'city' => $city, 'province' => $province, 'logo' => $logo])->setOptions(['defaultFont' => 'sans-serif']);
+
+        return $pdf->download($orders->id . '.pdf');
     }
 }

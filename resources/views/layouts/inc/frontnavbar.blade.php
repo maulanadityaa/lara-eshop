@@ -65,7 +65,8 @@
 
                         @if (Route::has('register'))
                             <li class="nav-item">
-                                <a class="nav-link text-dark" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                <a class="nav-link text-dark ms-2"
+                                    href="{{ route('register') }}">{{ __('Register') }}</a>
                             </li>
                         @endif
                     @else
@@ -102,7 +103,7 @@
                                 @endif
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
-                                                                                                                                                                                                                                                                                                                                                                                                               document.getElementById('logout-form').submit();">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                               document.getElementById('logout-form').submit();">
                                     <i class="fas fa-sign-out-alt"></i> {{ __('Logout') }}
                                 </a>
 

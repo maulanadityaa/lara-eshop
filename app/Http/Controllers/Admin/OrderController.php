@@ -38,10 +38,9 @@ class OrderController extends Controller
         //         $removeItem->delete();
         //     }
         // }
-        $cartitems = Cart::where('user_id', Auth::id())->get();
         // dd($cartitems);
 
-        return view('admin.order.view', compact('orders', 'province', 'city', 'cartitems'));
+        return view('admin.order.view', compact('orders', 'province', 'city'));
     }
 
     public function confirmOrder($id)

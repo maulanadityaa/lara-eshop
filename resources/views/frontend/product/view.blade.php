@@ -77,10 +77,10 @@
                                 <input type="number" name="size" value="" class="form-control prod_size text-center"
                                     required>
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-md-5">
                                 {{-- <input type="hidden" value="{{ $product->id }}" class="prod_id"> --}}
                                 <label for="Catatan">Catatan (optional)</label>
-                                <textarea class="form-control note" name="catatan" rows="2"></textarea>
+                                <textarea class="form-control note" name="catatan" rows="1" cols="1"></textarea>
                             </div>
                             <div class="col-md-10">
                                 <br />
