@@ -32,13 +32,12 @@
             </div>
         </div>
     </div>
-
     <div class="py-2">
         <div class="container">
             <div class="row">
                 <h2>Semua Produk</h2>
                 @foreach ($products as $product)
-                    <div class="col-md-3 mt-3">
+                    <div class="col-md-3 mt-3 card-product">
                         <div class="card h-100">
                             <a href="{{ url('view-category/' . $product->category->slug . '/' . $product->slug) }}">
                                 <img src="{{ asset('assets/uploads/product/' . $product->image) }}" class="card-img-top"
@@ -62,7 +61,6 @@
             </div>
         </div>
     </div>
-    {{ \TawkTo::widgetCode() }}
 @endsection
 
 @section('scripts')

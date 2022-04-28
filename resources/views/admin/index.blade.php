@@ -16,7 +16,8 @@
                     </div>
                     <div class="card-footer">
                         <div class="stats">
-                            <i class="material-icons text-danger">report_problem </i>Ada {{ $orders_unconfirmed }} Pesanan Baru yang belum dikonfirmasi
+                            <i class="material-icons text-warning">warning</i>Ada {{ $orders_unconfirmed }} Pesanan Baru
+                            yang belum dikonfirmasi
                         </div>
                     </div>
                 </div>
@@ -32,7 +33,8 @@
                     </div>
                     <div class="card-footer">
                         <div class="stats">
-                            <i class="material-icons">check</i> {{ $orders_confirmed }} pesanan sudah diproses
+                            <i class="material-icons text-success">check_circle</i> {{ $orders_confirmed }} pesanan sudah
+                            diproses
                         </div>
                     </div>
                 </div>
@@ -48,7 +50,7 @@
                     </div>
                     <div class="card-footer">
                         <div class="stats">
-                            <i class="material-icons">close</i> {{ $orders_canceled }} pesanan dibatalkan
+                            <i class="material-icons text-danger">cancel</i> {{ $orders_canceled }} pesanan dibatalkan
                         </div>
                     </div>
                 </div>
@@ -82,7 +84,9 @@
                                                 {{ date('d F Y H:i:s', strtotime($item->created_at)) }} WIB
                                             </small>
                                         </td>
-                                        <td><a href="https://wa.me/{{ $item->nohp }}" target="_blank" style="color: green"><i class="material-icons">whatsapp</i> {{ $item->nohp }}</a></td>
+                                        <td><a href="https://wa.me/{{ $item->nohp }}" target="_blank"
+                                                style="color: green"><i class="material-icons">whatsapp</i>
+                                                {{ $item->nohp }}</a></td>
                                         <td>{{ $item->email }}</td>
                                         <td>Rp. {{ number_format($item->total_price) }}</td>
                                         <td><span class="badge bg-danger text-white">Menunggu Konfirmasi</span></td>

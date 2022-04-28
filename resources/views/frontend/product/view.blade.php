@@ -30,7 +30,7 @@
                             </ul>
                         </div>
                     @endif
-                    <div class="col-md-4 border-right" id="img-product">
+                    <div class="col-md-4 border-right img-product" id="img-product">
                         <img src="{{ asset('assets/uploads/product/' . $product->image) }}" class="w-100 rounded"
                             alt="Product Image">
                     </div>
@@ -62,7 +62,7 @@
                         @endif
 
                         <div class="row mt-2">
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <input type="hidden" value="{{ $product->id }}" class="prod_id">
                                 <label for="Jumlah">Jumlah</label>
                                 <div class="input-group text-center mb-3" style="width: 130px;">
@@ -107,7 +107,6 @@
     <script>
         var options = {
             width: 425,
-            zoomWidth: 500,
             fillContainer: true,
             scale: 1.2,
             offset: {

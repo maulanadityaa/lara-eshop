@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\City;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Product;
 use App\Models\Province;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -46,7 +47,17 @@ class UserController extends Controller
     public function cancelOrder($id)
     {
         DB::table('orders')->delete($id);
-        OrderItem::where('order_id', $id)->delete();
+        // OrderItem::where('order_id', $id)->delete();
+
+        $orderitems = OrderItem::where('order_id', $id)->get();
+        // dd($orderitems);
+        foreach ($orderitems as $item) {
+            $product = Product::where('id', $item->prod_id)->first();
+            // dd($item->qty);
+            $product->stock = $product->stock + $item->qty;
+            $product->update();
+        }
+        $orderitems->each->delete();
 
         $orders = Order::where('user_id', Auth::id())->get();
         return view('frontend.order.index', compact('orders'))->with('status', 'Pesanan telah dibatalkan!');
