@@ -96,7 +96,7 @@
                                     @else
                                         <button type="button" class="btn btn-info" type="submit" name="bayar" disabled><i
                                                 class="far fa-check-circle"></i> Telah Dibayar</button>
-                                        <a href="{{ url('view-order/print-invoice/' . $orders->id) }}"
+                                        <a href="{{ url('view-order/print-invoice/' . $orders->id) }}" target="_blank"
                                             class="btn btn-success"><i class="fas fa-print"></i> Print
                                             Invoice</a>
                                     @endif

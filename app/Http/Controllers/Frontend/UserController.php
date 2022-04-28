@@ -15,11 +15,25 @@ use PDF;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $orders = Order::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
+        $status = $request->input('status');
 
-        return view('frontend.order.index', compact('orders'));
+        if ($request->has('status')) {
+            if ($status != '') {
+                $orders = Order::where('user_id', Auth::id())->where('status', $status)->orderBy('created_at', 'desc')->get();
+
+                return view('frontend.order.index', compact('orders'));
+            } else {
+                $orders = Order::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
+
+                return view('frontend.order.index', compact('orders'));
+            }
+        } else {
+            $orders = Order::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
+
+            return view('frontend.order.index', compact('orders'));
+        }
     }
 
     public function view($id)
@@ -97,7 +111,7 @@ class UserController extends Controller
         $user = User::where('id', Auth::id())->first();
         $user->name = $request->fname;
         $user->lname = $request->lname;
-        $user->nohp = $request->nohp;
+        $user->nohp = $hp;
         $user->alamat = $request->address;
         $user->kota = $request->city_destination;
         $user->provinsi = $request->province_destination;

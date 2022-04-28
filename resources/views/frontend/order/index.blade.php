@@ -16,8 +16,25 @@
                 <div class="card">
                     <h3 class="card-header text-center text-white" style="background: rgb(170, 79, 255)">
                         Pesanan Saya
+                        <form class="row float-end" method="GET">
+                            <div class="col-md-8">
+                                <select name="status" class="form-select">
+                                    <option value="">Semua Pesanan</option>
+                                    <option value="0">Menunggu Konfirmasi</option>
+                                    <option value="1">Menunggu Pembayaran</option>
+                                    <option value="2">Telah Dibayar</option>
+                                    <option value="3">Sedang Dikirim</option>
+                                    <option value="4">Selesai</option>
+                                    <option value="5">Dibatalkan</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 p-0">
+                                <button type="submit" class="btn btn-warning">Search</button>
+                            </div>
+                        </form>
                     </h3>
                     <div class="card-body table-responsive">
+
                         <table class="table table-bordered table-hover" style="cursor:pointer">
                             <thead class="table-dark">
                                 <tr class="text-center">
@@ -31,66 +48,74 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($orders as $item)
-                                    <tr class="text-center clickable-row"
-                                        data-href='{{ url('view-order/' . $item->id) }}'>
-                                        <td class="text-center">
-                                            <p class="h5">
-                                                {{ $item->id }}
-                                            </p>
-                                            <small>
-                                                {{ date('d F Y H:i:s', strtotime($item->created_at)) }} WIB
-                                            </small>
-                                        </td>
-                                        @if (!$item->payment_type)
-                                            <td>Belum Memilih Pembayaran</td>
-                                        @elseif ($item->payment_type == 'cstore')
-                                            <td style="text-transform:uppercase">Alfamart/Indomaret</td>
-                                        @else
-                                            <td style="text-transform:uppercase">{{ $item->payment_type }}</td>
-                                        @endif
-                                        @if (!$item->payment_code)
-                                            <td>Kode Bayar Tidak Tersedia</td>
-                                        @else
-                                            <td>{{ $item->payment_code }}</td>
-                                        @endif
-                                        @if ($item->noresi == '0')
-                                            <td>Belum Tersedia</td>
-                                        @else
-                                            <td>{{ $item->noresi }}</td>
-                                        @endif
-                                        <td>Rp. {{ number_format($item->total_price) }}</td>
-                                        @if ($item->status == '0')
-                                            <td><span class="badge bg-danger text-white">Menunggu Konfirmasi</span></td>
-                                        @elseif($item->status == '1')
-                                            <td><span class="badge bg-warning text-white">Menunggu Pembayaran</span></td>
-                                        @elseif($item->status == '2')
-                                            <td><span class="badge bg-primary">Telah Dibayar</span></td>
-                                        @elseif ($item->status == '3')
-                                            <td><span class="badge bg-info text-dark">Sedang dikirm</span></td>
-                                        @elseif ($item->status == '4')
-                                            <td><span class="badge bg-success">Selesai</span></td>
-                                        @else
-                                            <td><span class="badge bg-danger">Dibatalkan</span></td>
-                                        @endif
-                                        <td>
-                                            @if ($item->status == '0')
-                                            @elseif ($item->midtrans_status == null)
-
-                                            @elseif ($item->status == '5')
-                                                <div class="text-danger">Pesanan Dibatalkan</div>
-                                                @if ($item->midtrans_status == 'deny' || $item->midtrans_status == 'cancel')
-                                                    <p class="text-muted fw-lighter">(Pembayaran Gagal)</p>
-                                                @elseif ($item->midtrans_status == 'expire')
-                                                    <p class="text-muted fw-lighter">(Pembayaran melebihi batas waktu)</p>
-                                                @endif
+                                @if ($orders->count() > 0)
+                                    @foreach ($orders as $item)
+                                        <tr class="text-center clickable-row"
+                                            data-href='{{ url('view-order/' . $item->id) }}'>
+                                            <td class="text-center">
+                                                <p class="h5">
+                                                    {{ $item->id }}
+                                                </p>
+                                                <small>
+                                                    {{ date('d F Y H:i:s', strtotime($item->created_at)) }} WIB
+                                                </small>
+                                            </td>
+                                            @if (!$item->payment_type)
+                                                <td>Belum Memilih Pembayaran</td>
+                                            @elseif ($item->payment_type == 'cstore')
+                                                <td style="text-transform:uppercase">Alfamart/Indomaret</td>
                                             @else
-                                                <a href="{{ url('view-order/update-status/' . $item->id) }}"
-                                                    class="btn btn-primary" name="update_status">Update Status</a>
+                                                <td style="text-transform:uppercase">{{ $item->payment_type }}</td>
                                             @endif
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                            @if (!$item->payment_code)
+                                                <td>Kode Bayar Tidak Tersedia</td>
+                                            @else
+                                                <td>{{ $item->payment_code }}</td>
+                                            @endif
+                                            @if ($item->noresi == '0')
+                                                <td>Belum Tersedia</td>
+                                            @else
+                                                <td>{{ $item->noresi }}</td>
+                                            @endif
+                                            <td>Rp. {{ number_format($item->total_price) }}</td>
+                                            @if ($item->status == '0')
+                                                <td><span class="badge bg-danger text-white">Menunggu Konfirmasi</span></td>
+                                            @elseif($item->status == '1')
+                                                <td><span class="badge bg-warning text-white">Menunggu Pembayaran</span>
+                                                </td>
+                                            @elseif($item->status == '2')
+                                                <td><span class="badge bg-primary">Telah Dibayar</span></td>
+                                            @elseif ($item->status == '3')
+                                                <td><span class="badge bg-info text-dark">Sedang dikirm</span></td>
+                                            @elseif ($item->status == '4')
+                                                <td><span class="badge bg-success">Selesai</span></td>
+                                            @else
+                                                <td><span class="badge bg-danger">Dibatalkan</span></td>
+                                            @endif
+                                            <td>
+                                                @if ($item->status == '0')
+                                                @elseif ($item->midtrans_status == null)
+
+                                                @elseif ($item->status == '5')
+                                                    <div class="text-danger">Pesanan Dibatalkan</div>
+                                                    @if ($item->midtrans_status == 'deny' || $item->midtrans_status == 'cancel')
+                                                        <p class="text-muted fw-lighter">(Pembayaran Gagal)</p>
+                                                    @elseif ($item->midtrans_status == 'expire')
+                                                        <p class="text-muted fw-lighter">(Pembayaran melebihi batas waktu)
+                                                        </p>
+                                                    @endif
+                                                @else
+                                                    <a href="{{ url('view-order/update-status/' . $item->id) }}"
+                                                        class="btn btn-primary" name="update_status">Update Status</a>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    <td colspan="7">
+                                        <h4>Tidak Ada Pesanan</h4>
+                                    </td>
+                                @endif
                             </tbody>
                         </table>
                     </div>
