@@ -44,10 +44,41 @@
                                     class="form-control" placeholder="Search invoice id...">
                             </div>
                             <div class="col">
-                                <button type="submit" class="btn btn-primary">Search</button>
+                                <button type="submit" class="btn btn-primary"><span class="material-icons">
+                                        search
+                                    </span></button>
                             </div>
                         </form>
                         <hr>
+                        <form class="row my-auto text-center" action="{{ url('admin/order-history/print-report') }}"
+                            method="post">
+                            @csrf
+                            <div class="col mx-auto my-auto">
+                                <h5>Print Laporan Penjualan :</h5>
+                            </div>
+                            <div class="col">
+                                <select name="month_print" class="form-select filterMonth">
+                                    <option value="">Semua Bulan</option>
+                                    <option value="1">Januari</option>
+                                    <option value="2">Februari</option>
+                                    <option value="3">Maret</option>
+                                    <option value="4">April</option>
+                                    <option value="5">Mei</option>
+                                    <option value="6">Juni</option>
+                                    <option value="7">Juli</option>
+                                    <option value="8">Agustus</option>
+                                    <option value="9">September</option>
+                                    <option value="10">Oktober</option>
+                                    <option value="11">November</option>
+                                    <option value="12">Desember</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <button type="submit" class="btn btn-danger text-white"><span class="material-icons">
+                                        print
+                                    </span></button>
+                            </div>
+                        </form>
                     </div>
                     <div class="card-body table-responsive">
                         <table class="table table-hover">
@@ -79,7 +110,7 @@
                                             @endif
                                             <td>Rp. {{ number_format($item->total_price) }}</td>
                                             @if ($item->status == '0')
-                                                <td><span class="badge bg-danger text-dark">Menunggu Konfirmasi</span></td>
+                                                <td><span class="badge bg-danger text-white">Menunggu Konfirmasi</span></td>
                                             @elseif($item->status == '1')
                                                 <td><span class="badge bg-warning text-dark">Menunggu Pembayaran</span></td>
                                             @elseif($item->status == '2')
@@ -122,8 +153,9 @@
 @section('scripts')
     <script>
         $('select[name="month"]').on('change', function() {
-            var month = $('select[name="month"]').val();
-            console.log('hasjdhkajs');
+            let month = $(this).val();
+
+            $('select[name="month_print"]').val(month);
         });
     </script>
 @endsection

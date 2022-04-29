@@ -103,8 +103,8 @@ class UserController extends Controller
             [
                 'nohp.min' => 'No HP minimal 10 digit!',
                 'required' => 'Data Harus Diisi dengan Lengkap!',
-                'city_destination.gt' => 'Pilih Kota Tujuan Dahulu!',
-                'province_destination.gt' => 'Pilih Provinsi Tujuan Dahulu!',
+                'city_destination.gt' => 'Pilih Kota Dahulu!',
+                'province_destination.gt' => 'Pilih Provinsi Dahulu!',
             ]
         );
 

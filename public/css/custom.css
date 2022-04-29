@@ -47,16 +47,16 @@
 .owl-carousel :hover {
     color: black;
 }
-
+/* 
 .card-product {
     transition: transform 0.2s;
 }
 
 .card-product :hover {
     color: black;
-    transform: scale(1.5);
-}
+    transform: scale(1.2);
+} */
 
-.img-product {
+/* .img-product {
     z-index: 5000 !important;
-}
+} */

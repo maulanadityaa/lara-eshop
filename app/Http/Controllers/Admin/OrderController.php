@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Models\Province;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use PDF;
 
 class OrderController extends Controller
 {
@@ -99,5 +100,18 @@ class OrderController extends Controller
 
             return view('admin.order.history', compact('orders'));
         }
+    }
+
+    public function printReport(Request $request)
+    {
+        $month = $request->input('month_print');
+
+        $orders = Order::whereMonth('created_at', $month)->where('status', '=', '4')->get();
+        $orders_month = Order::whereMonth('created_at', $month)->first();
+        // dd($month);
+
+        $pdf = PDF::loadView('admin.order.report', ['orders' => $orders, 'month' => $orders_month])->setOptions(['defaultFont' => 'sans-serif']);
+
+        return $pdf->stream();
     }
 }

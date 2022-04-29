@@ -30,7 +30,7 @@
                             </ul>
                         </div>
                     @endif
-                    <div class="col-md-4 border-right img-product" id="img-product">
+                    <div class="col-md-4 border-right" id="img-product">
                         <img src="{{ asset('assets/uploads/product/' . $product->image) }}" class="w-100 rounded"
                             alt="Product Image">
                     </div>

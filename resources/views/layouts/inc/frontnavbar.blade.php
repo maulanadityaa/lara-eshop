@@ -59,13 +59,14 @@
                     @guest
                         @if (Route::has('login'))
                             <li class="nav-item">
-                                <a class="nav-link text-dark" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="btn btn-info text-white" style="background-color: #0099ff; border-color: #0099ff"
+                                    href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                         @endif
 
                         @if (Route::has('register'))
                             <li class="nav-item">
-                                <a class="nav-link text-dark ms-2"
+                                <a class="btn btn-outline-success ms-2"
                                     href="{{ route('register') }}">{{ __('Register') }}</a>
                             </li>
                         @endif
@@ -103,7 +104,7 @@
                                 @endif
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                               document.getElementById('logout-form').submit();">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       document.getElementById('logout-form').submit();">
                                     <i class="fas fa-sign-out-alt"></i> {{ __('Logout') }}
                                 </a>
 
