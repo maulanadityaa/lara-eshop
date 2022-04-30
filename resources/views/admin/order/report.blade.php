@@ -108,31 +108,73 @@
 </head>
 
 <body>
-    <h3 class="text-center" style="text-align:center;">Laporan Penjualan Bulan
-        {{ date('F'), strtotime($month->created_at) }}</h3>
-    <div class="invoice-box">
-        <table class="table table-striped">
-            <tr class="heading text-center">
-                <td style="text-align:center;">Invoice ID</td>
-                <td style="text-align:center;">Tanggal</td>
-                <td style="text-align:center;">Total Harga</td>
-                <td style="text-align:center;">Status</td>
-            </tr>
-            @if ($orders->count() > 0)
-                @foreach ($orders as $item)
-                    <tr class="item text-center">
-                        <td style="text-align:center;">{{ $item->id }}</td>
-                        <td style="text-align:center;">{{ date('d F Y H:i:s', strtotime($item->created_at)) }} WIB
-                        </td>
-                        <td style="text-align:center;">Rp. {{ number_format($item->total_price) }}</td>
-                        <td style="text-align:center;">Selesai</td>
-                    </tr>
-                @endforeach
-            @else
-                <td colspan="4">Tidak ada Penjualan</td>
-            @endif
-        </table>
-    </div>
+    @if ($month)
+        <h3 class="text-center" style="text-align:center;">Laporan Penjualan Bulan
+            {{ date('F'), strtotime($month->created_at) }}</h3>
+        <h4 class="text-center" style="text-align:center;">Pesanan Selesai</h4>
+        <hr>
+        <div class="invoice-box">
+            <table class="table table-striped">
+                <tr class="heading text-center">
+                    <td style="text-align:center;">Invoice ID</td>
+                    <td style="text-align:center;">Tanggal</td>
+                    <td style="text-align:center;">Total Harga</td>
+                    <td style="text-align:center;">Status</td>
+                </tr>
+                @if ($orders->count() > 0)
+                    @foreach ($orders as $item)
+                        <tr class="item text-center">
+                            <td style="text-align:center;">{{ $item->id }}</td>
+                            <td style="text-align:center;">{{ date('d F Y H:i:s', strtotime($item->created_at)) }} WIB
+                            </td>
+                            <td style="text-align:center;">Rp. {{ number_format($item->total_price) }}</td>
+                            <td style="text-align:center;">Selesai</td>
+                        </tr>
+                    @endforeach
+                @else
+                    <td colspan="4">Tidak ada Penjualan</td>
+                @endif
+            </table>
+        </div>
+        <hr>
+
+        <h4 class="text-center" style="text-align:center;">Pesanan Batal</h4>
+        <hr>
+        <div class="invoice-box">
+            <table class="table table-striped">
+                <tr class="heading text-center">
+                    <td style="text-align:center;">Invoice ID</td>
+                    <td style="text-align:center;">Tanggal</td>
+                    <td style="text-align:center;">Total Harga</td>
+                    <td style="text-align:center;">Status</td>
+                </tr>
+                @if ($orders_cancel->count() > 0)
+                    @foreach ($orders_cancel as $item)
+                        <tr class="item text-center">
+                            <td style="text-align:center;">{{ $item->id }}</td>
+                            <td style="text-align:center;">{{ date('d F Y H:i:s', strtotime($item->created_at)) }} WIB
+                            </td>
+                            <td style="text-align:center;">Rp. {{ number_format($item->total_price) }}</td>
+                            <td style="text-align:center;">
+                                <span class="badge bg-danger text-white">Dibatalkan</span><br>
+                                @if ($item->midtrans_status == 'deny' || $item->midtrans_status == 'cancel')
+                                    <small class="text-muted fw-lighter">(Pembayaran Gagal)</small>
+                                @elseif ($item->midtrans_status == 'expire')
+                                    <small class="text-muted fw-lighter">(Pembayaran melebihi batas waktu)
+                                    </small>
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
+                @else
+                    <td colspan="4">Tidak ada Penjualan</td>
+                @endif
+            </table>
+        </div>
+        <hr>
+    @else
+        <h3 class="text-center" style="text-align:center;">Tidak Ada Penjualan di Bulan yang Dipilih</h3>
+    @endif
 </body>
 
 </html>

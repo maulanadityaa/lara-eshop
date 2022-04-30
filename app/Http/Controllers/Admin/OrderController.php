@@ -107,11 +107,16 @@ class OrderController extends Controller
         $month = $request->input('month_print');
 
         $orders = Order::whereMonth('created_at', $month)->where('status', '=', '4')->get();
+        $orders_cancel = Order::whereMonth('created_at', $month)->where('status', '=', '5')->get();
         $orders_month = Order::whereMonth('created_at', $month)->first();
         // dd($month);
 
-        $pdf = PDF::loadView('admin.order.report', ['orders' => $orders, 'month' => $orders_month])->setOptions(['defaultFont' => 'sans-serif']);
+        if ($orders_month) {
+            $pdf = PDF::loadView('admin.order.report', ['orders' => $orders, 'month' => $orders_month, 'orders_cancel' => $orders_cancel])->setOptions(['defaultFont' => 'sans-serif']);
 
-        return $pdf->stream();
+            return $pdf->download('Laporan Penjualan Bulan ' . date('F'), strtotime($orders_month->created_at) . '.pdf');
+        } else {
+            return redirect()->back()->with('cancel', 'Tidak Ada Penjualan di Bulan yang Dipilih');
+        }
     }
 }

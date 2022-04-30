@@ -58,7 +58,7 @@
                             </div>
                             <div class="col">
                                 <select name="month_print" class="form-select filterMonth">
-                                    <option value="">Semua Bulan</option>
+                                    <option value="">---Pilih Bulan Penjualan---</option>
                                     <option value="1">Januari</option>
                                     <option value="2">Februari</option>
                                     <option value="3">Maret</option>
@@ -74,7 +74,8 @@
                                 </select>
                             </div>
                             <div class="col">
-                                <button type="submit" class="btn btn-danger text-white"><span class="material-icons">
+                                <button type="submit" class="btn btn-danger text-white" name="btn_month_print"
+                                    disabled><span class="material-icons">
                                         print
                                     </span></button>
                             </div>
@@ -155,7 +156,25 @@
         $('select[name="month"]').on('change', function() {
             let month = $(this).val();
 
-            $('select[name="month_print"]').val(month);
+            if (month == '') {
+                $("button[name='btn_month_print']").prop('disabled', true);
+                $('select[name="month_print"]').val(month);
+            } else {
+                $("button[name='btn_month_print']").prop('disabled', false);
+                $('select[name="month_print"]').val(month);
+            }
+        });
+
+        $('select[name="month_print"]').on('change', function() {
+            let month = $(this).val();
+
+            if (month == '') {
+                $("button[name='btn_month_print']").prop('disabled', true);
+                $('select[name="month"]').val(month);
+            } else {
+                $("button[name='btn_month_print']").prop('disabled', false);
+                $('select[name="month"]').val(month);
+            }
         });
     </script>
 @endsection
