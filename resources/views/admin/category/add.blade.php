@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+@section('title', 'Tambah Kategori')
+
 @section('content')
     @if ($errors->any())
         <div class="alert alert-danger">

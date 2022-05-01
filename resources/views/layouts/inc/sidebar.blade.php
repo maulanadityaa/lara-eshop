@@ -5,50 +5,45 @@
       Tip 2: you can also add an image using data-image tag
   -->
     <div class="logo"><a href="{{ url('/') }}" class="simple-text logo-normal">
-             Byboot.id
+            <img src="{{ url('assets/logo.png') }}" width="20px" alt="Logo Toko"> Byboot.id
         </a></div>
     <div class="sidebar-wrapper">
         <ul class="nav">
-            <li class="nav-item {{ Request::is('dashboard') ? 'active':'' }}">
+            <li class="nav-item {{ Request::is('dashboard') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('/dashboard') }}">
                     <i class="material-icons">dashboard</i>
                     <p>Dashboard</p>
                 </a>
             </li>
-            <li class="nav-item {{ Request::is('categories') ? 'active':'' }}">
+            <li class="nav-item {{ Request::is('categories') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('categories') }}">
                     <i class="material-icons">category</i>
                     <p>Kategori</p>
                 </a>
             </li>
-            <li class="nav-item {{ Request::is('add-categories') ? 'active':'' }}">
+            <li class="nav-item {{ Request::is('add-categories') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('add-categories') }}">
                     <i class="material-icons">add</i>
                     <p>Tambah Kategori</p>
                 </a>
             </li>
-            <li class="nav-item {{ Request::is('products') ? 'active':'' }}">
+            <li class="nav-item {{ Request::is('products') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('products') }}">
                     <i class="material-icons">inventory_2</i>
                     <p>Produk</p>
                 </a>
             </li>
-            <li class="nav-item {{ Request::is('add-products') ? 'active':'' }}">
+            <li class="nav-item {{ Request::is('add-products') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('add-products') }}">
                     <i class="material-icons">add</i>
                     <p>Tambah Produk</p>
                 </a>
             </li>
-            <li class="nav-item {{ Request::is('admin/orders') || Request::is('admin/order-history') || Request::is('admin/view-order-details/{id}') ? 'active':'' }}">
+            <li
+                class="nav-item {{ Request::is('admin/orders') || Request::is('admin/order-history') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('admin/orders') }}">
-                    <i class="material-icons">content_paste</i>
+                    <i class="material-icons">list_alt</i>
                     <p>Pesanan</p>
-                </a>
-            </li>
-            <li class="nav-item {{ Request::is('users') ? 'active':'' }}">
-                <a class="nav-link" href="{{ url('users') }}">
-                    <i class="material-icons">person</i>
-                    <p>Data Pelanggan</p>
                 </a>
             </li>
         </ul>

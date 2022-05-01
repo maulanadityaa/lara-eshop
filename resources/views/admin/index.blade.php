@@ -59,13 +59,13 @@
         <div class="row">
             <div class="col">
                 <div class="card">
-                    <div class="card-header card-header-warning">
+                    <div class="card-header card-header-primary" style="background-color: rgb(226, 0, 188)">
                         <h3 class="card-title">Pesanan Baru</h3>
                         <p class="card-category">Pesanan yang belum dikonfirmasi</p>
                     </div>
                     <div class="card-body table-responsive">
                         <table class="table table-hover">
-                            <thead class="text-warning">
+                            <thead class="text-primary">
                                 <th class="text-center">Invoice ID</th>
                                 <th>Hubungi WhatsApp</th>
                                 <th>Email</th>

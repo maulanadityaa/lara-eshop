@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+@section('title', 'Tambah Produk')
+
 @section('content')
     <div class="card card-nav-tabs">
         <div class="card-header card-header-primary">

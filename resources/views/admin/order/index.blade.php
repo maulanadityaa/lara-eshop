@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Data Pesanan
+    Pesanan Baru
 @endsection
 
 @section('content')
