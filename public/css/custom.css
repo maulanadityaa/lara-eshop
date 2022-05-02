@@ -44,9 +44,9 @@
     list-style-type: none;
 }
 
-.owl-carousel :hover {
+/* .owl-carousel :hover {
     color: black;
-}
+} */
 /* 
 .card-product {
     transition: transform 0.2s;
@@ -56,12 +56,3 @@
     color: black;
     transform: scale(1.2);
 } */
-
-.js-image-zoom__zoomed-image {
-    position: absolute;
-    z-index: 99;
-}
-
-hr {
-    z-index: -20;
-}

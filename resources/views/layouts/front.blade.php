@@ -46,12 +46,12 @@
     <style>
         a {
             text-decoration: none !important;
-            color: black;
+            color: #888888;
         }
 
-        a :hover {
+        /* a :hover {
             color: black;
-        }
+        } */
 
         td {
             vertical-align: middle;
@@ -80,8 +80,6 @@
     <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
     <script src="https://unpkg.com/js-image-zoom@0.7.0/js-image-zoom.js" type="application/javascript"></script>
-    <script src="https://app.sandbox.midtrans.com/snap/snap.js"
-        data-client-key="{{ config('services.midtrans.clientKey') }}"></script>
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 

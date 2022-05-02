@@ -20,12 +20,12 @@
 
     </style>
     <div class="py-3 mb-4 shadow-sm bg-light text-dark">
-        <div class="container">
+        <div class="container-xxl">
             <h5 class="mb-0"><a href="{{ url('/') }}">Home</a> > <a href="{{ url('/my-orders') }}">Pesanan
                     Saya</a> > {{ $orders->id }}</h5>
         </div>
     </div>
-    <div class="container mt-3">
+    <div class="container-xxl mt-3">
         <div class="d-flex align-content-center flex-wrap justify-content-center">
             <div id="spinner-div" class="pt-5">
                 <div class="spinner-border text-primary" role="status">
@@ -36,7 +36,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header bg-dark">
+                    <div class="card-header bg-primary">
                         <h3 class="text-center text-white"><strong>Detail Pesanan</strong></h3>
                         <h4 class="text-center text-white" name="invId">{{ $orders->id }}</h4>
                     </div>
@@ -62,8 +62,8 @@
                             <div class="col-md-6">
                                 <h3><strong>Detail Barang</strong></h3>
                                 <hr>
-                                <table class="table table-bordered">
-                                    <thead>
+                                <table class="table table-bordered table-responsive">
+                                    <thead class="table-dark">
                                         <tr class="text-center">
                                             <th><strong>Nama Produk</strong></th>
                                             <th><strong>Jumlah</strong></th>
@@ -138,6 +138,8 @@
 @endsection
 
 @section('scripts')
+    <script src="https://app.sandbox.midtrans.com/snap/snap.js"
+        data-client-key="{{ config('services.midtrans.clientKey') }}"></script>
     <script>
         $('button[name="bayar"]').on('click', function() {
             var id = $("h4[name=invId]").html()
