@@ -57,6 +57,11 @@
     transform: scale(1.2);
 } */
 
-/* .img-product {
-    z-index: 5000 !important;
-} */
+.js-image-zoom__zoomed-image {
+    position: absolute;
+    z-index: 99;
+}
+
+hr {
+    z-index: -20;
+}

@@ -5,16 +5,23 @@
 @endsection
 
 @section('content')
+    <style>
+        td {
+            vertical-align: center;
+            text-align: center;
+        }
+
+    </style>
     <div class="py-3 mb-4 shadow-sm bg-light text-dark">
-        <div class="container">
+        <div class="container-xxl">
             <h5 class="mb-0"><a href="{{ url('/') }}">Home</a> > Pesanan Saya</h5>
         </div>
     </div>
-    <div class="container mt-3">
+    <div class="container-xxl mt-3">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <h3 class="card-header text-center text-white" style="background: rgb(170, 79, 255)">
+                    <h3 class="card-header text-center text-white bg-info">
                         Pesanan Saya
                         <form class="row float-end" method="GET">
                             <div class="col-md-8">
@@ -29,7 +36,7 @@
                                 </select>
                             </div>
                             <div class="col-md-3 p-0">
-                                <button type="submit" class="btn btn-warning">Search</button>
+                                <button type="submit" class="btn btn-danger">Search</button>
                             </div>
                         </form>
                     </h3>
@@ -79,12 +86,13 @@
                                             @endif
                                             <td>Rp. {{ number_format($item->total_price) }}</td>
                                             @if ($item->status == '0')
-                                                <td><span class="badge bg-danger text-white">Menunggu Konfirmasi</span></td>
+                                                <td><span class="badge bg-danger text-white">Menunggu Konfirmasi</span>
+                                                </td>
                                             @elseif($item->status == '1')
                                                 <td><span class="badge bg-warning text-white">Menunggu Pembayaran</span>
                                                 </td>
                                             @elseif($item->status == '2')
-                                                <td><span class="badge bg-primary">Telah Dibayar</span></td>
+                                                <td><span class="badge bg-info">Telah Dibayar</span></td>
                                             @elseif ($item->status == '3')
                                                 <td><span class="badge bg-info text-dark">Sedang dikirm</span></td>
                                             @elseif ($item->status == '4')
@@ -99,10 +107,11 @@
                                                 @elseif ($item->status == '5')
                                                     <div class="text-danger">Pesanan Dibatalkan</div>
                                                     @if ($item->midtrans_status == 'deny' || $item->midtrans_status == 'cancel')
-                                                        <p class="text-muted fw-lighter">(Pembayaran Gagal)</p>
+                                                        <small class="text-muted fw-lighter">(Pembayaran Gagal)</small>
                                                     @elseif ($item->midtrans_status == 'expire')
-                                                        <p class="text-muted fw-lighter">(Pembayaran melebihi batas waktu)
-                                                        </p>
+                                                        <small class="text-muted fw-lighter">(Pembayaran melebihi batas
+                                                            waktu)
+                                                        </small>
                                                     @endif
                                                 @else
                                                     <a href="{{ url('view-order/update-status/' . $item->id) }}"

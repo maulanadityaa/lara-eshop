@@ -17,15 +17,13 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::check()){
-            if(Auth::user()->role_as == '1'){
+        if (Auth::check()) {
+            if (Auth::user()->role_as == '1') {
                 return $next($request);
+            } else {
+                return redirect('/')->with('error', 'Access Denied!! Anda bukan Admin');
             }
-            else{
-                return redirect('/')->with('status', 'Access Denied!! Anda bukan Admin');
-            }
-        }
-        else{
+        } else {
             return redirect('/')->with('status', 'Silahkan Login Dahulu');
         }
     }

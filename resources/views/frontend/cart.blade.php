@@ -6,14 +6,14 @@
 
 @section('content')
     <div class="py-3 mb-4 shadow-sm bg-light text-dark">
-        <div class="container">
+        <div class="container-xxl">
             <h5 class="mb-0"><a href="{{ url('/') }}">Home</a> > Keranjang</h5>
         </div>
     </div>
 
-    <div class="container">
+    <div class="container-xxl">
         <div class="card shadow">
-            <h3 class="card-header text-center text-white" style="background: rgb(90, 120, 255)">
+            <h3 class="card-header text-center text-white bg-primary">
                 Keranjang Saya
             </h3>
             @if ($cartitems->count() > 0)

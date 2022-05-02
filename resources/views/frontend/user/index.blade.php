@@ -23,7 +23,7 @@
         <div class="container">
             <div class="col">
                 <div class="card">
-                    <h3 class="card-header text-center text-white" style="background: rgb(0, 0, 0)">
+                    <h3 class="card-header text-center text-white bg-info">
                         Profil User
                     </h3>
                     <div class="card-body">

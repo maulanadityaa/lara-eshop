@@ -7,19 +7,19 @@
 @section('content')
     <style>
         .clickable-name :hover {
-            color: blue;
+            color: #f3969a;
         }
 
     </style>
     <div class="py-3 mb-4 shadow-sm bg-light text-dark">
-        <div class="container">
+        <div class="container-xxl">
             <h5 class="mb-0"><a href="{{ url('/') }}">Home</a> > Wishlist</h5>
         </div>
     </div>
 
-    <div class="container">
+    <div class="container-xxl">
         <div class="card shadow">
-            <h3 class="card-header text-center text-white" style="background: rgb(255, 90, 206)">
+            <h3 class="card-header text-center text-white bg-secondary">
                 Wishlist Saya
             </h3>
             <div class="card-body">
@@ -53,9 +53,9 @@
                                         <td>
                                             <input type="hidden" value="{{ $item->prod_id }}" class="prod_id">
                                             @if ($item->products->stock > 0)
-                                                <h6 class="badge bg-success">Stok Tersedia</h6>
+                                                <h6 class="badge bg-success text-white">Stok Tersedia</h6>
                                             @else
-                                                <h6 class="badge bg-danger">Stok Habis</h6>
+                                                <h6 class="badge bg-danger text-white">Stok Habis</h6>
                                             @endif
                                         </td>
                                         <td>

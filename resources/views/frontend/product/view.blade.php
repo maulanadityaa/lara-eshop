@@ -5,6 +5,13 @@
 @endsection
 
 @section('content')
+    <style>
+        .js-image-zoom__zoomed-image {
+            position: absolute;
+            z-index: 99;
+        }
+
+    </style>
     <div class="py-3 mb-4 shadow-sm bg-light text-dark">
         <div class="container">
             <h5 class="mb-0"><a href="{{ url('/') }}">Home</a> > <a
@@ -30,7 +37,7 @@
                             </ul>
                         </div>
                     @endif
-                    <div class="col-md-4 border-right" id="img-product">
+                    <div class="col-md-4 border-right" style="width: 400px" id="img-product">
                         <img src="{{ asset('assets/uploads/product/' . $product->image) }}" class="w-100 rounded"
                             alt="Product Image">
                     </div>
@@ -61,7 +68,7 @@
                             <label class="badge bg-danger">Stok Habis</label>
                         @endif
 
-                        <div class="row mt-2">
+                        <div class="row mt-2 me-1">
                             <div class="col-md-2">
                                 <input type="hidden" value="{{ $product->id }}" class="prod_id">
                                 <label for="Jumlah">Jumlah</label>
@@ -71,7 +78,7 @@
                                     <button class="input-group-text increment-btn">+</button>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-2 ms-5">
                                 {{-- <input type="hidden" value="{{ $product->id }}" class="prod_id"> --}}
                                 <label for="Jumlah">Ukuran</label>
                                 <input type="number" name="size" value="" class="form-control prod_size text-center"
@@ -92,7 +99,8 @@
                                         disabled>Masukkan
                                         Keranjang <i class="fa fa-shopping-cart"></i></button>
                                 @endif
-                                <button type="button" class="btn btn-success me-3 addtoWishlistBtn float-start">Tambahkan ke
+                                <button type="button" class="btn btn-secondary me-3 addtoWishlistBtn float-start">Tambahkan
+                                    ke
                                     Wishlist <i class="fa fa-heart"></i></button>
                             </div>
                         </div>
@@ -106,9 +114,8 @@
 @section('scripts')
     <script>
         var options = {
-            width: 425,
-            fillContainer: true,
-            scale: 1.2,
+            width: 400,
+            zoomWidth: 500,
             offset: {
                 vertical: 0,
                 horizontal: 10

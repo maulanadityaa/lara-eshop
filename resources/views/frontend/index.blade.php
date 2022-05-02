@@ -7,7 +7,7 @@
 @section('content')
     @include('layouts.inc.slider')
     <div class="py-5">
-        <div class="container">
+        <div class="container-xxl">
             <div class="row">
                 <h2>Produk Populer</h2>
                 <div class="owl-carousel owl-theme">
@@ -33,7 +33,7 @@
         </div>
     </div>
     <div class="py-2">
-        <div class="container">
+        <div class="container-xxl">
             <div class="row">
                 <h2>Semua Produk</h2>
                 @foreach ($products as $product)

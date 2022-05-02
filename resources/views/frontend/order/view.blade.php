@@ -5,6 +5,20 @@
 @endsection
 
 @section('content')
+    <style>
+        #spinner-div {
+            position: fixed;
+            display: none;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            z-index: 5500;
+        }
+
+    </style>
     <div class="py-3 mb-4 shadow-sm bg-light text-dark">
         <div class="container">
             <h5 class="mb-0"><a href="{{ url('/') }}">Home</a> > <a href="{{ url('/my-orders') }}">Pesanan
@@ -12,12 +26,19 @@
         </div>
     </div>
     <div class="container mt-3">
+        <div class="d-flex align-content-center flex-wrap justify-content-center">
+            <div id="spinner-div" class="pt-5">
+                <div class="spinner-border text-primary" role="status">
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header bg-warning">
-                        <h3 class="text-center text-dark"><strong>Detail Pesanan</strong></h3>
-                        <h4 class="text-center text-dark" name="invId">{{ $orders->id }}</h4>
+                    <div class="card-header bg-dark">
+                        <h3 class="text-center text-white"><strong>Detail Pesanan</strong></h3>
+                        <h4 class="text-center text-white" name="invId">{{ $orders->id }}</h4>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -120,6 +141,7 @@
     <script>
         $('button[name="bayar"]').on('click', function() {
             var id = $("h4[name=invId]").html()
+            $('#spinner-div').show(); //Load button clicked show spinner
 
             $.ajaxSetup({
                 headers: {
@@ -158,6 +180,9 @@
                                 sendCallback(result);
                             }
                         });
+                    },
+                    complete: function() {
+                        $('#spinner-div').hide(); //Request is complete so hide spinner
                     }
                 });
             }
