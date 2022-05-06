@@ -166,8 +166,18 @@ class CheckoutController extends Controller
 
     public function payNow($id)
     {
-        $orders = Order::findOrFail($id);
+        $orders = Order::where('id', $id)->where('user_id', Auth::id())->first();
         // dd($orders);
+
+        foreach ($orders->orderitems as $item) {
+            $items[] = array([
+                'prize' => $item->price,
+                'quantity' => $item->qty,
+                'name' => $item->products->name
+            ]);
+        }
+        // $item_details = json_encode($items);
+        // dd($items);
 
         $customerDetails = [
             'first_name' => $orders->fname,
@@ -187,6 +197,7 @@ class CheckoutController extends Controller
         // dd($this->harga);
 
         $payload = [
+            // 'item_details' => $items,
             'transaction_details' => $transactionDetails,
             'customer_details' => $customerDetails
         ];
@@ -208,6 +219,7 @@ class CheckoutController extends Controller
             $orders->snaptoken = $snapToken;
             $orders->update();
         }
+
 
         return response()->json($snapToken);
     }

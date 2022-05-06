@@ -180,6 +180,7 @@
                             onError: function(result) {
                                 /* You may add your own js here, this is just example */
                                 sendCallback(result);
+                                console.log('error');
                             }
                         });
                     },
@@ -189,30 +190,6 @@
                 });
             }
         });
-
-        document.getElementById('payNow').onclick = function() {
-            var snapToken = '<?php echo $orders->snaptoken; ?>';
-            // console.log('hahahah');
-            // console.log(snapToken);
-
-            snap.pay(snapToken, {
-                // Optional
-                onSuccess: function(result) {
-                    /* You may add your own js here, this is just example */
-                    document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
-                },
-                // Optional
-                onPending: function(result) {
-                    /* You may add your own js here, this is just example */
-                    document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
-                },
-                // Optional
-                onError: function(result) {
-                    /* You may add your own js here, this is just example */
-                    document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
-                }
-            });
-        }
 
         function sendCallback(response) {
             // document.getElementById('midtrans_callback').value = JSON.stringify(response);

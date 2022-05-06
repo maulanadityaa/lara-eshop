@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="py-3 mb-4 shadow-sm bg-light text-dark">
-        <div class="container">
+        <div class="container-xxl">
             <h5 class="mb-0"><a href="{{ url('/') }}">Home</a> > <a href="{{ url('/cart') }}">Keranjang</a>
                 > Checkout</h5>
         </div>
@@ -24,7 +24,7 @@
             $total_harga += $item->products->sell_price * $item->prod_qty;
         @endphp
     @endforeach
-    <div class="container mt-3">
+    <div class="container-xxl mt-3">
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -119,7 +119,7 @@
                         <div class="card-body">
                             <h5 class="fw-bold">Detail Order</h5>
                             <hr>
-                            <table class="table table-striped table-bordered">
+                            <table class="table table-bordered table-responsive">
                                 <thead>
                                     <tr>
                                         <th>Nama Produk</th>
@@ -134,7 +134,13 @@
 
                                     @foreach ($cartitems as $item)
                                         <tr>
-                                            <td>{{ $item->products->name }}</td>
+                                            <td style="overflow: hidden;
+                                                    text-overflow: ellipsis;
+                                                    display: -webkit-box;
+                                                    -webkit-line-clamp: 2;
+                                                    -webkit-box-orient: vertical;">
+                                                {{ $item->products->name }}
+                                            </td>
                                             <td>{{ $item->prod_size }}</td>
                                             <td>{{ $item->message }}</td>
                                             <td>{{ $item->prod_qty }}</td>

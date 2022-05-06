@@ -12,19 +12,22 @@
                 <h2>Produk Populer</h2>
                 <div class="owl-carousel owl-theme">
                     @foreach ($featured_products as $product)
-                        <div class="item">
-                            <div class="card h-100">
-                                <a href="{{ url('view-category/' . $product->category->slug . '/' . $product->slug) }}">
-                                    <img src="{{ asset('assets/uploads/product/' . $product->image) }}"
-                                        class="product-img" alt="Trending Image">
-                                    <div class="card-body">
-                                        <h5>{{ $product->name }}</h5>
-                                        <span class="float-end"><s>Rp.
-                                                {{ number_format($product->original_price) }}</s></span>
-                                        <span class="float-start"><strong>Rp.
-                                                {{ number_format($product->sell_price) }}</strong></span>
-                                    </div>
-                                </a>
+                        <div class="card h-100">
+                            <img src="{{ asset('assets/uploads/product/' . $product->image) }}" class="card-img-top"
+                                height="300px" alt="Product Image">
+                            <a class="stretched-link"
+                                href="{{ url('view-category/' . $product->category->slug . '/' . $product->slug) }}">
+                            </a>
+                            <div class="card-body d-flex flex-column">
+                                <div>
+                                    <h5>{{ $product->name }}</h5>
+                                </div>
+                                <div class="mt-auto">
+                                    <span class="float-end"><s>Rp.
+                                            {{ number_format($product->original_price) }}</s></span>
+                                    <span class="float-start"><strong>Rp.
+                                            {{ number_format($product->sell_price) }}</strong></span>
+                                </div>
                             </div>
                         </div>
                     @endforeach
@@ -38,18 +41,41 @@
                 <h2>Semua Produk</h2>
                 @foreach ($products as $product)
                     <div class="col-md-3 mt-3">
-                        <div class="card h-100">
+                        {{-- <div class="card h-100">
                             <a href="{{ url('view-category/' . $product->category->slug . '/' . $product->slug) }}">
                                 <img src="{{ asset('assets/uploads/product/' . $product->image) }}" class="card-img-top"
                                     height="300px" alt="Product Image">
                                 <div class="card-body">
+                                    <div class="align-self-center flex-grow d-flex">
+                                        <h5>{{ $product->name }}</h5>
+                                    </div>
+                                    <div class="mt-auto">
+                                        <span class="float-end"><s>Rp.
+                                                {{ number_format($product->original_price) }}</s></span>
+                                        <span class="float-start"><strong>Rp.
+                                                {{ number_format($product->sell_price) }}</strong></span>
+                                    </div>
+                                </div>
+
+                            </a>
+                        </div> --}}
+                        <div class="card h-100">
+                            <img src="{{ asset('assets/uploads/product/' . $product->image) }}" class="card-img-top"
+                                height="300px" alt="Product Image">
+                            <a class="stretched-link"
+                                href="{{ url('view-category/' . $product->category->slug . '/' . $product->slug) }}">
+                            </a>
+                            <div class="card-body d-flex flex-column">
+                                <div>
                                     <h5>{{ $product->name }}</h5>
+                                </div>
+                                <div class="mt-auto">
                                     <span class="float-end"><s>Rp.
                                             {{ number_format($product->original_price) }}</s></span>
                                     <span class="float-start"><strong>Rp.
                                             {{ number_format($product->sell_price) }}</strong></span>
                                 </div>
-                            </a>
+                            </div>
                         </div>
                     </div>
                 @endforeach
