@@ -25,8 +25,8 @@
                     Saya</a> > {{ $orders->id }}</h5>
         </div>
     </div>
-    <div class="container-xxl mt-3">
-        <div class="d-flex align-content-center flex-wrap justify-content-center">
+    <div class="container-xxl mt-3 mb-3">
+        <div class="d-flex align-items-center flex-wrap justify-content-center">
             <div id="spinner-div" class="pt-5">
                 <div class="spinner-border text-primary" role="status">
                 </div>
@@ -54,8 +54,8 @@
                                 <label for="">No HP</label>
                                 <div class="border">{{ $orders->nohp }}</div>
                                 <label for="">Alamat Pengiriman</label>
-                                <div class="border">{{ $orders->address }}, {{ $orders->city }},
-                                    {{ $orders->province }}, {{ $orders->postal_code }}</div>
+                                <div class="border">{{ $orders->address }}, {{ $city->name }},
+                                    {{ $province->name }}, {{ $orders->postal_code }}</div>
                                 <label for="">Jasa Ekspedisi</label>
                                 <div class="border">{{ $orders->courier }}</div>
                             </div>
@@ -183,6 +183,10 @@
                                 console.log('error');
                             }
                         });
+                    },
+                    error: function(xhr, status, error) {
+                        var err = eval("(" + xhr.responseText + ")");
+                        alert(err.Message);
                     },
                     complete: function() {
                         $('#spinner-div').hide(); //Request is complete so hide spinner

@@ -10,7 +10,7 @@
             <h5 class="mb-0"><a href="{{ url('/') }}">Home</a> > Semua Kategori</h5>
         </div>
     </div>
-    <div class="mt-3">
+    <div class="py-1">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -19,7 +19,7 @@
                         @foreach ($category as $item)
                             <div class="col-md-3 mb-3">
                                 <a href="{{ url('view-category/' . $item->slug) }}">
-                                    <div class="card">
+                                    <div class="card h-100">
                                         <img src="{{ asset('assets/uploads/category/' . $item->image) }}"
                                             class="card-img-top" alt="Category Image">
                                         <div class="card-body">

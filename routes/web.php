@@ -53,10 +53,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('cek-ongkir/cities/{province_id}', 'Frontend\CheckoutController@getCities');
     Route::post('cek-ongkir/', 'Frontend\CheckoutController@cekOngkir');
 
-    Route::get('my-orders', 'Frontend\UserController@index');
-    Route::get('view-order/{id}', 'Frontend\UserController@view');
-    Route::get('view-order/print-invoice/{id}', 'Frontend\UserController@printPDF');
-    Route::get('view-order/cancel-order/{id}', 'Frontend\UserController@cancelOrder');
+    Route::get('my-orders', 'Frontend\OrderController@index');
+    Route::get('view-order/{id}', 'Frontend\OrderController@view');
+    Route::get('view-order/print-invoice/{id}', 'Frontend\OrderController@printPDF');
+    Route::get('view-order/cancel-order/{id}', 'Frontend\OrderController@cancelOrder');
 });
 
 Route::middleware(['auth', 'isAdmin'])->group(function () {

@@ -14,8 +14,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Kavist\RajaOngkir\Facades\RajaOngkir;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Date;
 
 class CheckoutController extends Controller
 {
@@ -113,22 +111,6 @@ class CheckoutController extends Controller
         $order->total_price = $request->total_harga + $request->total_ongkir;
         $order->save();
 
-        // Order::create([
-        //     'user_id' => Auth::id(),
-        //     'invoice_id' => $id,
-        //     'fname' => $request->fname,
-        //     'lname' => $request->lname,
-        //     'email' => $request->email,
-        //     'nohp' => $hp,
-        //     'address' => $request->address,
-        //     'city' => $request->city_destination,
-        //     'province' => $request->province_destination,
-        //     'postal_code' => $request->postal_code,
-        //     'courier' => $request->jasa_pengiriman,
-        //     'ongkir' => $request->total_ongkir,
-        //     'total_price' => $request->total_harga + $request->total_ongkir
-        // ]);
-
         $cartitems = Cart::where('user_id', Auth::id())->get();
         // dd($cartitems);
         foreach ($cartitems as $item) {
@@ -167,17 +149,6 @@ class CheckoutController extends Controller
     public function payNow($id)
     {
         $orders = Order::where('id', $id)->where('user_id', Auth::id())->first();
-        // dd($orders);
-
-        foreach ($orders->orderitems as $item) {
-            $items[] = array([
-                'prize' => $item->price,
-                'quantity' => $item->qty,
-                'name' => $item->products->name
-            ]);
-        }
-        // $item_details = json_encode($items);
-        // dd($items);
 
         $customerDetails = [
             'first_name' => $orders->fname,
@@ -194,10 +165,7 @@ class CheckoutController extends Controller
             'gross_amount' => $orders->total_price
         ];
 
-        // dd($this->harga);
-
         $payload = [
-            // 'item_details' => $items,
             'transaction_details' => $transactionDetails,
             'customer_details' => $customerDetails
         ];
@@ -211,9 +179,7 @@ class CheckoutController extends Controller
         // Set 3DS transaction for credit card to true
         \Midtrans\Config::$is3ds = true;
 
-        // dd(\Midtrans\Config::$serverKey = config('services.midtrans.serverKey'));
         $snapToken = \Midtrans\Snap::getSnapToken($payload);
-        // dd($snapToken);
 
         if ($snapToken) {
             $orders->snaptoken = $snapToken;
