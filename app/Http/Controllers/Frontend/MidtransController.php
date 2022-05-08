@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\OrderItem;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class MidtransController extends Controller
@@ -11,17 +13,24 @@ class MidtransController extends Controller
     public function submitPayment(Request $request)
     {
         $callback = json_decode($request->get('midtrans_callback'));
-        // dd($callback);
-        // return $request;
         $orders = Order::findOrFail($callback->order_id);
 
         if ($orders) {
             if (strtolower($callback->transaction_status) == 'pending') {
                 $orders->status = 1;
-            } elseif (strtolower($callback->transaction_status) == 'settlement' || 'capture') {
+            } elseif (strtolower($callback->transaction_status) == 'settlement' || strtolower($callback->transaction_status) == 'capture') {
                 $orders->status = 2;
-            } elseif (strtolower($callback->transaction_status) == 'deny' || 'cancel' || 'expire') {
+            } elseif (strtolower($callback->transaction_status) == 'deny' || strtolower($callback->transaction_status) ==  'cancel' || strtolower($callback->transaction_status) ==  'expire') {
                 $orders->status = 5;
+
+                $orderitems = OrderItem::where('order_id', $callback->order_id)->get();
+                // dd($orderitems);
+                foreach ($orderitems as $item) {
+                    $product = Product::where('id', $item->prod_id)->first();
+                    // dd($item->qty);
+                    $product->stock = $product->stock + $item->qty;
+                    $product->update();
+                }
             }
             $orders->midtrans_status = $callback->transaction_status;
             $orders->payment_type = $callback->payment_type;

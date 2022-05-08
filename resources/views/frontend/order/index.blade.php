@@ -6,8 +6,8 @@
 
 @section('content')
     <style>
-        td {
-            vertical-align: center;
+        #tableMiddle td {
+            vertical-align: middle;
             text-align: center;
         }
 
@@ -42,7 +42,7 @@
                     </h3>
                     <div class="card-body table-responsive">
 
-                        <table class="table table-bordered table-hover" style="cursor:pointer">
+                        <table class="table table-bordered table-hover" id="tableMiddle" style="cursor:pointer">
                             <thead class="table-dark">
                                 <tr class="text-center">
                                     <th><strong>Invoice ID</strong></th>
@@ -94,7 +94,7 @@
                                             @elseif($item->status == '2')
                                                 <td><span class="badge bg-info">Telah Dibayar</span></td>
                                             @elseif ($item->status == '3')
-                                                <td><span class="badge bg-info text-dark">Sedang dikirm</span></td>
+                                                <td><span class="badge bg-info">Sedang dikirm</span></td>
                                             @elseif ($item->status == '4')
                                                 <td><span class="badge bg-success">Selesai</span></td>
                                             @else
@@ -113,6 +113,8 @@
                                                             waktu)
                                                         </small>
                                                     @endif
+                                                @elseif ($item->status == '4')
+                                                    <div class="text-success">Pesanan Telah Selesai</div>
                                                 @else
                                                     <a href="{{ url('view-order/update-status/' . $item->id) }}"
                                                         class="btn btn-primary" name="update_status">Update Status</a>
