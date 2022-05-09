@@ -40,8 +40,9 @@
 }
 
 .ui-menu-item :hover {
-    background: rgb(184, 184, 184);
+    background: #f3969a;
     list-style-type: none;
+    color: white;
 }
 
 /* .owl-carousel :hover {

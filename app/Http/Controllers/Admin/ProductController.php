@@ -50,10 +50,10 @@ class ProductController extends Controller
         );
 
         $products = new Product();
-        if($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             $file = $request->file('image');
             $ext = $file->getClientOriginalExtension();
-            $filename = time().'.'.$ext;
+            $filename = time() . '.' . $ext;
             $file->move('assets/uploads/product/', $filename);
             $products->image = $filename;
         }
@@ -66,8 +66,8 @@ class ProductController extends Controller
         $products->sell_price = $request->sell_price;
         $products->stock = $request->stock;
         $products->size = $request->size;
-        $products->status = $request->status == TRUE ? '1':'0';
-        $products->trending = $request->trending == TRUE ? '1':'0';
+        $products->status = $request->status == TRUE ? '1' : '0';
+        $products->trending = $request->trending == TRUE ? '1' : '0';
         $products->save();
 
         return redirect('products')->with('status', 'Produk Sukses ditambahkan');
@@ -85,7 +85,6 @@ class ProductController extends Controller
             [
                 'name' => 'required',
                 'slug' => 'required',
-                'image' => 'required',
                 'description' => 'required',
                 'stock' => 'required',
                 'original_price' => 'required',
@@ -95,7 +94,6 @@ class ProductController extends Controller
             [
                 'name.required' => 'Nama harus diisi!',
                 'slug.required' => 'Slug harus ada!',
-                'image.required' => 'Gambar harus ada!',
                 'description.required' => 'Deskripsi harus diisi!',
                 'stock.required' => 'Stok harus ada!',
                 'original_price.required' => 'Harga Asli harus diisi!',
@@ -105,29 +103,41 @@ class ProductController extends Controller
         );
 
         $products = Product::find($id);
-        if($request->hasFile('image')){
-            $path = 'assets/uploads/product/'.$products->image;
-            if(File::exists($path)){
-                File::delete($path);
+        if ($request->hasFile('image')) {
+            $path = 'assets/uploads/product/' . $products->image;
+            if (File::exists(public_path($path))) {
+                File::delete(public_path($path));
             }
 
             $file = $request->file('image');
             $ext = $file->getClientOriginalExtension();
-            $filename = time().'.'.$ext;
+            $filename = time() . '.' . $ext;
             $file->move('assets/uploads/product/', $filename);
             $products->image = $filename;
+            $products->name = $request->input('name');
+            $products->slug = Str::slug($products->name);
+            $products->description = $request->input('description');
+            $products->original_price = $request->input('original_price');
+            $products->sell_price = $request->input('sell_price');
+            $products->stock = $request->input('stock');
+            $products->size = $request->input('size');
+            $products->status = $request->input('status') == TRUE ? '1' : '0';
+            $products->trending = $request->input('trending') == TRUE ? '1' : '0';
+            $products->update();
+        } else {
+            $products->name = $request->input('name');
+            $products->slug = Str::slug($products->name);
+            $products->description = $request->input('description');
+            $products->original_price = $request->input('original_price');
+            $products->sell_price = $request->input('sell_price');
+            $products->stock = $request->input('stock');
+            $products->size = $request->input('size');
+            $products->status = $request->input('status') == TRUE ? '1' : '0';
+            $products->trending = $request->input('trending') == TRUE ? '1' : '0';
+            $products->update();
         }
 
-        $products->name = $request->input('name');
-        $products->slug = Str::slug($products->name);
-        $products->description = $request->input('description');
-        $products->original_price = $request->input('original_price');
-        $products->sell_price = $request->input('sell_price');
-        $products->stock = $request->input('stock');
-        $products->size = $request->input('size');
-        $products->status = $request->input('status') == TRUE ? '1':'0';
-        $products->trending = $request->input('trending') == TRUE ? '1':'0';
-        $products->update();
+
 
         return redirect('products')->with('status', 'Produk Sukses diubah');
     }
@@ -135,9 +145,9 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $products = Product::find($id);
-        if($products->image){
-            $path = 'assets/uploads/product/'.$products->image;
-            if(File::exists($path)){
+        if ($products->image) {
+            $path = 'assets/uploads/product/' . $products->image;
+            if (File::exists($path)) {
                 File::delete($path);
             }
         }

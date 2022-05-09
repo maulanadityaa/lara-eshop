@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\File;
 
 class CategoryController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $category = Category::all();
         return view('admin.category.index', compact('category'));
     }
@@ -35,10 +36,10 @@ class CategoryController extends Controller
             ]
         );
         $category = new Category();
-        if($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             $file = $request->file('image');
             $ext = $file->getClientOriginalExtension();
-            $filename = time().'.'.$ext;
+            $filename = time() . '.' . $ext;
             $file->move('assets/uploads/category/', $filename);
             $category->image = $filename;
         }
@@ -46,11 +47,11 @@ class CategoryController extends Controller
         $category->name = $request->input('name');
         $category->slug = $request->input('slug');
         $category->description = $request->input('description');
-        $category->status = $request->input('status') == TRUE ? '1':'0';
-        $category->popular = $request->input('popular') == TRUE ? '1':'0';
+        $category->status = $request->input('status') == TRUE ? '1' : '0';
+        $category->popular = $request->input('popular') == TRUE ? '1' : '0';
         $category->save();
 
-        return redirect('/dashboard')->with('status', 'Kategori Sukses Ditambahkan');
+        return redirect('categories')->with('status', 'Kategori Sukses Ditambahkan');
     }
 
     public function edit($id)
@@ -66,46 +67,50 @@ class CategoryController extends Controller
                 'name' => 'required',
                 'slug' => 'required',
                 'description' => 'required',
-                'image' => 'required',
             ],
             [
                 'name.required' => 'Nama harus diisi!',
                 'slug.required' => 'Slug harus ada!',
                 'description.required' => 'Deskripsi harus diisi!',
-                'image.required' => 'Gambar harus ada!',
             ]
         );
 
         $category = Category::find($id);
-        if($request->hasFile('image')){
-            $path = 'assets/uploads/category/'.$category->image;
-            if(File::exists($path)){
-                File::delete($path);
+        if ($request->hasFile('image')) {
+            $path = 'assets/uploads/category/' . $category->image;
+            if (File::exists(public_path($path))) {
+                File::delete(public_path($path));
             }
-            
+
             $file = $request->file('image');
             $ext = $file->getClientOriginalExtension();
-            $filename = time().'.'.$ext;
+            $filename = time() . '.' . $ext;
             $file->move('assets/uploads/category', $filename);
             $category->image = $filename;
+            $category->name = $request->input('name');
+            $category->slug = $request->input('slug');
+            $category->description = $request->input('description');
+            $category->status = $request->input('status') == TRUE ? '1' : '0';
+            $category->popular = $request->input('popular') == TRUE ? '1' : '0';
+            $category->update();
+        } else {
+            $category->name = $request->input('name');
+            $category->slug = $request->input('slug');
+            $category->description = $request->input('description');
+            $category->status = $request->input('status') == TRUE ? '1' : '0';
+            $category->popular = $request->input('popular') == TRUE ? '1' : '0';
+            $category->update();
         }
 
-        $category->name = $request->input('name');
-        $category->slug = $request->input('slug');
-        $category->description = $request->input('description');
-        $category->status = $request->input('status') == TRUE ? '1':'0';
-        $category->popular = $request->input('popular') == TRUE ? '1':'0';
-        $category->update();
-
-        return redirect('/dashboard')->with('status', 'Kategori Sukses diubah');
+        return redirect('categories')->with('status', 'Kategori Sukses diubah');
     }
 
     public function destroy($id)
     {
         $category = Category::find($id);
-        if($category->image){
-            $path = 'assets/uploads/category/'.$category->image;
-            if(File::exists($path)){
+        if ($category->image) {
+            $path = 'assets/uploads/category/' . $category->image;
+            if (File::exists($path)) {
                 File::delete($path);
             }
         }
