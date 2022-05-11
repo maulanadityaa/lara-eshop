@@ -20,6 +20,7 @@ Route::get('/view-category/{slug}', 'Frontend\FrontendController@viewcategory');
 Route::get('/view-category/{cate_slug}/{prod_slug}', 'Frontend\FrontendController@viewproduct');
 Route::get('/get-product-name', 'Frontend\FrontendController@getProductName');
 Route::post('/search-product', 'Frontend\FrontendController@searchProduct');
+Route::get('/all-products', 'Frontend\FrontendController@allProducts');
 
 
 Auth::routes();

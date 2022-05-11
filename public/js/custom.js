@@ -35,7 +35,7 @@ $("document").ready(function () {
                 swal("", response.status, "success");
             },
             error: function (response) {
-                swal("", "Ukuran Harus Diisi", "error");
+                swal("", "Ukuran dan Jumlah Harus Diisi", "error");
                 console.log(product_size);
             },
         });
@@ -74,7 +74,7 @@ $("document").ready(function () {
             .closest(".product_data")
             .find(".qty-input")
             .val();
-        var value = parseInt(dec_value, 15);
+        var value = parseInt(dec_value);
         value = isNaN(value) ? 0 : value;
 
         if (value > 1) {
@@ -90,12 +90,14 @@ $("document").ready(function () {
             .closest(".product_data")
             .find(".qty-input")
             .val();
-        var value = parseInt(inc_value, 15);
+        var value = parseInt(inc_value);
         value = isNaN(value) ? 0 : value;
 
         if (value < 15) {
             value++;
             $(this).closest(".product_data").find(".qty-input").val(value);
+        } else {
+            $(this).closest(".product_data").find(".qty-input").val(15);
         }
     });
 

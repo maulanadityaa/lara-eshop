@@ -1,5 +1,5 @@
 <!-- Footer -->
-<div class="footer fix-bottom text-center text-lg-start bg-light text-muted">
+<div class="footer text-center text-lg-start bg-light text-muted mt-5">
     <!-- Section: Links  -->
     <section class="py-1">
         <div class="container text-md-start mt-5">

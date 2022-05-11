@@ -17,6 +17,13 @@ class FrontendController extends Controller
         return view('frontend.index', compact('featured_products', 'products'));
     }
 
+    public function allProducts()
+    {
+        $products = Product::where('stock', '!=', '0')->latest()->paginate(8);
+        // dd($featured_products);
+        return view('frontend.all-products', compact('products'));
+    }
+
     public function category()
     {
         $category = Category::all();

@@ -24,7 +24,7 @@
                     <h3 class="card-header text-center text-white bg-info">
                         Pesanan Saya
                         <form class="row float-end" method="GET">
-                            <div class="col-md-8">
+                            <div class="input-group">
                                 <select name="status" class="form-select">
                                     <option value="">Semua Pesanan</option>
                                     <option value="0">Menunggu Konfirmasi</option>
@@ -34,9 +34,7 @@
                                     <option value="4">Selesai</option>
                                     <option value="5">Dibatalkan</option>
                                 </select>
-                            </div>
-                            <div class="col-md-3 p-0">
-                                <button type="submit" class="btn btn-danger">Search</button>
+                                <button type="submit" class="btn btn-secondary"><i class="fas fa-search"></i></button>
                             </div>
                         </form>
                     </h3>

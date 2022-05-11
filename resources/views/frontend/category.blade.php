@@ -6,12 +6,12 @@
 
 @section('content')
     <div class="py-3 mb-4 shadow-sm bg-light text-dark">
-        <div class="container">
+        <div class="container-xxl">
             <h5 class="mb-0"><a href="{{ url('/') }}">Home</a> > Semua Kategori</h5>
         </div>
     </div>
     <div class="py-1">
-        <div class="container">
+        <div class="container-xxl">
             <div class="row">
                 <div class="col-md-12">
                     <h2>Semua Kategori</h2>
@@ -24,7 +24,7 @@
                                             class="card-img-top" alt="Category Image">
                                         <div class="card-body">
                                             <h5>{{ $item->name }}</h5>
-                                            <p>{{ $item->description }}</p>
+                                            <p>{!! $item->description !!}</p>
                                         </div>
                                     </div>
                                 </a>

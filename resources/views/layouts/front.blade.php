@@ -62,7 +62,7 @@
 
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
     @include('layouts.inc.frontnavbar')
     <div class="content">
         @yield('content')
@@ -115,8 +115,8 @@
         });
     </script>
 
+    @include('layouts.inc.frontfooter')
     @yield('scripts')
 </body>
-@include('layouts.inc.frontfooter')
 
 </html>

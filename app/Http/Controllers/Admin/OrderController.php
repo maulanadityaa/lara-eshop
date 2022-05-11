@@ -15,7 +15,7 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $orders = Order::where('status', '0')->get();
+        $orders = Order::where('status', '0')->latest()->get();
 
         return view('admin.order.index', compact('orders'));
     }
@@ -79,24 +79,24 @@ class OrderController extends Controller
 
         if ($request->has('month') && $request->has('keyword')) {
             if ($month != '' && $keyword != '') {
-                $orders = Order::whereMonth('created_at', $month)->where('id', '=', $keyword)->get();
+                $orders = Order::whereMonth('created_at', $month)->where('id', '=', $keyword)->latest()->get();
 
                 return view('admin.order.history', compact('orders'));
             } elseif ($month == '' && $keyword != '') {
-                $orders = Order::where('id', '=', $keyword)->get();
+                $orders = Order::where('id', '=', $keyword)->latest()->get();
 
                 return view('admin.order.history', compact('orders'));
             } elseif ($month != '' && $keyword == '') {
-                $orders = Order::whereMonth('created_at', $month)->get();
+                $orders = Order::whereMonth('created_at', $month)->latest()->get();
 
                 return view('admin.order.history', compact('orders'));
             } else {
-                $orders = Order::where('status', '!=', '0')->get();
+                $orders = Order::where('status', '!=', '0')->latest()->get();
 
                 return view('admin.order.history', compact('orders'));
             }
         } else {
-            $orders = Order::where('status', '!=', '0')->get();
+            $orders = Order::where('status', '!=', '0')->latest()->get();
 
             return view('admin.order.history', compact('orders'));
         }

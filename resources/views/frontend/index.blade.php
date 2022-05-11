@@ -38,27 +38,11 @@
     <div class="py-2">
         <div class="container-xxl">
             <div class="row">
-                <h2>Semua Produk</h2>
+                <a href="{{ url('/all-products') }}">
+                    <h2>Semua Produk</h2>
+                </a>
                 @foreach ($products as $product)
                     <div class="col-md-3 mt-3">
-                        {{-- <div class="card h-100">
-                            <a href="{{ url('view-category/' . $product->category->slug . '/' . $product->slug) }}">
-                                <img src="{{ asset('assets/uploads/product/' . $product->image) }}" class="card-img-top"
-                                    height="300px" alt="Product Image">
-                                <div class="card-body">
-                                    <div class="align-self-center flex-grow d-flex">
-                                        <h5>{{ $product->name }}</h5>
-                                    </div>
-                                    <div class="mt-auto">
-                                        <span class="float-end"><s>Rp.
-                                                {{ number_format($product->original_price) }}</s></span>
-                                        <span class="float-start"><strong>Rp.
-                                                {{ number_format($product->sell_price) }}</strong></span>
-                                    </div>
-                                </div>
-
-                            </a>
-                        </div> --}}
                         <div class="card h-100">
                             <img src="{{ asset('assets/uploads/product/' . $product->image) }}" class="card-img-top"
                                 height="300px" alt="Product Image">
@@ -80,7 +64,7 @@
                     </div>
                 @endforeach
             </div>
-            <div class="pagination mt-3 justify-content-center">
+            <div class="pagination mt-5 justify-content-center">
                 <div class="d-flex">
                     {!! $products->links() !!}
                 </div>

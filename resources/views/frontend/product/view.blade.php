@@ -74,13 +74,14 @@
                                 <label for="Jumlah">Jumlah</label>
                                 <div class="input-group text-center mb-3" style="width: 130px;">
                                     <button class="input-group-text decrement-btn">-</button>
-                                    <input type="text" name="jumlah" value="1" class="form-control qty-input text-center" />
-                                    <button class="input-group-text increment-btn">+</button>
+                                    <input type="text" name="jumlah" value="1" class="form-control qty-input text-center"
+                                        required />
+                                    <button class="input-group-text increment-btn" name="incBtn">+</button>
                                 </div>
                             </div>
                             <div class="col-md-2 ms-5">
                                 {{-- <input type="hidden" value="{{ $product->id }}" class="prod_id"> --}}
-                                <label for="Jumlah">Ukuran</label>
+                                <label for="Ukuran">Ukuran</label>
                                 <input type="number" name="size" value="" class="form-control prod_size text-center"
                                     required>
                             </div>
