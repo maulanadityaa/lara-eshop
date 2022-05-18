@@ -10,8 +10,8 @@
             <div class="container-fluid justify-content-center justify-content-md-between px-5">
                 <div class="d-flex my-2 my-sm-0">
                     <a class="navbar-brand me-2 mb-1 d-flex justify-content-center" href="{{ route('home') }}">
-                        <img src="{{ url('assets/favicon.ico') }}" height="25" alt="" loading="lazy" />
-                        <span class="text-dark"> Byboot.id</span>
+                        <img src="{{ url('assets/logo.png') }}" height="30" alt="" loading="lazy" />
+                        {{-- <span class="text-dark"> Byboot.id</span> --}}
                     </a>
 
                     <!-- Search form -->
@@ -104,7 +104,7 @@
                                 @endif
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           document.getElementById('logout-form').submit();">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   document.getElementById('logout-form').submit();">
                                     <i class="fas fa-sign-out-alt"></i> {{ __('Logout') }}
                                 </a>
 

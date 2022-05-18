@@ -12,7 +12,7 @@ class FrontendController extends Controller
     public function index()
     {
         $featured_products = Product::where('trending', '1')->take(10)->get();
-        $products = Product::where('stock', '!=', '0')->paginate(4);
+        $products = Product::where('stock', '!=', '0')->latest()->paginate(4);
         // dd($featured_products);
         return view('frontend.index', compact('featured_products', 'products'));
     }
