@@ -49,7 +49,7 @@
                                     <th><strong>No. Resi</strong></th>
                                     <th><strong>Total Harga</strong></th>
                                     <th><strong>Status</strong></th>
-                                    <th><strong>Aksi/Keterangan</strong></th>
+                                    <th><strong>Keterangan</strong></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -100,8 +100,15 @@
                                             @endif
                                             <td>
                                                 @if ($item->status == '0')
+                                                    <div class="text-danger">Menunggu Konfirmasi Pesanan</div>
                                                 @elseif ($item->midtrans_status == null)
-
+                                                    <div class="text-warning">Silahkan lakukan pembayaran</div>
+                                                @elseif ($item->status == '2')
+                                                    <div class="text-info">Pembayaran Telah Berhasil</div>
+                                                    @if ($item->midtrans_status == 'settlement')
+                                                        <small class="text-muted fw-lighter">Pesananmu sedang
+                                                            diproses!</small>
+                                                    @endif
                                                 @elseif ($item->status == '5')
                                                     <div class="text-danger">Pesanan Dibatalkan</div>
                                                     @if ($item->midtrans_status == 'deny' || $item->midtrans_status == 'cancel')
@@ -111,11 +118,14 @@
                                                             waktu)
                                                         </small>
                                                     @endif
+                                                @elseif ($item->status == '3')
+                                                    <div class="text-info">Pesananmu sedang dikirim</div>
                                                 @elseif ($item->status == '4')
                                                     <div class="text-success">Pesanan Telah Selesai</div>
-                                                @else
-                                                    <a href="{{ url('view-order/update-status/' . $item->id) }}"
-                                                        class="btn btn-primary" name="update_status">Update Status</a>
+                                                @elseif ($item->status == '1')
+                                                    <div class="text-warning">Silahkan lakukan pembayaran</div>
+                                                    {{-- <a href="{{ url('view-order/update-status/' . $item->id) }}"
+                                                        class="btn btn-primary" name="update_status">Update Status</a> --}}
                                                 @endif
                                             </td>
                                         </tr>

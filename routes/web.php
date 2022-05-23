@@ -22,6 +22,10 @@ Route::get('/get-product-name', 'Frontend\FrontendController@getProductName');
 Route::post('/search-product', 'Frontend\FrontendController@searchProduct');
 Route::get('/all-products', 'Frontend\FrontendController@allProducts');
 
+// Route::redirect('payment/notifications', '/view-order/payment/notif', 307);
+Route::post('/view-order/payment/notif', 'Frontend\MidtransController@notifications');
+
+
 
 Auth::routes();
 
@@ -50,6 +54,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('checkout/place-order/paynow/submit-payment', 'Frontend\MidtransController@submitPayment');
     Route::get('/view-order/update-status/{id}', 'Frontend\MidtransController@updateStatus');
+
 
     Route::get('cek-ongkir/cities/{province_id}', 'Frontend\CheckoutController@getCities');
     Route::post('cek-ongkir/', 'Frontend\CheckoutController@cekOngkir');

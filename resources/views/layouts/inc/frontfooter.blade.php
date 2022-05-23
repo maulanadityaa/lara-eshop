@@ -9,7 +9,7 @@
                 <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                     <!-- Content -->
                     <h6 class="text-uppercase fw-bold mb-4">
-                        <i class="fas fa-gem me-3"></i>Byboot.id
+                        <img src="{{ url('assets/logo.png') }}" height="25" alt="">
                     </h6>
                     <p>
                         Toko Sandal Wanita Asik bet bet bet
@@ -65,10 +65,11 @@
                     <h6 class="text-uppercase fw-bold mb-4">
                         Contact
                     </h6>
-                    <p><i class="fas fa-home me-3"></i>Menturo, Mbito</p>
+                    <p><i class="fas fa-home me-3"></i>Plemahan, Sumobito</p>
                     <p>
-                        <i class="fab fa-instagram me-3"></i>
-                        @eugwkwk
+                        <a href="https://www.instagram.com/byboot_official/" target="_blank"><i
+                                class="fab fa-instagram me-3"></i>
+                            @byboot_official</a>
                     </p>
                     <p><i class="fab fa-whatsapp me-3"></i> + 62 234 567 88</p>
                 </div>
@@ -82,7 +83,7 @@
     <!-- Copyright -->
     <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
         © 2022
-        <a class="text-reset fw-bold" href="#">WKWKWKWK</a>
+        <a class="text-reset fw-bold" href="#">Byboot.id</a>
     </div>
     <!-- Copyright -->
 </div>
