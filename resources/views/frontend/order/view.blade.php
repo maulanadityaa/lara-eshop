@@ -17,7 +17,6 @@
             background-color: rgba(255, 255, 255, 0.8);
             z-index: 5500;
         }
-
     </style>
     <div class="py-3 mb-4 shadow-sm bg-light text-dark">
         <div class="container-xxl">
@@ -102,8 +101,9 @@
                                 @endphp --}}
                                 <div class="float-end">
                                     @if ($orders->status == 0)
-                                        <button type="button" class="btn btn-danger" type="submit" name="bayar" disabled><i
-                                                class="fas fa-exclamation-triangle"></i> Menunggu Konfirmasi</button>
+                                        <button type="button" class="btn btn-danger" type="submit" name="bayar"
+                                            disabled><i class="fas fa-exclamation-triangle"></i> Menunggu
+                                            Konfirmasi</button>
                                         <a class="btn btn-warning"
                                             href="{{ url('view-order/cancel-order/' . $orders->id) }}" name="cancel"><i
                                                 class="fas fa-exclamation"></i>
@@ -112,11 +112,11 @@
                                         <button type="button" class="btn btn-success" type="submit" name="bayar"><i
                                                 class="far fa-credit-card"></i> Bayar Sekarang</button>
                                     @elseif($orders->status == 5)
-                                        <button type="button" class="btn btn-danger" type="submit" name="bayar" disabled><i
-                                                class="fas fa-exclamation-triangle"></i> Pembayaran Gagal</button>
+                                        <button type="button" class="btn btn-danger" type="submit" name="bayar"
+                                            disabled><i class="fas fa-exclamation-triangle"></i> Pembayaran Gagal</button>
                                     @else
-                                        <button type="button" class="btn btn-info" type="submit" name="bayar" disabled><i
-                                                class="far fa-check-circle"></i> Telah Dibayar</button>
+                                        <button type="button" class="btn btn-info" type="submit" name="bayar"
+                                            disabled><i class="far fa-check-circle"></i> Telah Dibayar</button>
                                         <a href="{{ url('view-order/print-invoice/' . $orders->id) }}" target="_blank"
                                             class="btn btn-success"><i class="fas fa-print"></i> Print
                                             Invoice</a>
@@ -170,23 +170,28 @@
                             onSuccess: function(result) {
                                 /* You may add your own js here, this is just example */
                                 sendCallback(result);
+                                console.log(result);
+
                             },
                             // Optional
                             onPending: function(result) {
                                 /* You may add your own js here, this is just example */
                                 sendCallback(result);
+                                console.log(result);
+
                             },
                             // Optional
                             onError: function(result) {
                                 /* You may add your own js here, this is just example */
                                 sendCallback(result);
-                                console.log('error');
+                                console.log(result);
                             }
                         });
                     },
                     error: function(xhr, status, error) {
                         var err = eval("(" + xhr.responseText + ")");
                         alert(err.Message);
+                        console.log(err)
                     },
                     complete: function() {
                         $('#spinner-div').hide(); //Request is complete so hide spinner

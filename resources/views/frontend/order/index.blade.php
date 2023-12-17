@@ -10,7 +10,6 @@
             vertical-align: middle;
             text-align: center;
         }
-
     </style>
     <div class="py-3 mb-4 shadow-sm bg-light text-dark">
         <div class="container-xxl">
@@ -120,6 +119,9 @@
                                                     @endif
                                                 @elseif ($item->status == '3')
                                                     <div class="text-info">Pesananmu sedang dikirim</div>
+                                                    <a href="{{ url('view-order/check-awb/' . $item->id) }}"
+                                                        class="btn btn-primary" name="cek_resi" data-bs-toggle="modal"
+                                                        data-bs-target="#exampleModal">Cek Resi</a>
                                                 @elseif ($item->status == '4')
                                                     <div class="text-success">Pesanan Telah Selesai</div>
                                                 @elseif ($item->status == '1')
@@ -137,6 +139,23 @@
                                 @endif
                             </tbody>
                         </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
                     </div>
                 </div>
             </div>

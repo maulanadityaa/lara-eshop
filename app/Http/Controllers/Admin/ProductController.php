@@ -32,7 +32,7 @@ class ProductController extends Controller
                 'slug' => 'required',
                 'image' => 'required',
                 'description' => 'required',
-                'stock' => 'required',
+                'stock' => 'required|gt:5',
                 'original_price' => 'required',
                 'sell_price' => 'required',
                 'size' => 'required',

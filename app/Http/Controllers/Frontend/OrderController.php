@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\Province;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use PDF;
 
 class OrderController extends Controller
@@ -84,5 +85,19 @@ class OrderController extends Controller
         $pdf = PDF::loadView('frontend.order.invoice', ['orders' => $orders, 'city' => $city, 'province' => $province, 'logo' => $logo])->setOptions(['defaultFont' => 'sans-serif']);
 
         return $pdf->download($orders->id . '.pdf');
+    }
+
+    public function checkAwb($id)
+    {
+        $orders = Order::where('id', $id)->where('user_id', Auth::id())->first();
+
+        if ($orders) {
+            $noresi = $orders->noresi;
+            $apiKey = '9e8b0d51a60d4a63f3bb9ab8b8d3b7f3855ea6bd7eaf7d67cf16142f8acdc5bf';
+
+            $response = Http::get('https://api.binderbyte.com/v1/track?api_key=' . $apiKey . '&courier=jnt&awb=JP5431695388');
+
+            dd($response->json());
+        }
     }
 }

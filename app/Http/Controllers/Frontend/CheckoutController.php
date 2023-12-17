@@ -44,7 +44,7 @@ class CheckoutController extends Controller
         $courier = $request->courier;
         $weight = $request->weight;
         $destination = $request->city_destination;
-        $postal_code = $request->input('kode-pos');
+        // $postal_code = $request->input('kode-pos');
 
         $cost = RajaOngkir::ongkosKirim([
             'origin'    => 164,
@@ -185,6 +185,8 @@ class CheckoutController extends Controller
             $orders->snaptoken = $snapToken;
             $orders->update();
         }
+
+        // dd($snapToken);
 
 
         return response()->json($snapToken);

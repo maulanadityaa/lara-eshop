@@ -15,7 +15,7 @@ class MidtransController extends Controller
     {
         $callback = json_decode($request->get('midtrans_callback'));
         $orders = Order::findOrFail($callback->order_id);
-        // dd($callback->va_numbers['0']->va_number);
+        // dd($callback);
 
         if ($orders) {
             if (strtolower($callback->transaction_status) == 'pending') {
@@ -34,14 +34,14 @@ class MidtransController extends Controller
                     $product->update();
                 }
             }
-            if ($callback->va_numbers) {
+            if (isset($callback->va_numbers)) {
                 $orders->payment_code = $callback->va_numbers['0']->va_number;
             } else {
                 $orders->payment_code = isset($callback->payment_code) ? $callback->payment_code : null;
             }
 
             if ($callback->payment_type = "bank_transfer") {
-                $orders->payment_type = "Transfer Bank " . strtoupper($callback->va_numbers['0']->bank);
+                $orders->payment_type = "Transfer Bank " . strtoupper(isset($callback->va_numbers['0']->bank));
             } else {
                 $orders->payment_type = $callback->payment_type;
             }
@@ -128,15 +128,17 @@ class MidtransController extends Controller
         } else if ($transaction == 'pending') {
             // TODO set payment status in merchant's database to 'Pending'
             $orders->status = 1;
-        } else if ($transaction == 'deny') {
+        } else if ($transaction == 'deny' || $transaction == 'expire' || $transaction == 'cancel') {
             // TODO set payment status in merchant's database to 'Denied'
             $orders->status = 5;
-        } else if ($transaction == 'expire') {
-            // TODO set payment status in merchant's database to 'expire'
-            $orders->status = 5;
-        } else if ($transaction == 'cancel') {
-            // TODO set payment status in merchant's database to 'Denied'
-            $orders->status = 5;
+
+            $orderitems = OrderItem::where('order_id', $order_id)->get();
+            foreach ($orderitems as $item) {
+                $product = Product::where('id', $item->prod_id)->first();
+                // dd($item->qty);
+                $product->stock = $product->stock + $item->qty;
+                $product->update();
+            }
         }
 
         $orders->midtrans_status = $transaction;

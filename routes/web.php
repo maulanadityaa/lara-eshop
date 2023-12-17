@@ -61,6 +61,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('my-orders', 'Frontend\OrderController@index');
     Route::get('view-order/{id}', 'Frontend\OrderController@view');
+    Route::get('view-order/check-awb/{id}', 'Frontend\OrderController@checkAwb');
     Route::get('view-order/print-invoice/{id}', 'Frontend\OrderController@printPDF');
     Route::get('view-order/cancel-order/{id}', 'Frontend\OrderController@cancelOrder');
 });

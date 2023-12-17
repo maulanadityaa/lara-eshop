@@ -144,6 +144,11 @@
                                 @endif
                             </tbody>
                         </table>
+                        <div class="pagination mt-5 justify-content-center">
+                            <div class="d-flex">
+                                {!! $orders->links() !!}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

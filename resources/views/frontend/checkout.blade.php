@@ -60,8 +60,8 @@
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <label for="">Nomor HP</label>
-                                    <input type="text" class="form-control" value="{{ Auth::user()->nohp }}" name="nohp"
-                                        placeholder="Masukkan Nama Belakang">
+                                    <input type="text" class="form-control" value="{{ Auth::user()->nohp }}"
+                                        name="nohp" placeholder="Masukkan Nama Belakang">
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <label for="">Alamat Lengkap</label>
@@ -134,7 +134,8 @@
 
                                     @foreach ($cartitems as $item)
                                         <tr>
-                                            <td style="overflow: hidden;
+                                            <td
+                                                style="overflow: hidden;
                                                     text-overflow: ellipsis;
                                                     display: -webkit-box;
                                                     -webkit-line-clamp: 2;
@@ -162,8 +163,8 @@
                             <h6>Ongkos Kirim</h6>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1">Rp.</span>
-                                <input type="text" name="total_ongkir" value="0" class="form-control total_ongkir"
-                                    readonly />
+                                <input type="text" name="total_ongkir" value="0"
+                                    class="form-control total_ongkir" readonly />
                                 <input type="text" name="jasa_pengiriman" value="belum ada"
                                     class="form-control jasa_pengiriman" readonly />
                             </div>
@@ -249,9 +250,6 @@
                                     value.cost[0].value + ' (' + value.cost[0].etd +
                                     ' hari)' + '</option>');
                             });
-
-
-                            // $('#total_berat').val();
                         }
                     },
                     error: function(response) {

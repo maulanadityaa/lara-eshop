@@ -88,15 +88,21 @@
                                                 style="color: green"><i class="material-icons">whatsapp</i>
                                                 {{ $item->nohp }}</a></td>
                                         <td>{{ $item->email }}</td>
-                                        <td>Rp. {{ number_format($item->total_price) }}</td>
+                                        <td><strong>Rp. {{ number_format($item->total_price) }}</strong></td>
                                         <td><span class="badge bg-danger text-white">Menunggu Konfirmasi</span></td>
                                         <td class="text-center">
                                             <a href="{{ url('admin/confirm-order/' . $item->id) }}"
-                                                class="btn btn-success">Accept</a>
+                                                class="btn btn-success"><span class="material-icons">
+                                                    done
+                                                </span></a>
                                             <a href="{{ url('admin/decline-order/' . $item->id) }}"
-                                                class="btn btn-danger">Decline</a>
+                                                class="btn btn-danger"><span class="material-icons">
+                                                    close
+                                                </span></a>
                                             <a href="{{ url('admin/view-order-details/' . $item->id) }}"
-                                                class="btn btn-info">Lihat</a>
+                                                class="btn btn-info"><span class="material-icons">
+                                                    search
+                                                </span></a>
                                         </td>
                                     </tr>
                                 @endforeach

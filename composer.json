@@ -10,7 +10,7 @@
         "cviebrock/eloquent-sluggable": "^8.0",
         "emotality/tawk-laravel": "^2.1",
         "fruitcake/laravel-cors": "^2.0",
-        "guzzlehttp/guzzle": "^7.0.1",
+        "guzzlehttp/guzzle": "^7.4",
         "haruncpi/laravel-id-generator": "^1.1",
         "kavist/rajaongkir": "^1.1",
         "laravel/framework": "^8.75",
