@@ -13,9 +13,9 @@
     </div>
 
     @php
-    $total_berat = 0;
-    $jumlah_brg = 0;
-    $total_harga = 0;
+        $total_berat = 0;
+        $jumlah_brg = 0;
+        $total_harga = 0;
     @endphp
     @foreach ($cartitems as $item)
         @php
@@ -238,18 +238,22 @@
                     success: function(response) {
                         isProcessing = false;
                         if (response) {
+                            // console.log(response);
                             $('select[name="harga_ongkir"]').empty();
                             $('select[name="harga_ongkir"]').append(
                                 '<option value="">-- pilih ongkir --</option>');
-                            $.each(response[0]['costs'], function(key, value) {
+                            $.each(response.costs, function(key, value) {
+                                // console.log(value);
+                                // console.log(response[0].service);
                                 $('select[name="harga_ongkir"]').append('<option value="' +
-                                    value.cost[0].value + response[0].code
+                                    value.cost[0].value + response.code
                                     .toUpperCase() + ' : ' + value.service + '">' +
-                                    response[0].code
+                                    response.code
                                     .toUpperCase() + ' : ' + value.service + ' - Rp. ' +
                                     value.cost[0].value + ' (' + value.cost[0].etd +
                                     ' hari)' + '</option>');
                             });
+
                         }
                     },
                     error: function(response) {

@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Kavist\RajaOngkir\Facades\RajaOngkir;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
+use Illuminate\Support\Facades\Http;
 
 class CheckoutController extends Controller
 {
@@ -46,15 +47,35 @@ class CheckoutController extends Controller
         $destination = $request->city_destination;
         // $postal_code = $request->input('kode-pos');
 
-        $cost = RajaOngkir::ongkosKirim([
-            'origin'    => 164,
-            'destination'    => $destination,
-            'weight'    => $weight,
-            'courier'    => $courier,
-        ])->get();
+        // $cost = RajaOngkir::ongkosKirim([
+        //     'origin'    => 164,
+        //     'destination'    => $destination,
+        //     'weight'    => $weight,
+        //     'courier'    => $courier,
+        // ])->get();
 
-        // dd($courier, $weight, $destination, $postal_code);
-        return response()->json($cost);
+        // dd($courier, $weight, $destination);
+        // return response()->json($cost);
+
+        try {
+            $response = Http::withOptions(['verify' => false,])->withHeaders([
+                'key' => env('RAJAONGKIR_API_KEY')
+            ])->post('https://api.rajaongkir.com/starter/cost', [
+                'origin'    => 164,
+                'destination'    => $destination,
+                'weight'    => $weight,
+                'courier'    => $courier,
+            ])
+                ->json()['rajaongkir']['results'][0];
+
+            return response()->json($response);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'success' => false,
+                'message' => $th->getMessage(),
+                'data'    => []
+            ]);
+        }
     }
 
     public function placeOrder(Request $request)
